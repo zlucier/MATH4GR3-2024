@@ -1,0 +1,99 @@
+\section{Lecture 4 — The Fundamental Theorem of Finite Abelian Groups II: Proof}
+
+To prove the Fundamental Theorem of Finite Abelian Groups, we need to recall definitions and results relating to direct products. Direct products come in two flavours.
+
+\begin{definition}[external direct product]
+	Let $(G,\circ)$ and $(H,\cdot)$ be groups. The \textbf{external direct product} of $G$ and $H$ is the group
+	$$G\times H=\{(g,h)\mid g\in G,\,h\in H\}$$
+	where the group operation $*$ is defined by
+	$$(g_1,h_2)*(g_2,h_2)=(g_1\circ g_2,h_1\cdot h_2).$$
+\end{definition}
+
+\begin{definition}[internal direct product]
+	Let $G$ be a group with subgroups $H$ and $K$ such that
+	\begin{itemize}
+		\item $G=HK=\{hk\mid h\in H,\,k\in K\}$,
+		\item $H\cap K=\{e\}$,
+		\item $kh=hk$ for all $h\in H$ and $k\in K$.
+	\end{itemize}
+	Then $G$ is the \textbf{internal direct product} of $H$ and $K$.
+\end{definition}
+
+\begin{theorem}\label{thm:direct_internal_equiv}
+	Suppose $G$ is an internal direct product of subgroups $H$ and $K$. Then $G\cong H\times K$.
+\end{theorem}
+
+This gives us a natural way to extend the definition of the internal direct product.
+
+Let $G$ be a group with subgroups $H_1,H_2,\hdots,H_n$ such that
+
+\begin{itemize}
+	\item $G=H_1H_2\cdots H_n=\{h_1h_2\cdots h_n\mid h_i\in H_i\}$,
+	\item $H_i\cap \left(\bigcup_{i\neq j}H_j\right)=\{e\}$,
+	\item $h_ih_j=h_jh_i$ for all $i\neq j$ $h_i\in H_i$ and $h_j\in H_j$.
+\end{itemize}
+
+Then $G$ is the internal direct product of  $H_1,H_2,\hdots,H_n$ and $G\cong H_1\times H_2\times\cdots\times H_n$, by Theorem \ref{thm:direct_internal_equiv}.
+
+\begin{lemma}\label{lem:30}
+	Let $G$ be an abelian group and $p$ a prime such that $p\mid |G|$. Then $G$ has a subgroup of order $p$.
+\end{lemma}
+
+\begin{proof}
+	The proof is by induction on $|G|=n$.
+
+	If $|G|=2$, then $G\cong\mathbb Z_2$, and so the result holds (the subgroup is trivial).
+
+	Let $|G|=n>2$ and $e\neq g\in G$. So $|g|=qt$ for some prime $q$. Then $|g^t|=q$. If $q=p$, we are done (take $H=\langle g^t\rangle$). Assume otherwise. Let $N=\langle g^t\rangle\subseteq G$. Then since $G$ is abelian, $N$ is normal and so $G/N$ is a group. We also have, by Lagrange,
+	$$|G/N|=|G|/|N|=n/q.$$
+	Now $p\mid (n/q)$ since $\gcd(p,q)=1$. So $G/N$ is a group where $p\mid |G/N|$ and $|G/N|<n$. By induction, $G/N$ has an element of order $p$, say $aN\in G/N$. So $(aN)^p=eN=N$, or, equivalently, $a^p\in N$. Since $|N|=q$, $(a^p)^q=a^{pq}=e$. So $|a|\mid pq$ and thus $|a|$ must be one of 1, $p$, $q$ and $pq$. We must have $|a|\neq 1$ since $a\neq e$. If $|a|=p$, we are done. If $|a|=pq$, then $|a^q|=p$ and we are done. If $|a|=q$, then $(aN)^q=eN=N$. Since $|aN|=p$, this means $p\mid q$. but $\gcd(p,q)=1$ so this musn't be the case.
+\end{proof}
+
+\begin{definition}[\textit{p}-group]
+	A group $G$ is a $p$-group ($p$ prime) if for all $g\in G$, $|g|=p^t$ for some integer $t$.
+\end{definition}
+
+\begin{example}
+	$\mathbb Z_4$ is a 2-group.
+
+	$$|0|=2^0,\quad |1|=2^2,\quad |2|=2^1,\quad |3|=2^3$$
+
+	$\mathbb Z_2\times\mathbb Z_2$ is also a 2-group.
+
+	$$|(0,0)|=2^0,\quad |(0,1)|=2^1,\quad |(1,0)|=2^1,\quad |(1,1)|=2^2$$
+\end{example}
+
+\begin{lemma}
+	$G$ is a $p$-group $\Longleftrightarrow$ $|G|=p^\alpha$ for some $\alpha\in\mathbb Z_{\geq 0}$.
+\end{lemma}
+
+\begin{proof}
+	($\Rightarrow$) Let $a\in G$. Then $|a|\mid|G|=p^\alpha$. So $|a|=p^t$.
+
+	($\Leftarrow$) Suppose $G$ is a $p$-group, but some prime $q\neq p$ has the property that $q\mid|G|$. By Lemma \ref{lem:30}, $G$ has an element of order $q$. But this contradicts that $G$ is a $p$-group. So no such $q$ exists.
+\end{proof}
+
+We introduce some technical lemmas to which no proof will be given until the next lecture.
+
+\begin{lemma}\label{lem:tech1}
+	Suppose $G$ is a finite abelian group with $|G|=p_1^{\alpha_1}\cdots p_r^{\alpha_r}$ and the $p_i$'s are distinct. For each $p_i$, set $G_i=\{g\in G\mid |g|=p_i^t\text{ for some }t\}$. Then $G$ is the internal direct product of $G_1,\hdots,G_r$, and each $G_i$ is a $p_i$-group.
+\end{lemma}
+
+\begin{lemma}\label{lem:tech2}
+	Let $G$ be a finite abelian $p$-group and let $a\in G$ with maximal order (i.e. $|a|=p^m$, and $|h|\leq p^m$ for all $h\in G$ with $h\neq a$). Then
+	$$G\cong\langle a\rangle\times K\cong\mathbb Z_{p^m}\times K,$$
+	where $K$ is another $p$-group.
+\end{lemma}
+
+We are now able to give the proof of the Fundamental Theorem of Finite Abelian Groups.
+
+\begin{proof}
+	By Lemma \ref{lem:tech1}, $G\cong G_1\times G_2\times\cdots\times G_r$ with each $G_i$ a $p_i$ group. By Lemma \ref{lem:tech2}, we claim that for any $p$-group $H$, $H\cong\mathbb Z_{p^{a_1}}\times \mathbb Z_{p^{a_2}}\times\cdots\times \mathbb Z_{p^{a_s}}$. We proceed by induction on $|H|$. If $|H|=2$, then $H\cong\mathbb Z_2$ if $|H|>2$, take  $g\in H$ with $g$ having max order, say $|g|=p^\ell$. By \ref{lem:tech2}, $H\cong\mathbb Z_{p^\ell}\times K$ where $|K|<|H|$ and $K$ is a $p$-group. By induction applied fo $K$,
+	$$H\cong\mathbb Z_{p^\ell}\times\mathbb Z_{p^{b_1}}\times\cdots\times\mathbb Z_{p^{b_s}}.$$
+
+	Consequently,
+	\begin{align*}
+		G&\cong G_1\times\cdots\times G_r\\
+		&\cong (\mathbb Z_{p^{a_1}}\times\cdot\times\mathbb Z_{p^{a_s}})\times (\mathbb Z_{p^{b_1}}\times\cdot\times\mathbb Z_{p^{b_r}})\times\cdots
+	\end{align*}
+\end{proof}

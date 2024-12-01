@@ -1,0 +1,151 @@
+\section{Lecture 31 — Field Extensions and Linear Algebra}
+
+Observe that if $E$ is an extension of the field $F$, then $E$ is also an vector space over $F$, i.e. the elements of $E$ are the ``vectors'' and the elements of $F$ are the ``scalars'', with scalar multiplication
+\begin{align*}
+	F\times E&\to E,\\
+	(f,e)&\mapsto fe.
+\end{align*}
+
+\begin{example}
+	$\mathbb C$ is an extension of $\mathbb R$, so $\mathbb C$ is a $\mathbb R$-vector space:
+	\begin{align*}
+		\mathbb R\times \mathbb C&\to \mathbb C,\\
+		(r,a+bi)&\mapsto ra+rbi.
+	\end{align*}
+\end{example}
+
+One can easily check that the vector space axioms hold.
+
+\begin{theorem}
+	Let $F$ be a field and $F(\alpha)$ be a simple extension of $F$, where $\alpha\in F(\alpha)$ is algebraic over $F$. Suppose that the degree of the minimal polynomial of $\alpha$ is $n$. Then every element of $F(\alpha)$ can be written uniquely as
+	$$b_0+b_1\alpha+b_2\alpha^2+\cdots+b_{n-1}\alpha^{n-1},$$
+	where $b_i\in F$.
+\end{theorem}
+
+\begin{example}\phantom{x}
+	\begin{itemize}
+		\item $\mathbb Q(\sqrt 2)=\{a+b\sqrt 2\mid a,b\in\mathbb Q\}$.
+		\item $\mathbb C=\mathbb R(i)=\{a+bi\mid a,b\in\mathbb R\}$.
+	\end{itemize}
+\end{example}
+
+Recall that if $E$ is an $F$-vector space, the dimension of $E$ over $F$ is
+$$\dim_FE=\text{number of basis elements}.$$
+
+\begin{corollary}
+	If $E=F(\alpha)$ is a simple extension with $\alpha\in E$ algebraic over $F$, then
+	$$\dim_FE=n=\text{degree of $\alpha$}.$$
+\end{corollary}
+
+\begin{proof}
+	By the previous result,
+	$$\{1,\alpha,\alpha^2,\hdots,\alpha^{n-1}\}$$
+	is a basis for $F(\alpha)$ over $F$.
+\end{proof}
+
+\begin{example}\phantom{x}
+	\begin{itemize}
+		\item $\dim_{\mathbb R}\mathbb C=2$ and $\dim_{\mathbb C}\mathbb C=1$
+		\item $\dim_{\mathbb Q}\mathbb Q(\sqrt 2)$
+	\end{itemize}
+\end{example}
+
+\begin{definition}[degree]
+	If $E$ is an extension of $F$, the \textbf{degree} of the extension is
+	$$[E:F]=\dim_FE.$$
+	If $[E:F]<\infty$, we say that the degree of the extension $E$ over $F$ is \textbf{finite}. Otherwise it is infinite.
+\end{definition}
+
+\begin{example}
+	$[\mathbb C:\mathbb R]=2$.
+\end{example}
+
+\begin{theorem}
+	If $[E:F]$ is finite, then $E$ is an algebraic extension of the field $F$.
+\end{theorem}
+
+\begin{proof}
+	Let $n=[E:F]$. Let $\alpha\in E$ be arbitrary. Consider the $n+1$ elements
+	$$1,\alpha,\alpha^2,\hdots,\alpha^n$$
+	of $E$. Since $[E:F]=n$, these vectors are linearly dependent. So there exist $b_0,b_1,\hdots,b_n\in F$ such that
+	$$b_0+b_1\alpha+b_2\alpha^2+\cdots+b_n\alpha^n=0$$
+	Consider the polynomial $p(x)=b_0+b_1x+b_2x^2+\cdots+b_nx^n$. Then $\alpha$ is a root of this polynomial. So $E$ is algebraic over $F$.
+\end{proof}
+
+\begin{remark}
+	The converse is not always true. There are fields that are algebraic but $[E:F]=\infty$.
+\end{remark}
+
+\begin{example}
+	$E=\mathbb Q(\sqrt 2,\sqrt[3]{2},\sqrt[4]{2},\hdots)$ is algebraic but $[E:\mathbb Q]=\infty$.
+\end{example}
+
+\begin{example}
+	$[\mathbb Q(\pi):\mathbb Q]=\infty$.
+\end{example}
+
+\begin{theorem}
+	If $E$ is an extension of $F$ and $K$ is an extension of $E$, then $K$ is an extension of $F$. Furthermore, if these are finite extensions, then
+	$$[K:F]=[K:E][E:F].$$
+\end{theorem}
+
+\begin{proof}
+	Suppose $\{\alpha_1,\alpha_2,\hdots,\alpha_m\}$ is a basis for $E$ over $F$ and suppose $\{\beta_1,\beta_2,\hdots,\beta_n\}$ is a basis for $F$ over $E$. We claim that $\{\alpha_i\beta_j\mid 1\leq i\leq m,1\leq j\leq n\}$ is a basis for $K$ over $F$ with cardinality $mn$. So we need to show this set is linearly independent and spans $K$ over $F$. The remainder of the proof is left as an exercise.
+\end{proof}
+
+\begin{corollary}
+	If $F_k\supseteq F_{k-1}\supseteq \cdots\supseteq F_0$ are fields and $F_{i+1}$ is a finite extension of $F_i$, then
+	$$[F_k:F_0]=[F_k:F_{k-1}]\cdots[F_1:F_0].$$
+\end{corollary}
+
+\begin{corollary}
+	If $\alpha\in E$ is algebraic over $F$ with minimal polynomial $p(x)$ and if $\beta\in F(\alpha)$ with minimal polynomial $q(x)$, then $\deg q(x)$ divides $\deg p(x)$.
+\end{corollary}
+
+\begin{proof}
+	We have $\beta\in F(\alpha)$, so $F(\beta)\subseteq F(\alpha)$. So
+	$$[F(\alpha):F]=[F(\alpha):F(\beta)][F(\beta):F].$$
+	But $[F(\alpha):F]=\deg p(x)$ and $[F(\beta):F]=\deg q(x)$. So
+	$$\deg p(x)=[F(\alpha):F(\beta)]\deg q(x).$$
+\end{proof}
+
+\begin{theorem}
+	Let $E$ be a field extension of $F$. Then the following are equivalent:
+	\begin{enumerate}
+		\item $E$ is a finite extension of $F$.
+		\item There exists a finite number of algebraic elements $\alpha_1,\alpha_2,\hdots,\alpha_n$ such that $E=F(\alpha_1,\alpha_2,\hdots,\alpha_n)$.
+		\item There exists a sequence of fields
+		$$F(\alpha_1,\alpha_2,\hdots,\alpha_n)\supseteq F(\alpha_1,\alpha_2,\hdots,\alpha_{n-1})\supseteq\cdots\supseteq F$$
+		such that each $[F(\alpha_1,\alpha_2,\hdots,\alpha_{i+1}):F(\alpha_1,\alpha_2,\hdots,\alpha_i)]$ is finite and $\alpha_{i+1}$ is algebraic over $F(\alpha_1,\alpha_2,\hdots,\alpha_i)$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	Consider $E=\mathbb Q(\sqrt[3]{5},\sqrt 5i)$. Then we have the chain
+	$$\underbrace{\mathbb Q(\sqrt[3]{5},\sqrt 5i)\supseteq}_{x^2+5} \underbrace{\mathbb Q(\sqrt[3]{5})\supseteq}_{x^3-5} \mathbb Q.$$
+	So in this example $[\mathbb Q(\sqrt[3]{5},\sqrt 5i):\mathbb Q]=6$
+\end{example}
+
+\begin{example}
+	Is $\mathbb Q(\sqrt 3)\cong\mathbb Q(\sqrt 2)$?
+	\begin{solution}
+		As vector spaces, these extensions of $\mathbb Q$ are isomorphic.
+		$$\mathbb Q(\sqrt 3)\cong\mathbb Q(\sqrt 2)\cong\mathbb Q^2.$$
+
+		They are, however, \underline{not} isomorphic as fields. Take $1\in\mathbb Q(\sqrt 2)$ and suppose there is an isomorphism
+		$$\varphi\colon \mathbb Q(\sqrt 2)\to\mathbb Q(\sqrt 3).$$
+		So it must be that $\varphi(1)=1$. So
+		\begin{align*}
+			\varphi(2)&=\varphi(1+1)\\
+			&=\varphi(1)+\varphi(1)\\
+			&=1+1\\
+			&=2.
+		\end{align*}
+		Furthermore,
+		\begin{align*}
+			\varphi(2)&=\varphi(\sqrt 2\sqrt 2)\\
+			&=\varphi(\sqrt 2)\varphi(\sqrt 2).
+		\end{align*}
+		So $\varphi(\sqrt 2)^2=2$. So $\varphi(\sqrt 2)$ is a root of 2 in $\mathbb Q(\sqrt 3)$. But then in $\mathbb Q(\sqrt 3)$, if $(a+b\sqrt 3)^2=2$, $a^2+2ab\sqrt 3+3b^2=2$. Since $\sqrt 3$ is irrational $a=0$ or $b=0$. But if $a=0$, $3b^2=2$ and if $b=0$, $a^2=2$, both of which yield a contradiction.
+	\end{solution}
+\end{example}

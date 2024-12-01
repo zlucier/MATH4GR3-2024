@@ -1,0 +1,91 @@
+\section{Lecture 13 — Sylow Theorem II}
+
+\begin{definition}
+	A Sylow $p$-subgroup $P$ of $G$ is a subgroup that is a maximal $p$-subgroup in $G$. That is, if $|G|=pm$ for an integer $m$ with $\gcd(p,m)=1$, then any subgroup of order $p^r$ is a Sylow $p$-subgroup.
+\end{definition}
+
+\begin{remark}
+	The first Sylow theorem implies that there always exist at least one Sylow $p$-subgroup.
+\end{remark}
+
+The first Sylow theorem used the conjugation group action. The proof of the second and third Sylow theorem use a different group action.
+
+Let $S=\{\text{all subgroups of $G$}\}$. We define a $G$-action on $S$ by
+\begin{align*}
+	G\times S &\to S,\\
+	(g,K) &\mapsto gKg^{-1}=g\cdot K.
+\end{align*}
+
+\begin{definition}
+	We say that subgroups $L$ and $K$ are \textbf{congruent} if there exists $g\in G$ such that
+	$$L=gKg^{-1}.$$
+	If $H$ is a subgroup of $G$, we say that $L$ and $K$ are $H$-congruent if there exists $h\in H$ such that
+	$$L=hKh^{-1}.$$
+\end{definition}
+
+\begin{definition}[normalizer]
+	The \textbf{normalizer} of a subgroup $H$ of $G$ is the set
+	$$N(H)=\{g\in G\mid gHg^{-1}=H\}.$$
+\end{definition}
+
+\begin{proposition}
+	Let $H$ be a subgroup of $G$. The normalizer $N(H)$ has the following properties:
+	\begin{enumerate}
+		\item $H\subseteq N(H)\subseteq G$;
+		\item $H$ is normal in $N(H)$;
+		\item $N(H)$ is the largest normal subgroup of $G$ such that $H$ is normal in it.
+	\end{enumerate}
+\end{proposition}
+
+\begin{lemma}\label{lem:conjugate_P_Sylow}
+	Let $P$ be a Sylow $p$-subgroup and suppose $x\in G$ is such that $|x|=p^m$ for some integer $m$. If $xPx^{-1}=P$, then $x\in P$
+\end{lemma}
+
+\begin{proof}
+	Note first that $x\in N(P)$ and, since $P$ is normal in $N(P)$, $\langle xP\rangle$ is a cyclic subgroup of $N(P)/P$. Note also that $|xP|=p^\ell$ for some integer $\ell$, since
+	$$(xP)^{p^m}=x^{p^m}P=eP=P.$$
+	So $|xP|$ divides $p^m$.
+
+	By the Correspondence Theorem (\ref{thm:correspondence}), there exists a subgroup $H$ such that
+	$$P\subseteq H\subseteq N(P),$$
+	and $H/P=\langle xP\rangle$. So $|H|=|\langle xP\rangle||P|$, i.e. $|H|$ is a power of $p$. But $P$ is the largest subgroup that is a power of $p$. So $H=P$ and thus $xP=e$ or, more succinctly $x\in P$.
+\end{proof}
+
+\begin{lemma}\label{lem:distinct_H-conjugates}
+	Let $H$ and $K$ be subgroups of $G$. The number of distinct $H$-conjugates of $K$ is $[H:N(K)\cap H]$.
+\end{lemma}
+
+\begin{proof}
+	Observe, $|\{hKh^{-1}\mid h\in H\}|=|\mathcal O_K|$. This is the number of orbits of $K$ under the action defined earlier. So this equals $[H:H_K]$, where $H_K=\{h\in H\mid h\cdot K=K\Leftrightarrow hKh^{-1}=K\}=N(K)\cap H$. We thus have $[H:N(K)\cap H]$.
+\end{proof}
+
+\begin{theorem}[Sylow Theorem II]\label{thm:sylow_2}
+	Let $G$ be a finite group and $p$ be a prime such that $p$ divides $|G|$. If $P_1$ and $P_2$ are two Sylow $p$-subgroups of $G$, they are conjugates, i.e. there exists $g\in G$ such that
+	$$P_2=gP_1g^{-1}.$$
+\end{theorem}
+
+\begin{proof}
+	Suppose $|G|=p^rm$, with $\gcd(p,m)=1$, and let $P$ be a Sylow $p$-subgroup with $|P|=p^r$. Let $S=\{gPg^{-1}\mid g\in G\}$. By Lemma \ref{lem:distinct_H-conjugates}, the number of distinct conjugates is given by
+	$$|S|=[G:N(P)\cap G]=[G:N(P)].$$
+	We have $|G|=[g:N(P)]|N(P)|$. Since $P\subseteq N(P)$ and $p^r$ divides $|N(P)|$. This forces the fact that $p$ does not divide $[G:N(P)]=|S|$.
+
+	Let $Q$ be any other Sylow $p$-subgroup. We want to show $Q\in S$. For each $P_i\in S$, consider the $Q$-conjugates of $P_i$, i.e.
+	$$\{qP_iq^{-1}\mid q\in Q\}\subseteq S$$
+	Also, $|\{qP_i\mid q\in G\}|=[Q:N(P_i)cap Q]$, by Lemma \ref{lem:distinct_H-conjugates}. Since $|Q|=|N(P_i)\cap Q|[Q:N(P_i)hQ]=p^r$. So we have that $p^\ell$ divides $[Q:N(P_i)\cap Q]$.
+
+	Let $A_i=\{qP_iq^{-1}\mid q\in Q\}$. The collection of all $P_i's$ partitions the set $S$. Note that
+	$$|A_i|=[Q:N(P_i)\cap Q]=p^{\ell_i},$$
+	with $\ell_i\geq 0$.
+
+	If each $|A_i|\geq p$, this forces the fact that $p$ divides $|S|$. But $p$ does \underline{not} divide $|S|$. So $|A_i|=1$ if and only if $\{qP_iq^{-1}\mid q\in Q\}=\{P_i\}$. But $|q|=p^m$ for some $m$ and $qP_iq^{-1}=P_i$. By Lemma \ref{lem:conjugate_P_Sylow}, this means $q\in P_i$. So for all $q\in Q$, $q\in P_i$, i.e. $Q\subseteq P_i$. But $|Q|=|P_i|$. So $Q=P_i$.
+\end{proof}
+
+\begin{corollary}\label{cor:normal_sylow_p_group}
+	Let $G$ be a group and $P$ be a Sylow $p$-subgroup of $G$. Then $P$ is normal if and only if $P$ is the only Sylow $p$-subgroup of $G$.
+\end{corollary}
+
+\begin{proof}
+	Suppose $P$ and $Q$ are Sylow $p$-subgroups. Then they are conjugates by the second Sylow theorem (\ref{thm:sylow_2}). That is, $Q=gPg^{-1}$ for all $g\in G$. But $P$ is normal in G. So $P=gPg^{-1}$. Thus, $P=Q$.
+
+	Now suppose $P$ is the unique Sylow $p$-subgroup of $G$. Then for any $g\in G$, $gPg^{-1}=P$ since $|gPg^{-1}|=|P|$, i.e. $gPg^{-1}$ is also a Sylow $p$-subgroup. So $P$ is normal since this is true for all $g\in G$.
+\end{proof}

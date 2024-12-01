@@ -1,0 +1,90 @@
+\section{Lecture 10 — The Class Equation: Applications and Examples}
+
+\begin{theorem}\label{thm:center_order}
+	If $|G|=p^r$, then $|Z(G)|\geq p$.
+\end{theorem}
+
+\begin{proof}
+	By the class equation,
+	$$|Z(G)|=|G|-\sum_{i=1}^s[G:C(x_i)].$$
+
+	We have that $[G:C(x_i)]=\frac{|G|}{|C(x_i)|}\geq 2$. Since $|G|=p^r$, $|C(x_i)|=p^{r-n_i}$ and thus $[G:C(x_i)]=p^{n_i}$ for some $n_i\geq 1$. Note that it must be the case $n_i\geq 1$ since $[G:C(x_i)]\geq 2\geq p^0$. Thus every term on the right hand side is divisible by $p$. In particular, $p$ divides $Z(G)$ and so $|Z(G)|\geq p$.
+\end{proof}
+
+\begin{theorem}
+	If $|G|=p^2$, then $G$ is abelian. That is, $G\cong\mathbb Z_{p^2}$ or $G\cong\mathbb Z_p\times\mathbb Z_p$.
+\end{theorem}
+
+\begin{proof}
+	It is enough to show that $|Z(G)|=p^2$, which would imply that $Z(G)=G$. By the previous result (Theorem \ref{thm:center_order}), either $|Z(G)|=p^2$ or $|Z(G)|=p$. Suppose for a contradiction that $|Z(G)|=p$. Note that $Z(G)$ is normal in $G$. Take any $g\in G$ and $a\in Z(G)$. Then $gag^{-1}=gg^{-1}a=a\in Z(G)$. So $G/Z(G)$ is defined and we have $|G/Z(G)|=p$. So $G/Z(G)$ is cyclic, i.e. there exists $h\in G$ such that $\langle hZ(G)\rangle =G/Z(G)$.
+
+	For any $g\in G$, $gZ(G)\in\langle hZ(G)\rangle$. Thus there is an integer $m$ such that
+	$$gZ(G)=(hZ(G))^m=h^mZ(G).$$
+	since $g\in Z(G)$, there is $x\in Z(G)$ such that $g=h^mx$. Take $g_1,g_2\in G$. So there exist integers $m_1, m_2$ and $x_1,x_2\in Z(G)$ such that $g_1=h^{m_1}x_1$ and $g_2=h^{m_2}x_2$.
+	\begin{align*}
+		g_1g_2&=h^{m_1}x_1h^{m_2}x_2\\
+		&=h^{m_1}h^{m_2}x_1x_2\\
+		&=h^{m_1+m_2}x_1x_2\\
+		&=h^{m_2}h^{m_1}x_1x_2\\
+		&=h^{m_2}x_2h^{m_1}x_1\\
+		&=g_2g_1.
+	\end{align*}
+
+	So $G$ is abelian.
+\end{proof}
+
+\begin{example}
+	Determine the class equation for $Q_8$ (the Quaternion group), defined as $Q_8=\{\pm 1,\pm I,\pm J,\pm K\}$, where
+	$$1=\begin{bmatrix}
+		1 & 0 \\ 0 & 1
+	\end{bmatrix},\quad I=\begin{bmatrix}
+		0 & 1 \\ -1 & 0
+	\end{bmatrix},\quad J=\begin{bmatrix}
+		0 & i \\ i & 0
+	\end{bmatrix},\quad K=\begin{bmatrix}
+		i & 0 \\ 0 & -i
+	\end{bmatrix},$$
+	and $i^2=-1$.
+	The set has the following relations:
+	\begin{gather*}
+		I^2=J^2=K^2=-1,\\
+		IJ=K,\, JK=I,\, KI=J,\\
+		JI=-K,\, KJ=-I,\, IK=-J.
+	\end{gather*}
+
+	The Cayley table for this group is given as follows.
+	\begin{center}
+	\begin{tabular}{>{$}c<{$} | >{$}c<{$} >{$}c<{$} >{$}c<{$} >{$}c<{$} >{$}c<{$} >{$}c<{$} >{$}c<{$} >{$}c<{$}}
+		    &  1 & -1 &  I & -I &  J & -J &  K & -K \\ \hline
+		  1 &  1 & -1 &  I & -I &  J & -J &  K & -K \\
+		- 1 & -1 &  1 & -I &  I & -J &  J & -K &  K \\
+		  I &  I & -I & -1 &  1 &  K & -K & -J &  J \\
+		 -I & -I &  I &  1 & -1 & -K &  K &  J & -J \\
+		  J &  J & -J & -K &  K & -1 &  1 & -I &  I \\
+		 -J & -J &  J &  K & -K &  1 & -1 &  I & -I \\
+		  K &  K & -K &  J & -J &  I & -I & -1 &  1 \\
+		 -K & -K &  K & -J &  J & -I &  I &  1 & -1 \\
+	\end{tabular}
+	\end{center}
+
+	We have the following inverses.
+	\begin{align*}
+		(1)^{-1}&=1 & (-1)^{-1}&=-1\\
+		(I)^{-1}&=-I & (-I)^{-1}&=I\\
+		(J)^{-1}&=-J & (-J)^{-1}&=J\\
+		(K)^{-1}&=-K & (-K)^{-1}&=K
+	\end{align*}
+
+	We have the following orbits.
+	\begin{align*}
+		\mathcal O_1&=\{1\} & \mathcal O_{-1}&=\{-1\}\\
+		\mathcal O_I&=\{I,-I\} & \mathcal O_{-I}&=\{I,-I\}\\
+		\mathcal O_J&=\{J,-J\} & \mathcal O_{-J}&=\{J,-J\}\\
+		\mathcal O_K&=\{K,-K\} & \mathcal O_{-K}&=\{K,-I\}\\
+	\end{align*}
+	We also have $Z(Q_8)=\mathcal O_1\cup\mathcal O_{-1}$.
+
+	So, using the class equation,
+	$$8=|Q_8|=|Z(Q_8)|+|\mathcal O_I|+|\mathcal O_J|+|\mathcal O_K|=2+2+2+2.$$
+	This shows $|Q_8|=p^3$ for $p=2$ prime, but $Q_8$ is not abelian.
+\end{example}

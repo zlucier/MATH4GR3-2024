@@ -1,0 +1,168 @@
+\section{Lecture 19 — Review of Rings I}
+
+\begin{definition}[ring]
+	A \textbf{ring} $R$ is a set with binary operations $+$ and $\times$ called \textbf{addition} and \textbf{multiplication}, respectively, such that for all $a,b,c\in R$,
+	\begin{enumerate}
+		\item $a+b=b+a$ for all $a,b\in R$ \textit{(commutativity of addition)},
+		\item $(a+b)+c=a+(b+c)$ for all $a,b,c\in R$ \textit{(associativity of addition)},
+		\item there exists an element $0\in R$ such that $a+0=0+a=a$ for every $a\in R$ \textit{(additive identity)},
+		\item for every $a\in R$, there exists an element $b\in R$ such that $a+b=0$ and we write $-a$ for $b$ \textit{(additive inverse)},
+		\item $(ab)c=a(bc)$ for all $a,b,c\in R$ \textit{(associativity of multiplication)}, and
+		\item $a(b+c)=ab+ac$ and $(a+b)c=ac+bc$ for all $a,b,c\in R$ \textit{(distributivity)}.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	A ring $R$ is an abelian group under addition with additional structure.
+\end{remark}
+
+We consider a few special cases for rings.
+
+\begin{definition}[ring with identity]
+	A ring $R$ is said to be a \textbf{ring with idenity} if there exists an element $1\in R$ such that $a\times 1=1\times a=a$.
+\end{definition}
+
+\begin{definition}[commutative ring]
+	A ring $R$ is said to be a \textbf{commutative ring} if $ab=ba$ for all $a,b\in R$.
+\end{definition}
+
+\begin{definition}[integral domain]
+	A ring $R$ is said to be an \textbf{integral domain} if
+	\begin{enumerate}
+		\item $R$ is a ring with identity,
+		\item $R$ is a commutative ring, and
+		\item if $ab=0$, then $a=0$ or $b=0$, i.e. $R$ has no zero divisors.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[division ring]
+	A ring $R$ is said to be a \textbf{division ring} if $R$ is a ring with identity and, if for all $a\in R$ with $a\neq 0$, there is an element $a^{-1}\in R$ such that $aa^{-1}=a^{-1}a=1$.
+\end{definition}
+
+\begin{definition}[field]
+	A ring $R$ is said to be a \textbf{field} if $R$ is a commutative division ring.
+\end{definition}
+
+\begin{definition}[unit]
+	We say $a\in R$ with $a\neq 0$ is a \textbf{unit} if there exists $a^{-1}\in R$ such that $a^{-1}a=1$.
+\end{definition}
+
+\begin{example}
+	Consider the following with the usual operations:
+	\begin{itemize}
+		\item $\mathbb Q[x]$, the polynomials with rational coefficients, are an integral domain.
+		\item $\mathbb Z$ is an integral domain.
+		\item $\mathbb R$, $\mathbb Z_p$ with $p$ prime, $\mathbb C$ and $\mathbb Q$ are all fields.
+		\item $\mathcal M_n(\mathbb R)$ is not an integral domain,
+		$$\begin{bmatrix}
+			0 & 0 \\ 1 & 0
+		\end{bmatrix}\begin{bmatrix}
+			0 & 0 \\ 0 & 1
+		\end{bmatrix}=\begin{bmatrix}
+			0 & 0 \\ 0 & 0
+		\end{bmatrix}.$$
+		\item $E=\{2n\mid n\in\mathbb Z\}$ is a ring without identity.
+		\item $\mathbb Z_n$ with $n$ not prime is not an integral domain.
+		\item $\mathcal M_n(\mathbb R)$ is not a commutative ring.
+	\end{itemize}
+\end{example}
+
+\begin{proposition}
+	Every field $F$ is also an integral domain.
+\end{proposition}
+
+\begin{proof}
+	Suppose $ab=0$. If $a=0$, we are done. Suppose $a\neq 0$. So $a^{-1}\in F$. So $a^{-1}(ab)=a^{-1}\cdot 0=0$. Also $a^{-1}(ab)=(a^{-1}a)b=1\cdot b= b$. So $b$ must be 0.
+\end{proof}
+
+\begin{center}
+	\begin{tikzpicture}[draw=main,thick,yscale=1.25]
+		\footnotesize\sffamily
+		\node (A) at (0,0) {Rings};
+		\node[align=center] (B) at (-1,1) {Commutative\\Rings};
+		\node[align=center] (C) at (1,1) {Rings with\\identity};
+		\node[align=center] (D) at (-1,2) {Integral\\domains};
+		\node[align=center] (E) at (1,2) {Division\\ Rings};
+		\node[align=center] (F) at (0,3) {Fields};
+		\draw (A) edge (B) edge (C);
+		\draw (C) edge (D) edge (E);
+		\draw (F) edge (D) edge (E);
+		\draw (B) edge (D);
+	\end{tikzpicture}
+\end{center}
+
+\begin{definition}
+	A \textbf{subring} of a ring $R$ is a subset $S\subseteq R$ that is also a ring under the same operations. 
+\end{definition}
+
+\begin{proposition}[Subring Criteria]
+	Let $S$ be a subset of a ring $R$. Then $S$ is a subring if
+	\begin{enumerate}
+		\item $S\neq\emptyset$,
+		\item $a-b\in S$ for all $a,b\in S$, and
+		\item $ab\in S$ for all $a,b\in S$.
+	\end{enumerate}
+\end{proposition}
+
+An ideal is a special type of subring that has the ``absorption property''.
+
+\begin{definition}[ideal]
+	A subset $I$ of a ring $R$ is an \textbf{ideal} of $R$ if
+	\begin{enumerate}
+		\item $I\neq\emptyset$,
+		\item $a-b\in I$ for all $a,b\in I$, and
+		\item $ar\in I$ and $ra\in I$ for all $a\in I$ and $r\in R$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	Let $R=\mathbb Z$ and $I=\{2024n\mid n\in\mathbb Z\}$. Show that $I$ is an ideal of $\mathbb Z$.
+	\begin{proof}
+		We check the three conditions:
+		\begin{enumerate}[label=\textbf{(\alph*)}]
+			\item $I\neq\emptyset$ since $2024\cdot 1\in I$.
+			\item Let $a,b\in I$ so $a=2024m$ and $b=2024n$ with $m,n\in\mathbb Z$. So $a-b=2024(m-n)\in I$.
+			\item Let $a\in I$. So $a\in 2024 m$. Let $r\in\mathbb Z$. Then $ra=r(2024m)=2024(rm)\in I$.
+		\end{enumerate}
+	\end{proof}
+\end{example}
+
+In the same way we need normal subgroups to form quotient groups, we need ideals to form quotient rings.
+
+Let $R$ be a ring with $I$ an ideal. Note $R$ is an abelian group under addition. So $I$ is a normal subgroup of $R$. So
+$$R/I=\{a+I\mid a\in R\}$$
+is defined as a group with addition $(a+I)+(b+I)=(a+b)+I$. Recall that $a+I=b+I$ if and only $a-b\in I$. To give $R/I$ a ring structure, we need to define multiplication.
+
+We want $(a+I)(b+I)=ab+I$ but need to check that this is well-defined. Our definition depends on a choice of representative so wee need to show our operation does not depend on this choice.
+
+\begin{lemma}
+	Suppose $a_1+I=a_2+I$ and $b_1+I=b_2+I$. Then
+	$$a_1b_1+I=a_2b_2+I.$$
+\end{lemma}
+
+\begin{proof}
+	We are given $a_1-a_2\in I$ and $b_1-b_2\in I$. Since $I$ is an ideal,
+	$$(a_1-a_2)b_1=a_1b_1-a_2b_1\in I$$
+	and
+	$$a_2(b_1-b_2)=a_2b_1-a_2b_2\in I.$$
+	But this means
+	$$a_1b_1+I=a_2b_2+I.$$
+\end{proof}
+
+\begin{theorem}
+	If $R$ is a ring with ideal $I$, then $R/I$ is a ring under the operations
+	\begin{gather*}
+		(a+I)+(b+I)=(a+b)+I,\quad\text{and}\\
+		(a+I)(b+I)=ab+I.
+	\end{gather*}
+\end{theorem}
+
+Every ring $R$ has at least two ideals $\{0\}$ and $R$ is an ideal (trivial ideals).
+
+\begin{theorem}
+	The ideals of a field are precisely those which are trivial.
+\end{theorem}
+
+\begin{proof}
+	Suppose $I$ is not the zero ideal. Then there exist $a\in I$ with $a\neq 0$. Since $a^{-1}\in R$, $a^{-1}a=1\in I$. But for all $r\in R$, $r=r\cdot 1\in I$ So $R\subseteq I\subseteq R$. So $I=R$.
+\end{proof}

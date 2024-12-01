@@ -1,0 +1,136 @@
+\section{Lecture 6 — Composition Series and Solvable Groups}
+
+The Fundamental Theorem of Finite Abelian Groups classifies all finite abelian groups. But what about non-abelian groups? In the 20th century, there was a tremendous amount of effort put into the classification of non-abelian groups (completed in 2004). The main idea is to reduce to understanding solvable and simple groups.
+
+\begin{definition}[subnormal series]
+	A \textbf{subnormal series} of a group $G$ is a finite sequence of subgroups
+	$$G=H_n\supset H_{n-1}\supset\cdots\supset H_1\supset H_0=\{e\},$$
+	where $H_i$ is normal in $H_{i+1}$ for $i=0,\hdots,n-1$. If, in addition, each $H_i$ is normal in $G$, we call the series a \textbf{normal series}.
+
+	We denote subnormal series by $\{H_i\}$ and define the \textbf{length} of $\{H_i\}$ to be the number of inclusions.
+\end{definition}
+
+\begin{example}\label{ex:normal_series_abelian}
+	In an abelian group $G$, every subnormal series is also a normal series.
+	$$\mathbb Z\supset 11\mathbb Z\supset 253\mathbb Z\supset 2024\mathbb Z\supset\{0\}$$
+\end{example}
+
+\begin{example}
+	Consider the following subnormal series in $D_4$:
+	$$D_4\supset\{(1),(1\,2)(3\,4),(1\,3)(2\,4),(1\,4)(2\,3)\}\supset \{(1),(1\,2)(3\,4)\}\supset\{(1)\}$$
+	This is \underline{not} a normal series since $\{(1),(1\,2)(3\,4)\}$ is not normal in $D_4$.
+\end{example}
+
+\begin{definition}
+	A subnormal series $\{K_i\}$ is a \textbf{refinement} of a subnormal series $\{H_i\}$ if $\{H_i\}\subset\{K_i\}$, i.e. if the $H_i$'s appear among the $K_i$'s.
+\end{definition}
+
+\begin{example}
+	The subnormal series
+	$$\mathbb Z\supset 11\mathbb Z\supset 253\mathbb Z\supset 506\mathbb Z\supset 1012\mathbb Z\supset 2024\mathbb Z\supset\{0\}$$
+	is a refinement of that presented in Example \ref{ex:normal_series_abelian}.
+\end{example}
+
+\begin{definition}
+	Two subnormal series $\{H_i\}$ and $\{K_i\}$ are said to be \textbf{isomorphic} if there is a one-to-one correspondence between the sets $\{H_{i+1}/H_i\}$ and $\{K_{i+1}/K_i\}$.
+\end{definition}
+
+\begin{remark}
+	Suppose $\langle a\rangle\supset\langle b\rangle\supset\mathbb Z_n$. Recall $|\langle a\rangle|=\frac na$ and $|\langle b\rangle/\langle a\rangle|=\frac{n/b}{n/a}=\frac ab$.
+\end{remark}
+
+\begin{example}\label{ex:isomorphic_series}
+	Consider the following subnormal series.
+	\begin{align*}
+		\{H_i\}&:\mathbb Z_{2024}\supset\langle 11\rangle\supset\langle 22\rangle\supset\langle 506\rangle\supset\langle 0\rangle\\
+		\{K_i\}&:\mathbb Z_{2024}\supset\langle 23\rangle\supset\langle 46\rangle\supset\langle 506\rangle\supset\langle 0\rangle
+	\end{align*}
+	Then we have the following quotients.
+	\begin{align*}
+		\{H_{i+1}/H_i\}:& & \{K_{i+1}/K_i\}:\\
+		\mathbb Z_{2024}/\langle 11\rangle=\langle 1\rangle/\langle 11\rangle&\cong\mathbb Z_{11},& \mathbb Z_{2024}/\langle 23\rangle=\langle 1\rangle/\langle 11\rangle&\cong\mathbb Z_{23}\\
+		\langle 11\rangle/\langle 22\rangle &\cong\mathbb Z_2 & \langle 23\rangle/\langle 46\rangle &\cong\mathbb Z_2\\
+		\langle 22\rangle/\langle 506\rangle&\cong\mathbb Z_{23} & \langle 46\rangle/\langle 506\rangle &\cong\mathbb Z_{11}\\
+		\langle 506\rangle/\langle 0\rangle&\cong\mathbb Z_4 & \langle 506\rangle/\langle 0\rangle&\cong\mathbb Z_4
+	\end{align*}
+\end{example}
+
+\begin{definition}[simple group]
+	If $G$ has no non-trivial subgroups, we say that $G$ is \textbf{simple}.
+\end{definition}
+
+\begin{example}
+	Consider $\mathbb Z_p$ with $p$ prime. This group is simple by application of Lagrange's Theorem.
+\end{example}
+
+\begin{definition}
+	A subnormal series $\{H_i\}$ of $G$ is a \textbf{composition series} if all $H_{i+1}/H_i$ are simple.
+
+	A normal series $\{H_i\}$ of $G$ is a \textbf{principal series} if all $H_{i+1}/H_i$ are simple.
+\end{definition}
+
+\begin{example}
+	The series in Example \ref{ex:isomorphic_series} are not composition series since $\mathbb Z_4$ is not a simple group. However,
+	$$\mathbb Z_{2024}\supset\langle 23\rangle\supset\langle 46\rangle\supset\langle 506\rangle\supset\langle 1012\rangle\supset\langle 0\rangle$$
+	has quotients $\mathbb Z_{23},\mathbb Z_2,\mathbb Z_{11},\mathbb Z_2,\mathbb Z_2$.
+
+	Note that $2024=23\cdot 11\cdot 2^3$.
+\end{example}
+
+\begin{remark}
+	Not every group has a composition/principal series.
+\end{remark}
+
+\begin{example}
+	Consider the subnormal series
+	$$\mathbb Z\supset H_1\supset H_2\supset\cdots\supset H_k\supset\langle 0\rangle.$$
+	Then $H_k\cong t\mathbb Z$ for some integer $t$. Then $H_k/\langle 0\rangle\cong t\mathbb Z$, which is not simple.
+\end{example}
+
+\begin{remark}
+	Composition series, if they exist, they may not be unique.
+\end{remark}
+
+\begin{example}
+	Both
+	\begin{gather*}
+		\mathbb Z_{2024}\supset\langle 11\rangle\supset\langle 22\rangle\supset\langle 506\rangle\supset\langle 1012\rangle\supset\langle 0\rangle\\
+		\text{and}\\
+		\mathbb Z_{2024}\supset\langle 23\rangle\supset\langle 46\rangle\supset\langle 92\rangle\supset\langle 1012\rangle\supset\langle 0\rangle
+	\end{gather*}
+	are compostition series. (Check!)
+\end{example}
+
+We can easily get around the non-uniqueness of composition series by allowing isomorphism.
+
+\begin{theorem}[Jordan-Hölder]
+	Any two composition series of $G$ are isomorphic.
+\end{theorem}
+
+We will postpone the proof until next lecture.
+
+\begin{definition}
+	A group $G$ is \textbf{solvable} if it has a subnormal series such that all $H_{i+1}/H_i$ are abelian.
+\end{definition}
+
+\begin{example}
+	Famously, the alternating group $A_n$ is not solvable for integers $n\geq 5$.
+\end{example}
+
+\begin{example}
+	We apply the Jordan-Hölder Theorem to the Fundamental Theorem of Arithmetic. We know that every integer can be factored into primes (existence). We use Jordan-Hölder to show uniqueness.
+
+	\begin{proof}
+	Suppose
+	$$n=p_1p_2\cdots p_r=q_1q_1\cdots q_s\quad\textit{(not necessarily distinct)}.$$
+	We form the composition series
+	$$\mathbb Z_n\supset\langle p_1\rangle\supset\langle p_1p_2\rangle\supset\cdots\supset\langle p_1p_2\cdots p_r\rangle\supset\langle 0\rangle,$$
+	with $\langle p_1\cdots p_i\rangle/\langle p_1\cdots p_{i-1}\rangle\cong\mathbb Z_{p_i}$ simple. We also have the composition series
+	$$\mathbb Z_n\supset\langle q_1\rangle\supset\langle q_1q_2\rangle\supset\cdots\supset\langle q_1q_2\cdots q_s\rangle\supset\langle 0\rangle,$$
+	with $\langle q_1\cdots q_j\rangle/\langle q_1\cdots q_{j-1}\rangle\cong\mathbb Z_{q_j}$ simple. By Jordan-Hölder, the series are isomorphic, so $r=s$ and $\mathbb Z_{p_i}\cong\mathbb Z_{q_j}$ if and only if $p_i=q_j$.
+	\end{proof}
+
+	This proof can be used to find composition series for $\mathbb Z_n$. For example, take $n=2024=23\cdot 2\cdot 11\cdot 2\cdot 2$. So
+	$$\mathbb Z_{2024}\supset\langle 23\rangle\supset\langle 23\cdot 2\rangle\supset\langle 23\cdot 2\cdot 11\rangle\supset\langle 23\cdot 2\cdot 11\cdot 2\rangle\supset\langle 23\cdot 2\cdot 11\cdot 2\cdot 2\rangle=\langle 0\rangle$$
+	is a composition series.
+\end{example}

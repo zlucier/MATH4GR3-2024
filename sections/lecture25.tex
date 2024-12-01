@@ -1,0 +1,103 @@
+\section{Lecture 25 — Fields from Domains}
+
+Given an integral domain $D$, we would like to construct a field $F_D$. A motivating example is forming $\mathbb Q$ form $\mathbb Z$.
+
+Recall that a domain $D$
+\begin{itemize}
+	\item is commutative,
+	\item has identity, and
+	\item has no zero divisors.
+\end{itemize}
+
+Let $S=\{(a,b)\in D^2\mid b\neq 0\}$. Define a relation $\sim$ on $S$ by
+$$(a,b)\sim(c,d)\Leftrightarrow ad=bc.$$
+
+\begin{lemma}
+	$\sim$ is an equivalence relation.
+\end{lemma}
+
+\begin{proof}
+	We verify that the conditions hold.
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item Since $D$ is commutative, $ab=ba$ and thus $(a,b)\sim(a,b)$, i.e. $\sim$ is reflexive.
+		\item Suppose $(a,b)=(c,d)$. So $ad=bc$. Since $D$ is commutative, $cb=da$ and thus $(c,d)\sim(a,b)$. That is, $\sim$ is symmetric.
+		\item Suppose $(a,b)\sim(c,d)$ and $(c,d)=(e,f)$. So $ad=bc$ and $cf=de$. We multiply and obtain $adf=bcf$ and $bcf=bde$. Note $b,d,e\neq 0$. So $adf=bde$. In particular $af=be$ since $d\neq 0$ and $D$ is a domain. So $(a,b)\sim(e,f)$ and $\sim$ is transitive.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[field of fractions]
+	Let $D$ be an integral domain. The \textbf{field of fractions} of $D$ is the set of all equivalence classes
+	$$F_D=\{[(a,b)]\mid (a,b)\in S\}.$$
+\end{definition}
+
+\begin{example}
+	When $D=\mathbb Z$, $S=\{(a,b)\in D^2\mid b\neq 0\}$. Consider $(2,7)\in S$. So
+	\begin{align*}
+		[(2,7)]&=\{(c,d)\in S\mid (2,7)\sim(c,d)\}\\
+		&=\{(c,d)\in S\mid 2d=7c\}\\
+		&=\left\{(c,d)\in S\mid \frac 27=\frac cd\right\},
+	\end{align*}
+	i.e. when we write $\frac 27\in \mathbb Q$, we really mean ``all ways'' to write $\frac 27$. For example,
+	$$\frac 27=\frac{-2}{-7}=\frac{4}{14}=\frac{20}{70}.$$
+\end{example}
+
+We can define addition and multiplication on $F_D$:
+$$[(a,b)]+[(c,d)]=[(ad+bc,bd)]\quad\text{and}\quad[(a,b)]\cdot[(c,d)]=[(ac,bd)]$$
+
+\begin{lemma}
+	Both operations defined above are well-defined.
+\end{lemma}
+
+\begin{proof}
+	We prove only multiplication. Suppose $[(a,b)]=[(a',b')]$ and $[(c,d)]=[(c',d')]$. We want to show $[(a,b)]\cdot[(c,d)]=[(a',b')]\cdot[(c',d')]$, i.e. $[(ac,bd)]=[(a'c',b'd')]$.
+
+	We are given $ab'=a'b$ and $cd'=c'd$. So $ab'cd'=a'bc'd$, thus $(ac)(b'd')=(a'c')(bd)$ and $[(ac,bd)]=[(a'c',b'd')]$.
+\end{proof}
+
+\begin{theorem}
+	The field of fractions of a domain is a field with the previously defined addition and multiplication.
+\end{theorem}
+
+\begin{proof}
+	We verify that $F_D$ all the properties of a field.
+	\begin{itemize}
+		\item Addititve identity is $[(0,1)]$. Indeed, $[(a,b)]+[(0,1)]=[a\cdot 1+b\cdot 0,1\times b]=[a,b]$.
+		\item Multiplicative identity is $[(1,1)]$.
+		\item Suppose $[a,b]\in F_D$ and $a\neq 0$. Then $[(b,a)]\in F_D$ and this is the inverse since $[(a,b)][(b,a)]=[(ab,ba)]=[(1,1)]$.
+		\item $[(a,b)]+([(c,d)]+[(e,f)])=([(a,b)]+[(c,d)])+[(e,f)]$ (check!)
+	\end{itemize}
+	The rest is an exercise.
+\end{proof}
+
+\begin{theorem}
+	Let $D$ be a domain. Then $D$ can be embedded into $F_D$. That is, there exists an injective homomorphism $\varphi\colon D\to F_D$ and thus $F_D$ has a subring isomorphic to $D$.
+\end{theorem}
+
+\begin{proof}
+	Let $D'=\{[(d,1)]\mid d\in D\}\subseteq F_D$. Define a map $\varphi \colon D\to D'\subseteq F_D$ by $d\mapsto [(d,1)]$. It is a ring homomorphism since
+	\begin{align*}
+		\varphi(d_1+d_2)&=[(d_1+d_2,1)]\\
+		&=[(d_1,1)]+[(d_2,1)]\\
+		&=\varphi(d_1)+\varphi(d_2)
+	\end{align*}
+	and
+	\begin{align*}
+		\varphi(d_1d_2)&=[(d_1d_2,1)]\\
+		&=[(d_1,1)][(d_2,1)]\\
+		&=\varphi(d_1)\varphi(d_2).
+	\end{align*}
+
+	Then the map is injective and surjective on $D'$. It is left as an exercise to show $D'$ is a subring of $F_D$.
+\end{proof}
+
+\begin{theorem}
+	Suppose $E$ is a field that contains a domain $D$. Then there is a subfield $E'\subseteq E$ such that $F_D\cong E'$.
+\end{theorem}
+
+\begin{corollary}
+	If $E$ is a field of characteristic 0, then $E$ has a subfield isomorphic to $\mathbb Q$.
+\end{corollary}
+
+\begin{proof}
+	Let $1_E$ be the identity in $E$. Set $D=\{n\cdot 1_E\mid n\in\mathbb Z\}\cong\mathbb Z$. So $F_{\mathbb Z}\cong\mathbb Q\cong E'\subseteq E$.
+\end{proof}

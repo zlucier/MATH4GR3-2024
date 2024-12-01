@@ -1,0 +1,124 @@
+\section{Lecture 26 — Unique Factorization Domains}
+
+Let $R$ be a commutative ring with identity and let $a,b\in R$.
+
+\begin{definition}[divides, \textit{a}|\textit{b}]
+	We say that $a$ \textbf{divides} $b$ and write $a\mid b$ if $b=ac$ for some $c\in R$.
+\end{definition}
+
+\begin{definition}[unit]
+	We say that $a\in R$ is a \textbf{unit} if there exists $u\in R$ such that $au=1$, i.e. $a$ has a multiplicative inverse $u$.
+\end{definition}
+
+\begin{definition}[associates]
+	We say that $a$ and $b$ are \textbf{associates} if there exists a unit $u\in R$ such that $a=ub$.
+\end{definition}
+
+Let $D$ be an integral domain.
+
+\begin{definition}[irreducible]
+	Let $p\in D$ be nonzero. We say that $p$ is \textbf{irreducible} if $p$ is not a unit and whenever $p=ab$, then $a$ or $b$ is a unit.
+\end{definition}
+
+\begin{definition}[prime]
+	Let $p\in D$ be nonzero. We say that $p$ is \textbf{prime} if whenever $p$ divides $ab$, either $p$ divides $a$ or $p$ divides $b$.
+\end{definition}
+
+\begin{lemma}
+	If $p\in D$ is prime, them $p$ is irreducible.
+\end{lemma}
+
+\begin{proof}
+	Suppose $p=ab$ for some $a,b\in D$. Clearly, $p|ab$. Since $p$ is prime, either $p\mid a$ or $p|b$. Without loss of generality, suppose $p|a$. Then $a=pc$ for some $c$. Thus, $p=pcb$. Since we are in an integral domain, we can multiply by $p^{-1}$ on both sides. This yields $1=cb$. So $b$ is a unit and thus $p$ is irreducible.
+\end{proof}
+
+\begin{example}
+	If $p\in D$ is irreducible, it is not necessarily the case that $p$ is prime.
+
+	Take for example the domain $D=\mathbb Q[x^2,xy,y^2]$, i.e. all polynomials in $x^2,xy,y^2$ with rational coefficients. Observe $xy\in D$ is irreducible — it cannot be factored into two terms of degree 1. But $xy$ is not prime since $xy$ divides $x^2y^2$ and $xy$ divides neither $x^2$ nor $y^2$.
+\end{example}
+
+\begin{definition}
+	An integral domain $D$ is a \textbf{unique factorization domain (UFD)} if
+	\begin{enumerate}
+		\item Every nonzero $a\in D$ that is not a unit can be written as
+		$$a=p_1p_2\cdots p_r$$
+		with each $p_i$ irreducible, and
+		\item if $a=p_1p_2\cdots p_r=q_1q_2\cdots q_s$ with each $p_i$ and each $q_j$ irreducible, then $r=s$ and there exists a permutation $\pi\in S_r$ such that $p_i$ and $q_{\pi(i)}$ are associates.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	The integers $\mathbb Z$ form a UFD since every integer $a\in\mathbb Z$ can be written uniquely as
+	$$a=(-1)^tp_1^{b_1}\cdots p_s^{b_s},\qquad\text{with $p_i$ prime.}$$
+	Note that $-1$ is a unit in $\mathbb Z$.
+
+	Take for example,
+	$$20=2\times 2\times 5=(-2)\times(2)\times(-5).$$
+\end{example}
+
+\begin{example}
+	Though all UFDs are integral domains, not all integral domains are UFDs.
+
+	Set $$S=\{f\in\mathbb R[x]\mid f(x)=a_0+0x+a_2x^2+\cdots+a_nx^n\},$$
+	i.e. $S$ is the set of all polynomials with real coefficients such that the coefficient of the $x$ term is $0$. Then $S$ is a subring of $\mathbb R[x]$ that is an integral domain. In this ring, $x^2$ is irreducible as it cannot be factored as a product of two degree 1 polynomials. For the same reason, $x^3$ is irreducible. Now consider the following:
+	$$x^6=(x^2)(x^2)(x^2)=(x^3)(x^3).$$
+	Since $x^6$ has two possible factorizations with irreducible factors, $S$ cannot be a UFD.
+\end{example}
+
+\begin{definition}
+	A domain $D$ is called a \textbf{principal ideal domain (PID)} if every ideal of $D$ is principal.
+\end{definition}
+
+\begin{example}
+	Take for example $\mathbb Z$ and $F[x]$ with $F$ a field. (Why?)
+\end{example}
+
+Our goal will be to show that all PIDs are UFDs.
+
+\begin{lemma}
+	Let $D$ be a domain and let $a,b\in D$. Then
+	\begin{enumerate}
+		\item $a|b$ if and only if $\langle b\rangle\subseteq\langle a\rangle$,
+		\item $a$ and $b$ are associates if and only if $\langle a\rangle=\langle b\rangle$, and
+		\item $a$ is a unit if and only if $\langle a\rangle=D$. 
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof} \phantom{x}
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item Given $a|b$, $b=ac$ for some $c\in D$. but then $b\in\langle a\rangle$ and thus $\langle b\rangle\subseteq\langle a\rangle$.
+
+		Now given $\langle b\rangle\subseteq\langle a\rangle$, $b\in\langle b\rangle\subseteq\langle a\rangle$ and so $b=ac$ for some $c$. Thus, $a|b$.
+
+		\item If $a$ and $b$ are associates, there is a unit $u$ so that $a=ub$ and thus $u^{-1}a=b$. So both $b|a$ and $a|b$. By (a), $\langle b\rangle\subset\langle a\rangle\subset\langle b\rangle$ and so $\langle a\rangle =\langle b\rangle$.
+
+		Given $\langle a\rangle =\langle b\rangle$, we have $\langle a\rangle\subseteq\langle b\rangle$ $\langle b\rangle\subseteq\langle a\rangle$. So both $b|a$ and $a|b$. Thus, $a=bc$ and $b=at$. So $a=atc$ and thus $1=tc$. So $c$ is a unit and thus $a$ and $b$ are associates.
+
+		\item Suppose $a$ is a unit. So $au=1\Leftrightarrow a=1\cdot u^{-1}$. So $a|1$ and $1|a$. Thus $\langle a\rangle=\langle 1\rangle =D$.
+
+		The other direction is left as an exercise.
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{thm:irr_equiv_max_ideal}
+	Let $D$ be a PID. Then $p$ is irreducible if and only if $\langle p\rangle$ is a maximal ideal.
+\end{theorem}
+
+\begin{proof}
+	Suppose first that $p$ is irreducible and $a$ is such that $\langle p\rangle\subseteq\langle a\rangle$. So $a|p$. Since $p$ is irreducible, either $a$ is an associate of $p$ or $a$ is a unit in the case where $a$ is an associate, $\langle p\rangle$. In the other case that $a$ is a unit, $\langle a\rangle=D$. So $\langle p\rangle$ is maximal.
+
+	Now suppose that $\langle p\rangle$ is a maximal ideal and $a$ and $b$ are such that $p=ab$. So $\langle p\rangle\subseteq\langle a\rangle$. Since $\langle p\rangle$ is maximal, either $\langle p\rangle=\langle a\rangle$ or $\langle a\rangle=D$. In the case that $\langle a\rangle=D$, $a$ is a unit. In the other case where $\langle p\rangle=\langle a\rangle$, $a$ is an associate of $p$, so $b$ is a unit. Therefore, $p$ is irreducible.
+\end{proof}
+
+\begin{corollary}
+	Let $D$ be a PID. Then $p$ is prime if and only if $p$ is irreducible.
+\end{corollary}
+
+\begin{proof}
+	The forwards implication is trivial and always true. So suppose $p$ is irreducible. So $\langle p\rangle$ is a maximal ideal by Theorem \ref{thm:irr_equiv_max_ideal} and thus a prime ideal. If $ab\in\langle p\rangle$, then either $a\in\langle p\rangle$ or $b\in\langle p\rangle$. Equivalently, either $p|a$ or $p|b$.
+\end{proof}
+
+\begin{example}
+	In $\mathbb Z$ and $F[x]$, prime is equivalent to irreducible.
+\end{example}

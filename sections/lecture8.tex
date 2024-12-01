@@ -1,0 +1,145 @@
+\section{Lecture 8 — Group Actions and Examples}
+
+In this lecture, we will introduce group actions. As an example from linear algebra, if $V$ is a vector space over a field $\mathbb F$, then $\mathbb F$ ``acts'' on $V$ by scalar multiplication, i.e.
+$$(\mathbb F\times V)\to V,\qquad (c,v)\mapsto cv.$$
+
+\begin{definition}[group action]
+	Let $X$ be a set and $G$ a group. A \textbf{left action} of $G$ on $X$ is a map $G\times X\to X$ defined by
+	$$(g,x)\mapsto g\cdot x,$$
+	such that
+	\begin{enumerate}
+		\item $(e,x)\mapsto e\cdot x=x$, and
+		\item $(g_1,(g_2,x))\mapsto g_1\cdot(g_2\cdot x)=(g_1g_2)\cdot x$.
+	\end{enumerate}
+	We call $X$ a $G$-set.
+\end{definition}
+
+\begin{remark}
+	``$\cdot$'' does \textit{not} always mean multiplication.
+\end{remark}
+
+\begin{example}
+	The map $G\times X\to X$ defined by $(g,x)\mapsto x$ is trivially a group action.
+\end{example}
+
+\begin{example}
+	If $X=G$, then we can view the group operation as a group action $G\times G\to G$, $(g,x)\mapsto g*x$, where $*$ is the operation in the group $G$.
+\end{example}
+
+\begin{example}
+	Let $X=\mathbb R^2$ and take $G=\text{GL}_2(\mathbb R)$ (all $2\times 2$ invertible matrices). Define a map
+	\begin{align*}
+		G\times X&\to X,\\
+		\left(A,\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}\right)&\mapsto A\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}.
+	\end{align*}
+	This is indeed a group action. The identity criterion obviously holds. Let $A,B\in G$. Then
+	\begin{align*}
+		\left(A,\left(B,\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}\right)\right)&=\left(A,B\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}\right)\\
+		&=AB\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}
+	\end{align*}
+	But also
+	\begin{align*}
+		\left(AB,\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}\right)&=AB\begin{bmatrix}
+			x_1 \\ x_2
+		\end{bmatrix}
+	\end{align*}
+\end{example}
+
+\begin{example}
+	Let $X=G$ and let $H$ be a subgroup of $G$. Define an $H$-action on $G$ by
+	\begin{align*}
+		H\times G&\to G\\
+		(h,g)&\mapsto hgh^{-1}
+	\end{align*}
+	This is a group action since $e\in H$ and $(h,g)\mapsto ege^{-1}=g$ and, for any $h_1,h_2\in H$,
+	\begin{align*}
+		(h_1,(h_2,g))&\mapsto (h_1,h_2gh_2^{-1})\\
+		&\mapsto h_1(h_2gh_2^{-1})h_1^{-1}\\
+		&=(h_1h_2)g(h_2^{-1}h_1^{-1})\\
+		&=(h_1h_2)g(h_1h_2)^{-1}
+	\end{align*}
+	and also $(h_1h_2,g)\mapsto (h_1h_2)g(h_1h_2)^{-1}$.
+\end{example}
+
+\begin{example}
+	Let $X=\{a_1,a_2,\hdots,a_n\}$ and let $G=S_n$ (symmetric group on $n$ elements). Then $G$ acts on $X$ by
+	\begin{align*}
+		G\times X&\to X,\\
+		(\sigma,a_i)&\mapsto a_{\sigma(i)}.
+	\end{align*}
+
+	For example, take $X=\{a_1,a_2,a_3\}$ and $G=S_3$. Consider
+	$$\sigma=\begin{pmatrix}
+		1 & 2 & 3 \\ 2 & 1 & 3
+	\end{pmatrix}.$$
+	Then $(\sigma,a_1)\mapsto a_2$, $(\sigma, a_2)\mapsto a_1$ and $(\sigma, a_3)\mapsto a_3$.
+\end{example}
+
+This is all great, but why should we care about group actions? In short, they provide us with \textit{equivalence relations}.
+
+\begin{definition}[group-equivalent]
+	Two elements $x,y\in X$ are said to be $G$-equivalent if there is an element $g\in G$ such that $y=g\cdot x$. We write $x\sim y$ or, to specify the group, $x\sim_G y$.
+\end{definition}
+
+\begin{theorem}
+	Let $X$ be a $G$-set. Then ``$G$-equivalent'' is an equivalence relation
+\end{theorem}
+
+\begin{proof}
+	We verify that the required properties hold.
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item (reflexive) $x\sim x$ since $x=e\cdot x$
+		\item (symmetric) Suppose $x\sim y$. Then there exists an element $g\in G$ such that $y=g\cdot x$. So $g^{-1}\cdot y=g^{-1}\cdot (g\cdot x)=(g^{-1}g)\cdot x$.
+		\item (transitive) If $x\sim y$, then $y=g_1\cdot x$ and if $y\sim z$, then $z=g_2\cdot y$. So $z=g_2\cdot y=g_2\cdot (g_1\cdot x)=(g_1g_2)\cdot x$ and thus $x\sim z$
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[orbit]
+	Let $X$ be a $G$-set and fix $x\in X$. Define
+	$$\mathcal O_x=\{g\cdot x\mid g\in G\}.$$
+	We call $\mathcal O_x$ the \textbf{orbit} of $x$.
+\end{definition}
+
+We give a few properties without proof.
+
+\begin{proposition}
+	Let $X$ be a $G$-set.
+	\begin{enumerate}
+		\item $O_x=\{y\mid x\sim y\}$
+		\item $\mathcal O_{x_i}=\mathcal O_{x_j}$ or $\mathcal O_{x_i}\cap\mathcal O_{x_j}=\emptyset$ for all $x_i,x_j\in X$.
+		\item If $\mathcal O_{x_1},\hdots,\mathcal O_{x_s}$ are distinct orbits, then
+		$$X=\bigcup_{i=1}^s\mathcal O_{x_i},$$
+		i.e. the orbits partition $X$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{example}
+	Let $X=\{1,2,3\}$ and $H=\left\{\sigma_1=\begin{pmatrix}
+		1 & 2 & 3 \\ 1 & 2 & 3
+	\end{pmatrix}, \sigma_2=\begin{pmatrix}
+		1 & 2 & 3 \\ 2 & 1 & 3
+	\end{pmatrix}\right\}$. Define an action
+	\begin{align*}
+		H\times H&\to X,\\
+		(\sigma_i,j)&\mapsto \sigma_i(j).
+	\end{align*}
+	Then we have the following orbits.
+	\begin{align*}
+		\mathcal O_1&=\{\sigma_1(1),\sigma_2(1)\}=\{1,2\}\\
+		\mathcal O_2&=\{\sigma_1(2),\sigma_2(2)\}=\{2,1\}\\
+		\mathcal O_3&=\{\sigma_1(3),\sigma_2(3)\}=\{3\}\\
+	\end{align*}
+	Thus $X=\{1,2,3\}=\mathcal O_1\cup\mathcal O_3$.
+\end{example}

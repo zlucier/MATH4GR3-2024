@@ -1,0 +1,148 @@
+\section{Lecture 34 — Geometric Constructions II}
+
+Recall that a number $\alpha\in\mathbb R$ is constructible if we can construct a line segment of length $|\alpha|$ using only straightedge and compass operations.
+
+The set
+$$\{\alpha\in\mathbb R\mid\text{$\alpha$ is constructible}\}\subseteq\mathbb R,$$
+Is a proper subfield of $\mathbb R$ and a proper extension of $\mathbb Q$.
+
+\begin{definition}[constructible]
+	A point $P=(a,b)$ is \textbf{constructible} if both $a$ and $b$ are constructible.
+\end{definition}
+
+\begin{lemma}
+	Let $F$ be a subfield of $\mathbb R$.
+	\begin{enumerate}
+		\item If a line $L$ contains points $P_1$ and $P_2$ in $F$, then its equation has the form
+		$$ax+by+c=0,\qquad\text{with $a,b,c\in F$.}$$
+		\item If a circle has center $P$ in $F$ and a radius $r\in F$, then its equation has the form
+		$$x^2+y^2+dx+ey+f=0,\qquad\text{with $d,e,f\in F$.}$$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	We prove (b).
+
+	Let $S$ be a circle with center $P=(a,b)\in F^2$ and radius $r\in F$. Then its equation is
+	\begin{align*}
+		(x-a)^2+(y-b)^2&=r^2\\
+		x^2-2ax+a^2+y^2-2by+b^2&=r^2\\
+		x^2+y^2+(-2a)x+(-2b)y+(a^2+b^2+r^2)&=0.
+	\end{align*}
+	But since $a,b,r\in F$, it must also be that $(-2a),(-2b),(a^2+b^2+r^2)\in F$.
+\end{proof}
+
+Starting with a field $F$ of constructible numbers, recall how we can add ``new'' points:
+
+\begin{enumerate}[label={\color{main}\bfseries\sffamily (\roman*)}]
+	\item Intersect two lines, each of which passes through two points with coordinates in $F$.
+	\item Intersect a line and a circle with center and radius in $F$.
+	\item Intersect two circles with centers and radii in $F$.
+\end{enumerate}
+
+Note that case (iii) reduces to case (ii).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\begin{scope}
+	\draw (-1,0) circle (2);
+	\draw (1,0) circle (2);
+	\node[circle,fill=main,scale=0.5] at (0,{sqrt(3)}) {};
+	\node[circle,fill=main,scale=0.5] at (0,{-sqrt(3)}) {};
+\end{scope}
+\begin{scope}[shift={(8,0)}]
+	\draw (-1,0) circle (2);
+	\draw (1,0) circle (2);
+	\draw (0,2.5) -- (0,-2.5);
+	\node[circle,fill=main,scale=0.5] at (0,{sqrt(3)}) {};
+	\node[circle,fill=main,scale=0.5] at (0,{-sqrt(3)}) {};
+\end{scope}
+\begin{scope}[shift={(16,0)}]
+	\draw (-1,0) circle (2);
+	\draw[opacity=0.1] (1,0) circle (2);
+	\draw (0,2.5) -- (0,-2.5);
+	\node[circle,fill=main,scale=0.5] at (0,{sqrt(3)}) {};
+	\node[circle,fill=main,scale=0.5] at (0,{-sqrt(3)}) {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+In case (i), since the two equations have the form $ax+by+c=0$ with coefficients in $F$, the intersection will have coordinates in $F$.
+
+In case (ii), we want to solve
+$$\begin{cases}
+	ax+by+c=0,\\
+	x^2+y^2+dx+ey+f=0,
+\end{cases}$$
+where $a,b,c,d,e,f\in F$. Solve $y=-\frac abx-\frac cb$ and substitute into the second equation and obtain
+$$x^2+\left(-\frac abx-\frac cb\right)^2+dx+e\left(-\frac abx-\frac cb\right)+f=0.$$
+Expanding gives an equation of the form
+$$Ax^2+Bx+C=0,$$
+where $A,B,C\in F$. So
+$$x=\frac{-B\pm\sqrt{B^2-4AC}}{2A}\quad\text{and}\quad y=-\frac ab\left(\frac{-B\pm\sqrt{B^2-4AC}}{2A}\right)-\frac cb.$$
+But notice that it is not necessarily the case that these solutions $x,y$ lie in $F$. But $x,y\in F(\sqrt\alpha)$ where $\alpha=B^2-4AC$. So this implies that $\sqrt\alpha$ is constructible.
+
+To recap, when creating points by intersecting two lines, we get points with coordinates in $F$, but when creating points by intersecting a circle and a line, we get points with coordinates in $F(\sqrt\alpha)$, for some $\alpha$ and observe that $[F(\sqrt\alpha):F]=1$ or $[F(\sqrt\alpha):F]=2$. So $F(\alpha)$ is at most a \textbf{quadratic extension}.
+
+\begin{theorem}
+	$\alpha\in\mathbb R$ is constructible if and only if there is a sequence of fields
+	$$\mathbb Q=F_0\subseteq F_1\subseteq F_2\subseteq\cdots\subseteq F_k$$
+	such that $F_i=F_{i-1}(\sqrt\alpha_i)$ for some $\alpha_i\in F_{i-1}$. In particular,
+	$$[\mathbb Q(\alpha):\mathbb Q]=2^k,$$
+	if and only if $\alpha$ is constructible.
+\end{theorem}
+
+\subsection*{Impossible Constructions}
+
+\begin{enumerate}[label={\bfseries\sffamily\color{main}(\arabic*)}]
+	\item \textbf{Squaring a circle:} \textit{Given a circle of radius 1, construct a square with the same area as the circle.}
+
+	This problem is equivalent to constructing a square with area $\pi$ and thus segments of length $\sqrt\pi$. So this would require $\sqrt\pi$ to be constructible. But $[\mathbb Q(\sqrt{\pi}):\mathbb Q]=\infty$ since $\pi$, and thus $\sqrt\pi$, is transcendental.
+
+	\item \textbf{Doubling a cube:} \textit{Given a cube of volume 1, construct a cube with double its volume.}
+
+	This problem is equivalent to constructing a cube with side lengths $\sqrt[3]{2}$. But $\sqrt[3]{2}$ is not constructible since
+	$$[\mathbb Q(\sqrt[3]{2}):\mathbb Q]=3\neq2^k.$$
+
+	\item \textbf{Trisect an angle:} \textit{Given an angle with measure $\theta$, construct an angle with measure $\theta/3$.}
+
+	Note that the point $\left(\frac 12,\frac{\sqrt 3}{2}\right)$ is constructible. This is the point obtained by intersecting the unit circle with a line forming an angle of $60^\circ$ with the $x$-axis. A point $R$ on the unit circle trisecting this angle would construct $\cos 20^\circ$.
+
+	\begin{center}
+	\begin{tikzpicture}[scale=2]
+		\footnotesize
+		\draw[dashed,main] ({cos(20)},0) -- (20:1);
+
+		\draw[gray] (0,0) -- (60:1.5);
+		\draw[gray] (0.15,0) arc (0:60:0.15);
+
+		\draw[main] (0,0) -- (20:1.5);
+		\draw[main] (0.35,0) arc (0:20:0.35);
+
+		\draw[->] (-0.25,0) -- (1.5,0);
+		\draw[->] (0,-0.25) -- (0,1.5);
+		\draw (1,0) arc (0:90:1);
+		\node[gray,circle,scale=0.5,fill,label=right:{$\left(\frac 12,\frac{\sqrt 3}{2}\right)$}] at (0.5,{sqrt(3)/2}) {};
+		\node[main,circle,scale=0.5,fill,label=right:{$R$}] at (20:1) {};
+		\node[below,color=main] at ({cos(20)},0) {$\cos 20^\circ$};
+
+		\node[above right,gray] at (30:0.1) {$60^\circ$};
+		\node[right,main] at (10:0.35) {$20^\circ$};
+	\end{tikzpicture}
+	\end{center}
+
+	Using trigonometric identities,
+	\begin{align*}
+		\cos 3\theta&=\cos(2\theta+\theta)\\
+		&=\cos(2\theta)\cos\theta-\sin(2\theta)\sin\theta\\
+		&=(2\cos^2\theta-1)\cos\theta-2\sin^2\theta\cos\theta\\
+		&=(2\cos^2\theta-1)\cos\theta-2(1-\cos^2\theta)\cos\theta\\
+		&=4\cos^3\theta-3\cos\theta.
+	\end{align*}
+	So $\cos 20^\circ$ satisfies
+	\begin{align*}
+		4(\cos 20^\circ)^3-3(\cos 20^\circ)-\cos(60^\circ)&=0\\
+		4(\cos 20^\circ)^3-3(\cos 20^\circ)-\frac 12&=0.
+	\end{align*}
+	Thus, $\cos 20^\circ$ is a root of $p(x)=4x^3-3x-\frac 12$. But $p(x)$ is irreducible over $\mathbb Q$. So $[Q(\cos^\circ):\mathbb Q]=3\neq 2^k$.
+\end{enumerate}

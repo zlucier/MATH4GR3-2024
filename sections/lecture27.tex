@@ -1,0 +1,107 @@
+\section{Lecture 27 — Principal Ideal Domains}
+
+Recall that an integral domain is a principal ideal domain (PID) if every ideal in the domain is principal. Common examples are $\mathbb Z$ and $F[x]$ for $F$ a field. The goal of this lecture is to show that all PIDs are UFDs.
+
+\begin{lemma}
+	Let $D$ be a PID and let $I_1,I_2,\hdots$ be a collection of ideals of $D$ such that
+	$$I_1\subseteq I_2\subseteq\cdots.$$
+	Then there is an integer $N$ such that
+	$$I_N=I_{N+1}=I_{N+2}=\cdots.$$
+\end{lemma}
+
+\begin{proof}
+	Let $I=\bigcup_{i=1}^\infty I_i$. We claim that $I$ is an ideal. Indeed,
+	\begin{itemize}
+		\item $I\neq\emptyset$ since $0\in I_1\subseteq I$.
+		\item Let $a,b\in I$. Then $a\in I_i$ and $b\in I_j$ for some $i,j$. Without loss of generality, suppose $i\leq j$. Then $a\in I_i\subseteq I_j$, so $a,b\in I_j$. Thus, $a-b\in I_j\subseteq I$.
+		\item Let $a\in I$. So $a\in I_i$ for some $i$. For any $r\in D$, $ra\in I_i\subseteq I$.
+	\end{itemize}
+	Since $D$ is a PID, there exists an element $d\in D$ such that $I=\langle d\rangle$. Since $d\in I=\bigcup_{i=1}^\infty I_i$, there exists and integer $N$ such that $d\in I_N$. So
+	$$\langle d\rangle\subseteq I_N\subseteq I_{N+1}\subseteq\cdots\subseteq I=\langle d\rangle.$$
+	Therefore, $\langle d\rangle=I_N=I_{N+1}=\cdots$.
+\end{proof}
+
+\begin{definition}[Noetherian ring]
+	A ring $R$ is a \textbf{Noetherian ring} if it satisfies the ascending chain condition, i.e. for any chain of ideals $I_1\subseteq I_2\subseteq\cdots$, there is an integer $N$ such that $I_N=I_{N+1}=\cdots$.
+\end{definition}
+
+\begin{corollary}
+	Every PID is Noetherian.
+\end{corollary}
+
+\begin{lemma}\label{lem:max_ideal}
+	Let $S$ be a nonempty collection of ideals in a PID. Then there is an ideal $J\in S$ such that for all $I\in S$ with $J\subseteq I$, $J=I$, i.e. $S$ has a maximal element.
+\end{lemma}
+
+\begin{proof}
+	Suppose for a contradiction that $S$ had no such maximal element. Take $I_1\in S$. Since $I_1$ is not maximal, there exists $I_2\in S$ such that $I_1\subsetneq I_2$. Again, $I_2$ is not maximal so there is $I_3\in S$ such that $I_1\subsetneq I_2\subsetneq I_3$. Continuing in this way,
+	$$I_1\subsetneq I_2\subsetneq I_3\subsetneq\cdots.$$
+	But this contradicts the ascending chain condition and the fact that every PID is Noetherian.
+\end{proof}
+
+\begin{lemma}\label{lem:pid_irred_prod}
+	Let $R$ be a PID. If $a\in R$ is not a unit, then $a$ can be written as a product of irreducible elements.
+\end{lemma}
+
+\begin{proof}
+	Let $S$ be the collection of principal ideals $\langle a\rangle$ of $R$ such that $a$ is not a unit and $a$ cannot be written as a product of irreducibles. Our goal is to show $S=\emptyset$.
+
+	Suppose otherwise for a contradiction, i.e. $S\neq\emptyset$. Then by Lemma \ref{lem:max_ideal}, there exists a maximal $\langle a\rangle\in S$. But we also know that $a=bc$ with $a$ not reducible, so $b$ and $c$ are not units. But then
+	$$\langle a\rangle\subseteq\langle b\rangle\quad\text{and}\quad\langle a\rangle\subseteq\langle c\rangle.$$
+	So $\langle b\rangle,\langle c\rangle\notin S$. So $b$ and $c$ can be factored into irreducibles as $b=p_1\cdots p_r$ and $c=q_1\cdots q_s$. But then $a=bc=p_1\cdots p_rq_1\cdots q_s$ is a product of irreducibles, yielding a contradiction. So $S=\emptyset$.
+\end{proof}
+
+\begin{theorem}\label{thm:pid_is_ufd}
+	Every PID is also a UFD.
+\end{theorem}
+
+\begin{proof}
+	Let $D$ be a PID. Let $a\in D$ with $a$ not a unit. By Lemma \ref{lem:pid_irred_prod}, $a$ can be written as a product of irreducibles.
+
+	Suppose $a=p_1\cdots p_r$ and $a=q_1\cdots q_s$ are two ways to write $a$ as a product of irreducibles. Without loss of generality, suppose $r\leq s$. Since $D$ is a PID, $p_1$ is also prime. Since $p_1|q_1\cdots q_s$, we must have $p_1|q_i$ for some $i$. Relabeling, assume $p_1|q_1$, that is, $q_1=u_1p_1$. Note that $u_1$ must be a unit since $q_1$ is irreducible. Thus,
+	$$p_1p_2\cdots p_r=u_1p_1q_2\cdots q_s.$$
+	In the case that $r<s$, we end up with
+	$$1=u_1\cdots u_rq_{r+1}\cdots q_s.$$
+	But this cannot happen, since the $q_i$'s are not units. So it must be that $r=s$ and thus $p_i=u_iq_i$ for all $i$. As such, the factorization for $a$ is unique.
+\end{proof}
+
+\begin{corollary}
+	If $F$ is a field, $F[x]$ is a UFD.
+\end{corollary}
+
+Note that the converse of Theorem \ref{thm:pid_is_ufd} is false; there are UFDs that are not PIDs.
+
+\begin{example}
+	$F[x_1,\hdots,x_n]$ is a UFD but not a PID.
+\end{example}
+
+\begin{definition}[Euclidean domain, Euclidean valuation]
+	Let $D$ be an integral domain. Suppose that there is a function $v\colon D\setminus\{0\}\to\mathbb N$ that satisfies the following:
+	\begin{enumerate}
+		\item If $a,b\in D$, then $v(a)\leq v(ab)$.
+		\item Let $a,b\in D$ with $b\neq 0$. Then there exist $q,r\in d$ such that $a=bq+r$ with $r=0$ or $v(r)<v(b)$.
+	\end{enumerate}
+	Then $D$ is called a \textbf{Euclidean domain} and $v$ is called a \textbf{Euclidean valuation}.
+\end{definition}
+
+The function $v$ associates to the elements of $D$ a ``size''.
+
+\begin{example}
+	Take $D=\mathbb Z$. We may use
+	\begin{align}
+		v\colon\mathbb Z\setminus\{0\}&\to\mathbb N,\\
+		a&\mapsto |a|.
+	\end{align}
+
+	Now take $D=F[x]$. We may use
+	\begin{align}
+		v\colon\mathbb F[x]\setminus\{0\}&\to\mathbb N,\\
+		p(x)&\mapsto \deg p(x).
+	\end{align}
+
+	(Check that the above functions satisfy the conditions of a valuation!)
+
+	So $\mathbb Z$ and $F[x]$ are Euclidean domains.
+\end{example}
+
+Our goal for next lecture is to show that every Euclidean domain is a PID.

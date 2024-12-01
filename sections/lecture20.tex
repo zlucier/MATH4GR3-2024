@@ -1,0 +1,140 @@
+\section{Lecture 20 — Review of Rings II}
+
+\begin{definition}[ring homomorphism]
+	Let $R$ and $S$ be rings. A \textbf{ring homomorphism} is a function $\varphi\colon R\to S$ such that
+	\begin{enumerate}
+		\item $\varphi(a+b)=\varphi(a)+\varphi(b)$, and
+		\item $\varphi(ab)=\varphi(a)\varphi(b)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[ring isomorphism]
+	A ring homomorphism $\varphi\colon R\to S$ is called a \textbf{ring isomorphism} if $\varphi$ is a bijection.
+
+	If there exists such a bijection $\varphi$, we say that $R$ and $S$ are \textbf{isomorphic} and write $R\cong S$.
+\end{definition}
+
+\begin{proposition}
+	Let $\varphi\colon R\to S$ be a ring homomorphism. Then,
+	\begin{enumerate}
+		\item $\varphi(0_R)=0_S$,
+		\item $\varphi(-a)=-\varphi(a)$,
+		\item $\varphi(a^n)=\varphi(a)^n$,
+		\item $\varphi(R)=\{\varphi(r)\mid r\in R\}\subseteq S$ is a subring, and
+		\item If $1_R\in R$ and $1_S\in S$ and if $\varphi$ is surjective, then $\varphi(1_R)=1_S$
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}\phantom{x}
+	\begin{itemize}
+		\item[\textbf{(a)}] Note $0_R=0_R+0_R$. So
+		$$\varphi(0_R)=\varphi(0_R+0_R)=\varphi(0_R)+\varphi(0_R).$$
+		Subtracting $\varphi(0_R)$ from both sides yields the desired result.
+		\item[\textbf{(e)}] To show $\varphi(1_R)=1_S$, we need to show $\varphi(1_R)$ ``acts like'' $1_S$. Take any $b\in S$. Since $\varphi$ is surjective, we have $a\in R$ with $\varphi(a)=b$. So $b=\varphi(a)=\varphi(1_R\cdot a)=\varphi(1_R)\cdot\varphi(a)=\varphi(1_R)\cdot b$. By the same argument, $b=\varphi(a)=\varphi(a\cdot 1_R)=\varphi(a)\cdot\varphi(1_R)=b\cdot\varphi(1_R)$. Since the multiplicative identity is unique, $1_S=\varphi(1_R)$.
+	\end{itemize}
+\end{proof}
+
+\begin{definition}[kernel]
+	The \textbf{kernel} of a ring homomorphism $\varphi\colon R\to S$, denoted $\ker\varphi$, is the set
+	$$\ker\varphi=\{r\in R\mid\varphi(r)=0_S\}.$$
+\end{definition}
+
+\begin{theorem}
+	Let $\varphi\colon R\to S$ be a ring homomorphism. Then,
+	\begin{enumerate}
+		\item $\ker\varphi$ is an ideal of $R$, and
+		\item $\ker\varphi=\{0_R\}$ if and only if $\varphi$ is injective.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}[{\color{main}\sffamily\itshape Proof of (a).}]
+	We verify that $\ker\varphi$ satisfies the properties of an ideal.
+	\begin{itemize}
+		\item $\ker\varphi\neq\emptyset$ since $0_R\in R$ and $\varphi(0_R)=0_S$.
+		\item Let $a\in\ker\varphi$ and $r\in R$. Then $\varphi(ra)=\varphi(r)\varphi(a)=\varphi(r)\cdot 0_S=0_S$. So $ra\in\ker\varphi$.
+		\item Let $a,b\in\ker\varphi$. Then $\varphi(a-b)=\varphi(a)-\varphi(b)=0_S-0_S=0_S$. So $a-b\in\ker\varphi$.
+	\end{itemize}
+\end{proof}
+
+A consequence of the above result is that any homomorphism $\varphi\colon R\to S$ gives a quotient ring $R/\ker\varphi$.
+
+\begin{theorem}[First Isomorphism Theorem]
+	Let $\varphi\colon R\to S$ be a ring homomorphism. Then
+	$$R/\ker\varphi\cong\varphi(R).$$
+\end{theorem}
+
+\begin{example}
+	Let $R=\mathbb Z$ and $S=\mathbb Z_{2024}$. Define a ring homomorphism
+	\begin{align*}
+		\varphi\colon\mathbb Z&\to\mathbb Z_{2024},\\
+		n&\mapsto n\pmod{2024}.
+	\end{align*}
+	This map is onto. So $\varphi(\mathbb Z)=\mathbb Z_{2024}$. By the First Isomorphism Theorem, $\mathbb Z/\ker\varphi\cong\mathbb Z_{2024}$. We claim $\ker\varphi=\{2024k\mid k\in\mathbb Z\}$.
+
+	\begin{definition}[principal ideal]
+		We call an ideal $I$ of a ring $R$ a \textbf{principal ideal} if there exists $a\in R$ such that
+		$$I=\{ra\mid r\in R\}.$$
+		We write $I=\langle a\rangle$ and say that $a$ \textbf{generates} the ideal $I$.
+	\end{definition}
+	So $\ker\varphi=\langle 2024\rangle$. So $\mathbb Z/\langle 2024\rangle\cong\mathbb Z_{2024}$. In fact,
+	$$\mathbb Z/\langle m\rangle\cong\mathbb Z_{m}.$$
+\end{example}
+
+\begin{theorem}[Second Isomorphism Theorem]
+	Let $I$ be a subring of $R$ and $J$ and ideal of $R$. Then $I\cap J$ is an ideal of $U$ and
+	$$I/I\cap J\cong (I+J)/J.$$
+\end{theorem}
+
+\begin{theorem}[Third Isomorphism Theorem]
+	Let $I$ and $J$ be ideals of $R$ with $I\subseteq J\subseteq R$. Then
+	$$(R/I)/(J/I)\cong R/J.$$
+\end{theorem}
+
+\begin{theorem}[Fourth Isomorphism Theorem]
+	Let $I$ be an ideal of $R$. Then there is a one-to-one correspondence between the ideals of $R/I$ and the ideals $J$ of $R$ that contain $I$, i.e.
+	$$I\subseteq J\subseteq R.$$
+\end{theorem}
+
+Suppose now that $R$ is a commutative ring.
+
+\begin{definition}[maximal ideal]
+	An ideal $M$ is a \textbf{maximal ideal} of $R$ if for every ideal $J$ of $R$ with $M\subseteq J\subseteq R$, either $J=M$ or $J=R$.
+\end{definition}
+
+\begin{definition}
+	An ideal $P$ is a \textbf{prime ideal} of $R$ if $P\neq R$ and whenever $ab\in P$, $a\in P$ or $b\in P$.
+\end{definition}
+
+\begin{theorem}
+	$M$ is a maximal ideal of $R$ if and only if $R/M$ is a field.
+\end{theorem}
+
+\begin{example}
+	$\langle 2024\rangle$ in $\mathbb Z$ is \textit{not} maximal since $\mathbb Z/\langle 2024\rangle\cong\mathbb Z_{2024}$ but $\mathbb Z_{2024}$ is not a field.
+\end{example}
+
+\begin{example}
+	$\langle m\rangle$ in $\mathbb Z$ is a maximal ideal if and only if $m$ is prime.
+\end{example}
+
+\begin{theorem}
+	$P$ is a prime ideal if and only if $R/P$ is an integral domain.
+\end{theorem}
+
+\begin{example}
+	$P$ is a prime ideal of $\mathbb Z$ if and only if
+	$$P=\langle p\rangle,\text{ ($p$ prime)}\qquad\text{or}\qquad P=\langle 0\rangle.$$
+	Note $\mathbb Z/\langle 0\rangle\cong\mathbb Z$ is a domain, so $\langle 0\rangle$ is prime.
+\end{example}
+
+\begin{theorem}
+	Every maximal ideal is a prime ideal.
+\end{theorem}
+
+\begin{proof}
+	$M$ is maximal if and only if $R/M$ is a field, which is an integral domain. An ideal $M$ is prime if and only if $R/M$ is an integral domain.
+\end{proof}
+
+\begin{remark}
+	$\langle 0\rangle$ is prime but not maximal.
+\end{remark}

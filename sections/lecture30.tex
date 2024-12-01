@@ -1,0 +1,118 @@
+\section{Lecture 30 — Algebraic Extensions}
+
+We will assume for this lecture that $E$ is an extension of the field $F$, i.e. $E\supseteq F$ and $E$ is a field.
+
+\begin{definition}[algebraic element, transcendental element]
+	We say that $\alpha\in E$ is \textbf{algebraic} over $F$ if there exists a polynomial $p(x)\in F[x]$ such that $p(\alpha)=0$. Otherwise, we say that $\alpha$ is \textbf{transcendental}.
+\end{definition}
+
+\begin{example}\phantom{x}
+	\begin{itemize}
+		\item $\sqrt 2$ is algebraic over $\mathbb Q$ since $\sqrt 2$ is a root of $p(x)=x^2-2$.
+		\item $i\in\mathbb C$ with $i^2=-1$ is algebraic over $\mathbb R$ since $i$ is a root of $p(x)=x^2+1$.
+		\item $\pi\in\mathbb R$ is transcendental over $\mathbb Q$ (this is hard to prove!)
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	It is difficult to prove an element of a field extension is transcendental. But most of $\mathbb R$ is comprised of transcendental numbers. A set-theoretic counting argument shows that there are only countably many polynomials over $\mathbb Q$ and therefore that there are countably many algebraic numbers. But $\mathbb R$ is provably uncountable. So it must be that there are uncountably many transcendental numbers.
+\end{remark}
+
+\begin{example}
+	Show $\sqrt{3+\sqrt 5}$ is algebraic over $\mathbb Q$.
+	\begin{solution}
+		Let $\alpha=\sqrt{3+\sqrt 5}$. Then
+		\begin{align*}
+			\alpha&=\sqrt{3+\sqrt 5}\\
+			\alpha^2&=3+\sqrt 5\\
+			\alpha^2-3&=\sqrt 5\\
+			(\alpha^2-3)^2&=5\\
+			\alpha^4-6\alpha^2+9-5&=0\\
+			\alpha^4-6\alpha^2+4&=0
+		\end{align*}
+		So $\alpha$ is a root of
+		$$p(x)=x^4+6x^2+4.$$
+	\end{solution}
+\end{example}
+
+\begin{definition}[algebraic extension]
+	An extension $E$ of a field $F$ is \textbf{algebraic} if every element of $E$ is algebraic over $F$.
+\end{definition}
+
+\begin{example}
+	$\mathbb C$ is an algebraic extension of $\mathbb R$.
+\end{example}
+
+\begin{definition}[simple extension]
+	Suppose $\alpha_1,\hdots,\alpha_n\in E$. Let $F(\alpha_1,\hdots,\alpha_n)$ be the smallest extension of $F$ containing $\alpha_1,\hdots,\alpha_n$. If $E=F(\alpha)$ for some $\alpha\in E$, then $E$ is called a \textbf{simple extension} of $F$.
+\end{definition}
+
+\begin{example}\phantom{x}
+	\begin{itemize}
+		\item $\mathbb C=\mathbb R(i)$ is a simple extension of $\mathbb R$.
+		\item $\{a+b\sqrt 2\mid a,b\in\mathbb Q\}=\mathbb Q(\sqrt 2)$ is a simple extension of $\mathbb Q$.
+	\end{itemize}
+\end{example}
+
+Recall that if $F$ is a field, then $F[x]$ is a domain. So we can form the field of fractions for $F[x]$:
+$$F_{F[x]}=\left.\left\{\frac{p(x)}{q(x)}~\right|~p(x),q(x)\in F[x],~q(x)\neq 0\right\}.$$
+
+\begin{theorem}
+	$\alpha\in E$ is transcendental over $F$ if and only if $F(\alpha)\cong F[x]$.
+\end{theorem}
+
+Essentially, the above theorem states that transcendental $\alpha$ ``behaves'' like a variable.
+
+\begin{example}
+	By the above theorem, $\mathbb Q(\pi)\cong\mathbb Q[x]$. So we can think of elements of $\mathbb Q(\pi)$ as $\frac{p(\pi)}{q(\pi)}$, where $p(x),q(x)\in\mathbb Q[x]$. For example,
+	$$\frac{3\pi^2+2\pi+17}{\frac 13\pi^3+5}\in\mathbb Q(\pi).$$
+\end{example}
+
+\begin{theorem}\label{thm:minimal_poly}
+	Suppose $\alpha\in E$ is algebraic over $F$. Then there exists a unique monic irreducible polynomial $p(x)\in F[x]$ with minimal degree such that $p(\alpha)=0$. Furthermore, if $f(x)\in F[x]$ is another polynomial with $f(\alpha)=0$, then $p(x)$ divides $f(x)$.
+\end{theorem}
+
+\begin{proof}
+	Consider the evaluation homomorphism
+	\begin{align*}
+		\varphi\colon F[x]&\to E,\\
+		q(x)&\mapsto q(\alpha).
+	\end{align*}
+
+	Then $\ker\varphi=\{f(x)\mid f(\alpha)=0\}\subseteq F[x]$. Since $F[x]$ is a PID, $\ker\varphi=\langle p'(x)\rangle$ for some polynomial $p'(x)\in F[x]$. We can find a unit $u\in F$ such that $p(x)=up'(x)$ and $p(x)$ is monic. Since $p(x)$ and $p'(x)$ are associates, $\langle p(x)\rangle=\langle p(x)\rangle$. We claim that $p(x)$ is the desires polynomial.
+
+	Observe that $p(x)$ has smallest degree by our choice for a generator for $\ker\varphi$. Now suppose for a contradiction that $p(x)=r(x)s(x)$ for $r(x)s(x)\in F[x]$ and $\deg r(x),\deg s(x)\geq 1$. Then $0=p(\alpha)=r(\alpha)s(\alpha)$. But $E$ is a field. So either $r(\alpha)=0$ or $s(\alpha)=0$. So either $r(x)\in\ker\varphi$ or $s(x)\in\ker\varphi$. But this contradicts the choice for $p(x)$. So $p(x)$ must be irreducible.
+
+	Finally, if $f(\alpha)=0$ then $f(x)\in\ker\varphi$, so $p(x)$ divides $f(x)$.
+\end{proof}
+
+\begin{definition}[minimal polynomial]
+	The polynomial $p(x)$ as in Theorem \ref{thm:minimal_poly} is called the \textbf{minimal polynomial} for $\alpha$ over $F$. We say that the root $\alpha$ has degree $\deg p(x)$ over $F$.
+\end{definition}
+
+\begin{theorem}
+	Suppose $\alpha\in E$ is algebraic over $F$. Then the subfield $F(\alpha)$ of $E$ satisfies
+	$$F(\alpha)\cong F[x]/\langle p(x)\rangle,$$
+	where $p(x)$ is the minimal polynomial for $\alpha$.
+\end{theorem}
+
+\begin{proof}
+	Consider the evaluation homomorphism
+	\begin{align*}
+		\varphi\colon F[x]&\to F(\alpha),\\
+		q(x)&\mapsto q(\alpha).
+	\end{align*}
+	As before, $\ker\varphi=\langle p(x)\rangle$. So by the First Isomorphism Theorem,
+	$$F[x]/\langle p(x)\rangle\cong\im\varphi\subseteq F(\alpha).$$
+	Note that $F[x]/\langle p(x)\rangle$ is a field (since $p(x)$ is irreducible) and it contains a copy of $F$. So $\im\varphi$ contains an isomorphic copy of $F$. At the same time, $\alpha\in\im\varphi$, since $x\mapsto\alpha$ under $\varphi$. So $\im\varphi$ contains $F$ and $\alpha$, and is a field. But $F(\alpha)$ is the smallest extension of $F$ containing $\alpha$. So
+	$$F(\alpha)\subseteq\im\varphi\subseteq F(\alpha).$$
+\end{proof}
+
+\begin{example}
+	$x^2-2$ has two roots: $\sqrt 2$ and $\sqrt{-2}$. So both $\sqrt 2$ and $\sqrt{-2}$ are algebraic over $\mathbb Q$. So
+	$$\mathbb Q(\sqrt 2)\cong\mathbb Q[x]/\langle x^2-2\rangle\cong\mathbb Q(\sqrt{-2}).$$
+\end{example}
+
+Generalizing the above example, if $\alpha$ and $\beta$ are roots of the irreducible polynomial $p(x)$, then
+$$F(\alpha)\cong F(\beta)\cong F[x]/\langle p(x)\rangle.$$
+So different roots of are not algebraically distinguishable.

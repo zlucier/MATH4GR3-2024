@@ -1,0 +1,89 @@
+\section{Lecture 12 — Sylow Theorem I}
+
+Recall that Lagrange's Theorem states that the order of a subgroup divides the order of the group containing it.
+
+The Sylow theorems give us a partial converse, i.e. if $|G|=n$ and if we know the factorization of $n$, we can deduce \textit{some} things about its subgroups.
+
+\begin{theorem}[Sylow Theorem I]\label{thm:sylow_1}
+	Let $G$ be a finite group. If $p$ is prime and if $p^k$ divides $|G|$, then $G$ has a subgroup of order $p^k$.
+\end{theorem}
+
+\begin{example}
+	Take $S_7$. We know $|S_7|=7!=2^4\cdot 3^2\cdot 5\cdot 7$. By the theorem, $S_7$ has subgroups of order $2,2^2,2^3,2^4,3,3^2,5,7$.
+\end{example}
+
+Recall the following definition
+
+\begin{definition}[\textit{p}-group]
+	A group $G$ is a $p$-group ($p$ prime) if for all $g\in G$, $|g|=p^t$ for some integer $t$.
+
+	A subgroup $H$ of $G$ is a $p$-subgroup if $H$ is a $p$-group.
+\end{definition}
+
+\begin{theorem}[Cauchy]\label{thm:cauchy}
+	Let $G$ be a finite group and $p$ a prime with $p$ dividing $|G|$. Then $G$ has a subgroup of order $p$.
+\end{theorem}
+
+We already proved this for abelian groups (Lemma \ref{lem:30}). To prove the general case, we use the class equation (\ref{eq:class_equation}).
+
+\begin{proof}
+	If $|G|=p$ ($p$ prime), then $G$ is cyclic and $G$ is a subgroup of itself of order $p$. This takes care of cases where $p=2,3$.
+
+	Assume $|G|=n$ and that the result holds for positive integers $k<n$. If $n=p$, we are done. Via the class equation, there exist $x_1,x_2,\hdots, x_n\in G$ such that
+	$$|G|=|Z(G)|+[G:C(x_1)]+\cdots+[G:C(x_n)],$$
+	with $[G:C(x_i)]>1$ for each $i$. Note that if $|G|=|Z(G)|$, then $G$ is abelian and the result is true by Lemma \ref{lem:30}. We consider two cases.
+
+	\underline{Case 1:} Suppose $p$ does \textit{not} divide $[G:C(x_i)]$ for some $i$. So $|G|=[G:C(x_i)]|C(x_i)|$. Thus $p$ must divide $|C(x_i)|$ and $|C(x_i)|<|G|$. So by induction, $C(x_i)$ has an element of order $p$ and so does $G$.
+
+	\underline{Case 2:} Suppose $p$ divides $[G:C(x_i)]$ for all $i$. So $p$ divides $|Z(G)|$, since
+	$$|Z(G)|=|G|-[G:C(x_1)]-\cdots -[G:C(x_n)].$$
+	But $Z(G)$ has an element of order $p$ and so does $G$.
+\end{proof}
+
+\begin{corollary}
+	$G$ is a $p$-group if and only if $|G|=p^t$ for some integer $t$.
+\end{corollary}
+
+\begin{proof}
+	Suppose $|G|=p^t$. Let $g\in G$. So $|g|$ divides $|G|=p^t$ and we must have $|g|=p^r$ for some integer $r\leq t$.
+
+	Now suppose $G$ is a $p$-group. Suppose that $q$ is a prime different than $p$ such that $q$ divides $|G|$. But then by Theorem \ref{thm:cauchy}, $G$ has an element of order $q$. This contradicts that $G$ is a $p$-group. 
+\end{proof}
+
+We state a theorem without proof.
+
+\begin{theorem}[Correspondence Theorem]\label{thm:correspondence}
+	Let $L\subseteq G/N$. Then $L$ is a subgroup if and only if there is a subgroup $H$ of $G$ with
+	$$N\subseteq H\subset G$$
+	and $H/N=L$.
+\end{theorem}
+
+We can now prove the first Sylow theorem.
+
+\begin{proof}
+	The proof is by induction on $|G|=n$. The result evidently holds if $|G|=p$ ($p$ prime), since $G\cong\mathbb Z_{p}$ and thus has a subgroup of order $p^0$ and $p^1$ (both trivial subgroups).
+
+	Assume $|G|=n$ and that the result holds for integers $\ell<n$. We can assume $n$ is not prime. By the class equation, there exist $x_1,\hdots,x_n\in G$ such that
+	$$|G|=|Z(G)|+[G:C(x_1)]+\cdots+[G:C(x_n)],$$
+	with $[G:C(x_i)]>1$ for each $i$.
+
+	\underline{Case 1:} Suppose $p$ does \textit{not} divide $[G:C(x_i)]$ for some $i$. So $|G|=[G:C(x_i)]|C(x_i)|$. Thus $p^k$ must divide $|C(x_i)|$ and $|C(x_i)|<|G|$. So by induction, $C(x_i)$ has a subgroup of order $p^k$ and so does $G$.
+
+	\underline{Case 2:} Suppose $p$ divides $[G:C(x_i)]$ for each $i$. Then by the class equation, $p$ divides $|Z(G)|$. By Theorem \ref{thm:cauchy} (Cauchy), there exists $g\in Z(G)$ with $N=\langle g\rangle\subseteq Z(G)$ with $|G|=p$. We claim that $N$ is normal in $G$. Take $h\in G$ and $m\in N$. Then $hmh^{-1}=hh^{-1}m=m\in N$, so $m\in Z(G)$. Thus the quotient $G/N$ is well-defined. Because $|N|=p$, $|G/N|=n/p$. So $p^{k-1}$ divides $|G/N|=n/p$. So $G/N$ has a subgroup of order $p^{k-1}$. Call this subgroup $L\subset G/N$. By the correspondence theorem (Theorem \ref{thm:correspondence}), there is a subgroup $H$ of $G$ with
+	$$N\subseteq H\subset G$$
+	and $H/N=L$. So $|L|=|H|/|N|=p^{k-1}$. So $|H|=p^{k-1}|N|=p^k$.
+\end{proof}
+
+\begin{example}
+	Let $G$ be a finite abelian group with $|G|=p_1^{\alpha_1}\cdots p_r^{\alpha_r}$. Then 
+	$$G\cong\mathbb Z_{p_1^{r_{1,1}}}\times \mathbb Z_{p_1^{r_{1,2}}}\times\cdots\times \mathbb Z_{p_1^{r_{1,s_1}}}\times \mathbb Z_{p_2^{r_{2,1}}}\times\cdots$$
+
+	Note that $\mathbb Z_{p_1^{r_{1,1}}}\times \mathbb Z_{p_1^{r_{1,2}}}\times\cdots\times \mathbb Z_{p_1^{r_{1,s_1}}}$ is a $p_1$-subgroup of $G$. Also,
+	$$|\mathbb Z_{p_1^{r_{1,1}}}\times \mathbb Z_{p_1^{r_{1,2}}}\times\cdots\times \mathbb Z_{p_1^{r_{1,s_1}}}|=p^{\alpha_1}.$$
+\end{example}
+
+\begin{example}
+	Suppose $N$ is normal in $G$ and both $G/N$ and $N$ are $p$-groups. Then $G$ is also a $p$-group.
+
+	\underline{Infinite case:} Let $g\in G$. If $g\in N$, then $|g|=p^t$. If $g\not\in N$, consider $gN\in G/N$. So $|(gN)|=p^\ell$. This means $(g)^{p^\ell}\in N$. But $N$ is a $p$-group, so $((g)^{p^l})^{p^t}=e$.
+\end{example}

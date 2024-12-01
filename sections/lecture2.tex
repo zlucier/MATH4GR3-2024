@@ -1,0 +1,109 @@
+\section{Lecture 2 — Equivalence Relations, Quotient Groups}
+
+\begin{definition}[equivalence relation]
+	An \textbf{equivalence relation} $R$ on a set $X$ is a subset $R\subseteq X\times X$ such that
+	\begin{enumerate}
+		\item $(x,x)\in R$ for all $x\in X$ \textit{(reflexive)},
+		\item if $(x,y)\in R$, then $(y,x)\in R$ \textit{(symmetric)}, and
+		\item if $(x,y)\in R$ and $(y,z)\in R$, then $(x,z)\in R$ \textit{(transitive)}.
+	\end{enumerate}
+	We sometimes write $x\sim y$ for $(x,y)\in R$.
+\end{definition}
+
+An equivalence relation ``partitions'' the set $X$.
+
+Fix $x\in X$. then the \textbf{equivalence class} of $x$ is the set
+$$[x]=\{y\in X\mid (x,y)\in R\}.$$
+
+\begin{lemma}\label{lem:disjoint_equiv_class}
+	If $\sim$ is an equivalence relation, then for any $x,y\in X$, either
+	$$[x]\cap[y]=\emptyset\quad\text{or}\quad[x]=[y].$$
+\end{lemma}
+
+\begin{proof}
+	Suppose for a contradiction that $[x]\cap[y]\neq\emptyset$. So there exists $a\in[x]\cap[y]$. Since $a\in[x]$, we have $x\sim a$ and $a\in[y]$ implies $y\sim a$. So $a\sim y$, and thus, by transitivity, $x\sim y$. Let $b\in[x]$. Then $x\sim b$. So $b\sim x$. By transitivity, $b\sim y$ and $y\sim b$, i.e. $b\in[y]$. Thus $[x]\subset[y]$. Let $b\in [y]$. Then $y\sim b$. Since $x\sim y$ and $y\sim b$, $x\sim b$. So $b\in[x]$ and thus $[y]\subseteq[x]$. This along with the fact that $[x]\subseteq[y]$ contradicts our first assumption.
+\end{proof}
+
+\begin{theorem}
+	Let $X$ be a set and $R$ an equivalence relation on $X$. Let $[x_1],\hdots,[x_n]$ be the distinct equivalence classes. Then
+	$$X=[x_1]\cup[x_2]\cup\cdots\cup[x_n].$$
+\end{theorem}
+
+\begin{proof}
+	Since each $[x_i]\subseteq X$, it is clear that $[x_1]\cup[x_2]\cup\cdots\cup[x_n]\subseteq X$.
+
+	Let $y\in X$ be arbitrary. Then $[y]$ is an equivalence class and $[y]=[x_i]$ for some $i$. So $y\in[y]=[x_i]\subseteq [x_1]\cup[x_2]\cup\cdots\cup[x_n]$. Therefore, $X=[x_1]\cup[x_2]\cup\cdots\cup[x_n]$ and $[x_i]\cap[x_j]=\emptyset$ by Lemma \ref{lem:disjoint_equiv_class}.
+\end{proof}
+
+\begin{example}
+	Let $X=\{\text{all McMaster Students}\}$ and $R=\{(x,y)\in X\times X\mid\text{$x$ and $y$ have the same height}\}$. Then $R$ is an equivalence relation. So $[\text{Bob}]=\{\text{all students with the same height as Bob}\}$.
+\end{example}
+
+\begin{example}
+	Let $G$ be a group and $H$ a subgroup. Let $R=\{(g_1,g_2)\in G\times G\mid {g_1}^{-1}g_2\in H\}$. This is an equivalence relation. Observe:
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item $(g,g)\in R$ since $g^{-1}g=e\in H$.
+		\item if $(g_1,g_2)\in R$, then
+		\begin{align*}
+			{g_1}^{-1}g_2\in H&\implies ({g_1}^{-1}g_2)^{-1}={g_2}^{-1}g_1\in H\\
+			&\implies (g_2,g_1)\in R.
+		\end{align*}
+		\item $(g_1,g_2),(g_2,g_3)\in R$ implies ${g_1}^{-1}g_2,{g_2}^{-1}g_3\in H$. So ${g_1}^{-1}g_2{g_2}^{-1}g_3={g_1}^{-1}g_3\in H$ and thus $(g_1,g_3)\in R$.
+	\end{enumerate}
+\end{example}
+
+Note that $[g]=gH$ (the left coset of $H$).
+
+Let $b\in[g]$. So $(g,b)\in R\implies g^{-1}b\in H$. So $b=gh\in gH$. Thus $[g]\subseteq gH$. Let $k\in gH$. So $k=gh$ for some $h\in H$. Thus $g^{-1}k=h\in H$. So $(g,k)\in R\implies k\in[g]$. Thus $gH\subseteq [g]$.
+
+Given a group $G$ and a subgroup $H$, we can form the set
+
+$$G/H=\{gH\mid g\in G\}\quad \textit{(the set of all left cosets)}.$$
+
+\begin{example}
+	Let $G=\mathbb Z_{12}=\{0,1,2,\hdots,11\}$ (group under $+$). Let $H=\langle 3\rangle=\{0,3,6,9\}$.
+
+	We have cosets
+	\begin{align*}
+		0+H&=\{0,3,6,9\}=3+H\\
+		1+H&=\{1,4,7,10\}=4+H\\
+		2+H&=\{2,5,8,11\}=5+H\\
+	\end{align*}
+	So $G/H=\{0+H,1+H,2+H\}$.
+\end{example}
+
+This leads to a natural question: does $G/H$ have a group structure? If so, we require a binary operation, say $\star$. We would like for $(aH)\star(bH)=(ab)\star H$, which is almost right! This operation $\star$ depends upon the coset representative, i.e. if $a_1H=a_2H$ and $b_1H=b_2H$. Then why is $a_1b_1H=a_2b_2H$? This is false in general!
+
+For example, take $S_3=\{(1),(12),(13),(23),(123),(132)\}$ and the subgroup $H=\{(1),(12)\}$. Then $(13)H=(123)H$ but $(13)(23)H=(132)H$. Now $(23)H=(132)H$ but $(123)(132)H=(1H)$.
+
+The workaround is to introduce restrictions on the subgroup $H$.
+
+\begin{definition}[normal subgroup]
+	A subgroup $N$ of $G$ is \textbf{normal} if $gN=Ng$ for all $g\in G$. Equivalently, $gNg^{-1}\subset N$ for all $g\in G$.
+\end{definition}
+
+\begin{lemma}
+	If $N$ is a normal subgroup of $G$, then $(aH)\star(bH)=(ab)\star H$ is well-defined.
+\end{lemma}
+
+\begin{proof}
+	Suppose that $a_1N=a_2N$ and $b_1N=b_2N$. We want to show that $a_1b_1N=a_2b_2N$. This is equivalent to showing $(a_1b_1)^{-1}a_2b_2\in N$. That is, ${b_1}^{-1}{a_1}^{-1}a_2b_2\in N$.
+
+	Since $a_2\in a_2N=a_1N$, there is $n_1\in N$ such that $a_2=a_1n_1$. Since $b_2\in b_2N=b_1N=Nb_1$, There is $n_2\in N$ such that $b_2n_2b_1$.
+
+	So 
+	\begin{align*}
+		{b_1}^{-1}{a_1}^{-1}a_2b_2&={b_1}^{-1}{a_1}^{-1}a_1n_1n_2b_1\\
+		&={b_1}^{-1}(n_1n_2)b_1\in {b_1}^{-1}Nb_1\subseteq N
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	If $N$ is any normal subgroup of $G$, then $G/N=\{gN\mid g\in G\}$ is a group under the operation $(aN)(bN)=(ab)N$.
+\end{theorem}
+
+\begin{remark}
+	The identity in the group $G/N$ is $eN=N$.
+\end{remark}
+
+It should be easy see that \underline{all} abelian groups are normal. For example $\mathbb Z/\langle 3\rangle=\{0+H,1+H,2+H\}$ is a group.

@@ -1,0 +1,99 @@
+\section{Lecture 32 — Algebraic Closure and Splitting Fields}
+
+Given a polynomial $p(x)\in F[x]$, we can find an extension $E$ of $F$ such that $E$ has a root of $p(x)$. A guiding question for this lecture is as follows: \textit{Is there an exension $E'$ of $F$ that contains \underline{all} the roots of all $p(x)\in F[x]$?}
+
+\begin{theorem}
+	Let $E$ be an extension of $F$ and consider
+	$$E'=\{\alpha\in E\mid\text{$\alpha$ is algebraic over $F$}\}.$$
+	Then $E'$ is an extension of $F$, i.e. $E'$ is a subfield of $E$. We call $E'$ the \textbf{algebraic closure} of $F$ in $E$.
+\end{theorem}
+
+\begin{proof}
+	Given $\alpha,\beta\in E'$, we need to show $\alpha\pm\beta$, $\alpha\beta$ and $\alpha/\beta$ ($\beta\neq 0$) all belong to $E'$. Both $\alpha$ and $\beta$ are algebraic over $F$, so $F(\alpha,\beta)$ is a finite extension of $F$. But then every element of $F(\alpha,\beta)$, is algebraic over $F$. But $\alpha\pm\beta$, $\alpha\beta$ and $\alpha/\beta$ ($\beta\neq 0$) all belong to $F(\alpha,\beta)$. So all these elements are algebraic over $F$, so they also belong to $E'$.
+\end{proof}
+
+\begin{definition}
+	A field $F$ is \textbf{algebraically closed} if every nonconstant polynomial $p(x)\in F[x]$ has a root.
+\end{definition}
+
+\begin{example}
+	$\mathbb R$ is not algebraically closed since $x^2+1$ has no root.
+\end{example}
+
+\begin{theorem}
+	A field $F$ is algebraically closed if and only if every nonconstant polynomial $p(x)\in F[x]$ factors into linear polynomials.
+\end{theorem}
+
+\begin{proof}
+	Suppose first that $F$ is algebraically closed. Let $p(x)$ be a nonconstant polynomial. Since $F$ is algebraically closed, $p(x)$ has a root $\alpha_1$ in $F$. So $p(x)=(x-\alpha_1)q_1(x)$ with $\deg q_1(x)<\deg p(x)$. Now repeat with $q_1(x)$ and obtain another root $\alpha_2$. Once $k$ is such that $\deg q_k=1$, we have a factorization
+	$$c(x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_k)$$
+	for $p(x)$.
+
+	Now suppose $p(x)\in F[x]$ factors into linear polynomials. Then
+	$$p(x)=c(x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_k),$$
+	with $c,\alpha_1,\hdots,\alpha_k\in F$. But then $\alpha_i$ is a root of $p(x)$ for each $i$.
+\end{proof}
+
+\begin{corollary}
+	If $F$ is algebraically closed, then there is no proper algebraic extension of $F$.
+\end{corollary}
+
+\begin{proof}
+	Suppose $E$ is an algebraic extension of $F$ (so $F\subseteq E$). Let $\alpha\in E$, and let $p(x)\in F[x]$ be its minimal polynomial. But $F$ being algebraically closed implies that $p(x)$ factors into linear factors in $F[x]$. Also, $p(x)$ is irreducible. This forces $p(x)=c(x-\alpha)$. So $\alpha\in F$. Thus $E=F$.
+\end{proof}
+
+\begin{theorem}
+	Every field has a unique algebraic closure (up to isomorphism).
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+	The field $\mathbb C$ is algebraically closed. Equivalently, all polynomials $p(x)\in\mathbb C[x]$ can be factored into linear factors.
+\end{theorem}
+
+We will specify our motivating question: \textit{Given a particular $p(x)\in F[x]$, what field contains all the roots of $p(x)$ and is the smallest such field?}
+
+\begin{example}
+	Consider $p(x)=x^4-2x^2-3\in\mathbb Q[x]$. We have (in $\mathbb C$)
+	\begin{align*}
+		p(x)&=x^4-2x^2-3\\
+		&=(x^2-3)(x^2+1)\\
+		&=(x-\sqrt 3)(x+\sqrt 3)(x-i)(x+i).
+	\end{align*}
+	The field $\mathbb Q(\sqrt 3,i)$ is the smallest field for which $p(x)$ ``splits''.
+\end{example}
+
+\begin{definition}[splitting field]
+	An extension $E$ is a \textbf{splitting field} for $p(x)\in F[x]$ if there exist $\alpha_1,\alpha_2,\hdots,a_n\in E$ such that
+	$$E=F(\alpha_1,\alpha_2,\hdots,a_n)$$
+	and
+	$$p(x)=c(x-\alpha_1)\cdots(x-\alpha_n).$$
+	We say a polynomial $p(x)\in F[x]$ \textbf{splits} in $E$ if it is a product of linear functions in $E[x]$.
+\end{definition}
+
+\begin{example}
+	Consider $p(x)=x^3-5\in\mathbb Q[x]$. This has a root $\sqrt[3]{5}$ in $\mathbb Q(\sqrt[3]{5})$, but this is \underline{not} a splitting field for $p(x)$ since $p(x)$ has two other complex roots:
+	$$x^3-5=(x-\sqrt[3]{5})(x^2+\sqrt[3]{5}x+(\sqrt[3]{5})^2),$$
+	and
+	$$\operatorname{disc}(p(x))<0.$$
+\end{example}
+
+\begin{theorem}
+	Let $p(x)\in F[x]$ be a nonconstant polynomial. Then a splitting field for $p(x)$ exists.
+\end{theorem}
+
+\begin{proof}
+	The proof is by induction on the degree of $p(x)$.
+
+	If $\deg p(x)=1$, then $p(x)=c(x-\alpha)$ with $c,\alpha\in F$, so $F$ is the splitting field.
+
+	Assume that for all $q(x)\in F[x]$ with $\deg q(x)<n$, there exists a splitting field. Let $p(x)\in F[x]$ be such that $\deg p(x)=n$. In the case that $p(x)$ is reducible, $p(x)=p_1(x)\cdots p_r(x)$ where $p_1(x),\hdots,p_r(x)\in F[x]$ are irreducible. But $\deg p_i(x)<n$ for each $i$. So by the induction hypothesis, there exist splitting fields $E_i$ for each $p_i(x)$. So $E=\bigcup_{i=1}^rE_i$ is the splitting field for $p(x)$. If $p(x)$ is irreducible, there is a field $K$ such that $p(x)$ has a root $\alpha\in K$. So $p(x)=(x-\alpha)q(x)$ for $q(x)\in K[x]$ and $\deg q(x)<n$. In fact, $K=F(\alpha)$. By the induction hypothesis there is a splitting field $K(\alpha_2,\hdots,\alpha_n)$ for $q(x)$. But $K(\alpha_2,\hdots,\alpha_n)=F(\alpha)(\alpha_2,\hdots,\alpha_n)=F(\alpha_1,\hdots,\alpha_n)$.
+\end{proof}
+
+\begin{theorem}
+	The splitting field of $p(x)\in F[x]$ is unique up to isomorphism.
+\end{theorem}
+
+\begin{theorem}
+	Suppose that $E$ is the splitting field for $p(x)\in F[x]$. If $\deg p(x)=n$, then
+	$$[E:F]\leq n!.$$
+\end{theorem}

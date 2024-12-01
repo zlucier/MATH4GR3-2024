@@ -1,0 +1,92 @@
+\section{Lecture 9 — Group Actions and the Class Equation}
+
+\begin{definition}
+	The \textbf{fixed points} of $g\in G$ are elements of the set $$X_g=\{x\in X\mid g\cdot x=x\}\subset X.$$
+
+	The \textbf{stablilizer} subgroup of $x\in X$ is defined by $$G_x=\{g\in G\mid g\cdot x=x\}\subset G.$$
+\end{definition}
+
+\begin{lemma}
+	The stabilizer $G_x$ is a subgroup of $G$.
+\end{lemma}
+
+\begin{proof}
+	First note that $G_x\neq\emptyset$ since $e\cdot x=x$ and thus $e\in G_x$. Let $g\in G_x$. So $g\cdot x=x$ and thus $g^{-1}\cdot (g\cdot x)=g^{-1}\cdot x$. But this is the case if and only if $(g^{-1}g)\cdot x=g^{-1}x$ and so $x=g^{-1}\cdot x$. So $g^{-1}\in G_x$. Now take $g,h\in G_x$. Then
+	\begin{align*}
+		(gh)\cdot x&=g\cdot (h\cdot x)\\
+		&=g\cdot x\\
+		&=x
+	\end{align*}
+	So $gh\in G_x$
+\end{proof}
+
+\begin{theorem}
+	Let $X$ be a $G$-set and let $x\in X$. Then
+	$$|\mathcal O_x|=\frac{|G|}{|G_x|}=[G:G_x].$$
+\end{theorem}
+
+\begin{proof}
+	Recall that $[G:G_x]$ is the number of distinct left cosets of $G_x$. Let $\mathcal L_{G_x}$ be the set of distinct left cosets, i.e.
+	$$\mathcal L_{G_x}=\{gG_x\mid g\in G\}.$$
+	Note that if $y\in\mathcal O_x$, there exists a $g\in G$ such that $y=g\cdot x$. Define a map $\Phi\colon\mathcal O_x\to \mathcal L_{G_x}$ by $y\mapsto gG_x$, where $y=g\cdot x$. If we can show $\Phi$ is a bijection, then $|\mathcal O_x|=|\mathcal L_{G_x}|$.
+
+	To see the map is surjective, take $gG_x\in\mathcal L_{G_x}$. Then $y=g\cdot x\in\mathcal O_x$ and so $\Phi(y)=gG_x$.
+
+	To see the map is injective, observe that if $\Phi(y_1)=g_1G_x=g_2G_x=\Phi(y_2)$ with $y_1=g_1\cdot x$ and $y_2=g_2\cdot x$. So there exists $g\in G_x$ such that $g_2=g_1g$. So
+	\begin{align*}
+		y_2&=g_2\cdot x\\
+		&=(g_1g)\cdot x\\
+		&=g_1\cdot (g\cdot x)\\
+		&=g_1\cdot x
+	\end{align*}
+
+	So $\Phi$ is injective and thus $|\mathcal O_x|=|\mathcal L_{G_x}|$, as desired
+\end{proof}
+
+\begin{example}
+	Take $X=\{1,2,3,4\}$, $G=\{\sigma_1,\sigma_2\}=\{(1),(1\,2)(3\,4)\}$, and the action
+	\begin{align*}
+		G\times X&\to X,\\
+		(\sigma,i)&\mapsto \sigma(i).
+	\end{align*}
+
+	Then $\mathcal O_1=\{\sigma_1(1),\sigma_2(1)\}=\{1,2\}$ and $G_1=\{\sigma\in G\mid\sigma(1)=1\}=\{\sigma_1\}$. Indeed,
+	$$|\mathcal O_1|=|G|/|G_1|=2/1=2.$$
+\end{example}
+
+\begin{remark}
+	If $|\mathcal O_x|=1$, then $\{g\cdot x\mid g\in X\}=\{x\}$. So if $X$ is a $G$-set, then the set of all fixed points is 
+	$$X_G=\{x\mid g\cdot x=x\text{ for all }g\in G\}=\mathcal O_{x_1}\cup\cdots\cup\mathcal O_{x_s},$$
+	where $|\mathcal O_{x_i}|=1$.
+\end{remark}
+
+Let $X$ be a $G$-set, and let $x_1,\hdots,x_n$ be the distinct coset representatives. Then
+$$X=\underbrace{\mathcal O_{x_1}\cup\cdots\cup\mathcal O_{x_s}}_{|\mathcal O_{x_i}|>1}\cup \underbrace{\mathcal O_{x_{s+1}}\cup\cdots\cup\mathcal O_{x_n}}_{|\mathcal O_{x_i}|=1},$$
+and, as such,
+$$|X|=|\mathcal O_{x_1}|+\cdots+|\mathcal O_{x_s}|+|X_G|=[G:G_{x_1}]+\cdots+[G:G_{x_s}]+|X_G|.$$
+
+We specialize these results to the following case:
+\begin{align*}
+	G\times G&\to G,\\
+	(g,x)&\mapsto gxg^{-1}
+\end{align*}
+This group action is called \textbf{conjugation}. So the set of fixed points using this operation is
+$$Z(G)=\{x\in G\mid gxg^{-1}=x\text{ for all }g\in G\}.$$
+We call $Z(G)$ the \textbf{center} of $G$. One can show $Z(G)$ is a subgroup of $G$.
+
+The \textbf{stabilizer} subgroup of $x\in G$ is
+$$C(x)=\{g\mid gxg^{-1}=x\},$$
+i.e. all things of $G$ that commute with $x$. We call $C(G)$ the \textbf{centralizer} of $G$. One can also show $C(G)$ is a subgroup of $G$.
+
+The orbits of $x\in G$ are called \textbf{conjugacy classes}.
+$$\mathcal O_x=\{gxg^{-1}\mid g\in G\}.$$
+
+\begin{theorem}[Class Equation]
+	Let $G$ be a finite group and consider the group action of conjugation. If $x_1,\hdots, x_n$ are the distinct coset representatives of this action, then
+	$$G=\mathcal O_{x_1}\cup\cdots\cup\mathcal O_{x_n}.$$
+	Furthermore, if $|\mathcal O_{x_i}|>1$ for $i=1,\hdots, s$, and $|\mathcal O_{x_i}|=1$ for $i=s+1,\hdots,n$, then
+	\begin{equation}\label{eq:class_equation}
+		|G|=|\mathcal O_{x_1}|+\cdots+|\mathcal O_{x_s}|+|Z(G)|=[G:C(x_1)]+[G:C(x_s)]+|Z(G)|
+	\end{equation}
+	We call (\ref{eq:class_equation}) the \textbf{class equation}.
+\end{theorem}

@@ -1,0 +1,214 @@
+\section{Lecture 16 — Group Theory and Linear Algebra}
+
+Let $\mathcal M_n(\mathbb R)$ be the set of all $n\times n$ matrices with entries in $\mathbb R$. Ignoring matrix multiplication, $\mathcal M_n(\mathbb R)$ is a perfectly valid group under addition (check!). It is however the case that $\mathcal M_n(\mathbb R)$ is \underline{not} a group under matrix multiplication—many matrices (eg. the zero matrix) do not have a defined multiplicative inverse.
+
+Recall that $A\in\mathcal M_n(\mathbb R)$ is invertible if and only if $\det(A)\neq 0$.
+
+\begin{definition}[general linear group]
+	Let
+	$$\operatorname{GL}_n(\mathbb R)=\{A\in\mathcal M_n(\mathbb R)\mid \det(A)\neq 0\}.$$
+	Then $\operatorname{GL}_n(\mathbb R)$ is called the \textbf{general linear group} of degree $n$ over $\mathbb R$.
+\end{definition}
+
+We have the following facts:
+\begin{itemize}
+	\item $\operatorname{GL}_n(\mathbb R)$ is a group under multiplication.
+	\item $|{\operatorname{GL}_n(\mathbb R)}|=\infty$.
+	\item $\operatorname{GL}_n(\mathbb R)$ is not abelian.
+	\item The identity is $I_n$.
+	\item Given $A\in \operatorname{GL}_n(\mathbb R)$, its inverse is $A^{-1}$.
+\end{itemize}
+
+Recall that $\mathbb R^*=\mathbb R\setminus\{0\}$ is a group under multiplication
+
+\begin{theorem}
+	The map $\det\colon\operatorname{GL}_n(\mathbb R)\to\mathbb R^*$ given by $A\mapsto\det(A)$ is a group homomorphism.
+\end{theorem}
+
+\begin{proof}
+	Let $A,B\in\operatorname{GL}_n(\mathbb R)$. Then $\det(AB)=\det(A)\det(B)$. So $\det$ is a group homomorphism.
+\end{proof}
+
+We can use the kernel of $\det$ to find the canonical normal subgroup:
+$$\ker(\det)=\{A\in\operatorname{GL}_n(\mathbb R)\mid\det(A)=1\}.$$
+
+\begin{definition}[special linear group]
+	The \textbf{special linear group} of degree $n$ over $\mathbb R$, denoted $\operatorname{SL}_n(\mathbb R)$, is the kernel of $\det$. That is, $\operatorname{SL}_n(\mathbb R)$ consists of all $n\times n$ matrices over $\mathbb R$ with determinant 1.
+\end{definition}
+
+By the First Isomorphism Theorem,
+$$\operatorname{GL}_n(\mathbb R)/\operatorname{SL}_n(\mathbb R)\cong\mathbb R^*.$$
+
+Recall that a matrix $A$ corresponds to a unique linear transformation $T_A\colon\mathbb R^n\to\mathbb R^n$ given by $T_A(\vec x)=A\vec x$.
+
+\begin{example}
+	Let $A=\begin{bmatrix}
+		1 & 3 \\ 4 & 1
+	\end{bmatrix}$. What does $T_A$ do to the unit square?
+
+	Observe the following.
+
+	$$T_A\left(\begin{bmatrix}
+		1\\0
+	\end{bmatrix}\right)=\begin{bmatrix}
+		1 \\4
+	\end{bmatrix},\quad T_A\left(\begin{bmatrix}
+		0\\1
+	\end{bmatrix}\right)=\begin{bmatrix}
+		3 \\1
+	\end{bmatrix},\quad T_A\left(\begin{bmatrix}
+		1\\1
+	\end{bmatrix}\right)=\begin{bmatrix}
+		4 \\5
+	\end{bmatrix}.$$
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.4]
+		\footnotesize
+		\begin{scope}
+		\draw[->] (-0.5,0) -- (5,0);
+		\draw[->] (0,-0.5) -- (0,5);
+		\fill[main,opacity=0.15] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+		\draw[thick,main] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+		\end{scope}
+		\draw[->] (6,2.5) -- node[midway,above] {$T_A$} (9,2.5);
+		\begin{scope}[shift={(10,0)}]
+		\draw[->] (-0.5,0) -- (5,0);
+		\draw[->] (0,-0.5) -- (0,5);
+		\fill[main,opacity=0.15] (0,0) -- (1,4) -- (4,5) -- (3,1) -- cycle;
+		\draw[thick,main] (0,0) -- (1,4) -- (4,5) -- (3,1) -- cycle;
+		\end{scope}
+	\end{tikzpicture}
+	\end{center}
+\end{example}
+
+Recall that if $S$ is a set with volume $V$ in $\mathbb R^n$, the volume of $T_A(S)$ is $|{\det(A)}|B$. In particular, if $A\in\operatorname{SL}_n(\mathbb R)$, then the map $T_A\colon\mathbb R^n\to\mathbb R^n$ maps the unit cube to a parallelepiped of volume 1.
+
+Recall that a matrix $A$ is \textbf{orthogonal} if $A^\mathsf T=A^{-1}$.
+
+\begin{example}
+	Take $A=\begin{bmatrix}
+		\frac 35 & -\frac 45 \\ \frac 45 & \frac 35
+	\end{bmatrix}$.
+
+	\begin{align*}
+		AA^\mathsf{T}&=\begin{bmatrix}
+		\frac 35 & -\frac 45 \\ \frac 45 & \frac 35
+	\end{bmatrix}\begin{bmatrix}
+		\frac 35 & \frac 45 \\ -\frac 45 & \frac 35
+	\end{bmatrix}\\
+	&=\begin{bmatrix}
+		1 & 0 \\ 0 & 1
+	\end{bmatrix}\\
+	&=I_2.
+	\end{align*}
+\end{example}
+
+Equivalently, a matrix $A$ is orthogonal if its columns have norm 1 and are linearly independent.
+
+\begin{definition}
+	Let
+	$$\mathrm{O}_n(\mathbb R)=\{A\in\operatorname{GL}_n(\mathbb R)\mid A^\mathsf{T}=A^{-1}\}.$$
+	Then $\mathrm{O}_n(\mathbb R)$ is called the \textbf{orthogonal group} of degree $n$ over $\mathbb R$.
+\end{definition}
+
+It's easy to see that $\mathrm{O}_n(\mathbb R)$ is a group under multiplication (check that it satisfies the subgroup criterion as a subgroup of $\operatorname{GL}_n(\mathbb R)$!).
+
+\begin{proposition}
+	If $A\in\mathrm{O}_n(\mathbb R)$, then $\det(A)=\pm 1$.
+\end{proposition}
+
+\begin{proof}
+	We compute.
+	\begin{align*}
+		1&=\det(I_n)\\
+		&=\det(AA^{-1})\\
+		&=\det(A)\det(A^{-1})\\
+		&=\det(A)\det(A^\mathsf{T})\\
+		&=\det(A)\det(A)\\
+		&=\det(A)^2
+	\end{align*}
+	So $\det(A)=\pm 1$.
+\end{proof}
+
+Elements of $\mathrm{O}_n(\mathbb R)$ preserve distance. Recall that, given
+$$\vec v=\begin{bmatrix}
+	v_1 \\ \vdots \\ v_n
+\end{bmatrix}\qquad\text{and}\qquad\vec w=\begin{bmatrix}
+	w_1 \\ \vdots \\ w_n
+\end{bmatrix},$$
+the distance between $\vec v$ and $\vec w$ is
+$$d(\vec v,\vec w)=\sqrt{(v_1-w_1)^2+\cdots+(v_n-w_n)^2}=\|\vec v-\vec w\|.$$
+This actually characterizes elements of $\mathrm{O}_n(\mathbb R)$.
+
+\begin{theorem}
+	$A\in\mathrm{O}_n(\mathbb R)$ if and only if
+	$$d(A\vec v,A\vec w)=d(\vec v,\vec w),$$
+	for all $\vec v,\vec w\in\mathbb R^n$.
+\end{theorem}
+
+Here's the picture, where the dashed lines have equal length.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+	\footnotesize
+	\begin{scope}
+	\draw[->] (-0.5,0) -- (5,0);
+	\draw[->] (0,-0.5) -- (0,5);
+	\draw[->,very thick,main] (0,0) -- (10:4) node[right] {$\vec v$};
+	\draw[->,very thick,main] (0,0) -- (40:5) node[right] {$\vec w$};
+	\draw[dashed,main] (10:4) -- (40:5);
+	\end{scope}
+	\draw[->] (6,2.5) -- node[midway,above] {$T_A$} (9,2.5);
+	\begin{scope}[shift={(10,0)}]
+	\draw[->] (-0.5,0) -- (5,0);
+	\draw[->] (0,-0.5) -- (0,5);
+	\draw[->,very thick,main] (0,0) -- (40:4) node[right] {$A\vec v$};
+	\draw[->,very thick,main] (0,0) -- (70:5) node[above] {$A\vec w$};
+	\draw[dashed,main] (40:4) -- (70:5);
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}
+	We define the \textbf{special orthogonal group}, denoted $\operatorname{SO}_n(\mathbb R)$, as
+	\begin{align*}
+		\operatorname{SO}_n(\mathbb R)&=\operatorname{O}_n(\mathbb R)\cap\operatorname{SL}_n(\mathbb R)\\
+		&=\{\text{all $n\times n$ orthogonal matrices with determinant 1}\}.
+	\end{align*}
+\end{definition}
+
+We consider the special case for $\operatorname{O}_n(\mathbb R)$ when $n=2$.
+
+Note that any $A\in\operatorname{O}_2(\mathbb R)$ is entirely determined by where it takes $\begin{bmatrix}1\\0\end{bmatrix}$ and $\begin{bmatrix}0\\1\end{bmatrix}$.
+
+If $A\begin{bmatrix}1\\0\end{bmatrix}=\begin{bmatrix}a\\b\end{bmatrix}$, then $a^2+b^2=1$. Note that this implies
+$$A=\begin{bmatrix}
+	a & * \\ b & *
+\end{bmatrix}.$$
+Since the columns of $A$ must be orthogonal, then either
+\begin{align}
+	A&=\begin{bmatrix}
+	a & b \\ b & -a
+\end{bmatrix},\quad\text{or}\label{eq:A1}\\
+	A&=\begin{bmatrix}
+	a & -b \\ b & a
+\end{bmatrix}\label{eq:A2}
+\end{align}
+
+If we are in case (\ref{eq:A1}), then
+$$A=\begin{bmatrix}
+	a & b \\ b & -a
+\end{bmatrix}=\begin{bmatrix}
+	\cos\theta & \sin\theta \\ \sin\theta & -\cos\theta
+\end{bmatrix},\quad\text{for $\theta\in[0,2\pi)$},$$
+i.e. $A$ rotates vectors about the origin by an angle $\theta$.
+
+If we are in case (\ref{eq:A2}), then
+$$A=\begin{bmatrix}
+	a & -b \\ b & a
+\end{bmatrix}=\underbrace{\begin{bmatrix}
+	a & b \\ b & -a
+\end{bmatrix}}_\text{rotation}\underbrace{\begin{bmatrix}
+	1 & 0 \\ 0 & -1
+\end{bmatrix}}_\text{flip about $x$-axis}.$$

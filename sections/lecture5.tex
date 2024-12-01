@@ -1,0 +1,70 @@
+\section{Lecture 5 — The Fundamental Theorem of Finite Abelian Groups III: Proving the technical lemmas}
+
+We restate and prove the technical lemmas from last lecture (\ref{lem:tech1} and \ref{lem:tech2}).
+\begin{lemma}
+	Suppose $G$ is a finite abelian group with $|G|=p_1^{\alpha_1}\cdots p_r^{\alpha_r}$ and the $p_i$'s are distinct. For each $p_i$, set $G_i=\{g\in G\mid |g|=p_i^t\text{ for some }t\}$. Then $G$ is the internal direct product of $G_1,\hdots,G_r$, and each $G_i$ is a $p_i$-group.
+\end{lemma}
+
+\begin{proof}
+	First we show that each $G_i$ is a $p_i$-subgroup. They are subgroups since all the properties hold:
+	\begin{itemize}
+		\item $|e|=1=p_i^0$ so $e\in G_i$,
+		\item Let $a,b\in G_i$. So $|a|=p_i^t$ and $|b|=p_i^s$ for some $s,t$. Then $|ab|=\lcm(|a|,|b|)=\lcm(p_i^t,p_i^s)=p_i^{\max\{t,s\}}$ so $ab\in G_i$.
+		\item Let $a\in G_i$. So $|a|=|a^{-1}|=p_i^t$. So $a^{-1}\in G_i$
+	\end{itemize}
+	In particular, each $G_i$ is a $p_i$-group since every element has prime power order, by definition.
+
+	We now check the three conditions for direct products (in no particular order).
+
+	Let $g\in G_i\cap\left(\bigcup_{i\neq j}G_j\right)$. So if $g\in G_i$, $|g|=p_i^s$ for some $s$. But $g\in \left(\bigcup_{i\neq j}G_j\right)$, so $g\in G_j$ for some $j$ So $|g|=p_j^t$ for some $t$. Thus, $p_i^s=p_j^t$ but this happens if and only if $s=t=0$. So we must have that $g=e$.
+
+	To show $G=G_1\cdots G_r=\{g_1\cdots g_r\mid g_i\in G_i\}$, it is enough to show $G\subseteq G_1\cdots G_r$. Let $g\in G$. So $|g|\mid|G|=p_1^{\alpha_1}\cdots p_r^{\alpha_r}$. So $|g|=p_1^{\beta_1}\cdots p_r^{\beta_r}$ with $0\leq\beta_i\leq\alpha_i$. Let $a_i=|g|/p_i^{\beta_i}$. So $\gcd(a_1,\hdots,a_r)=1$. By Bezout, there exist $c_1,\hdots,c_r$ such that $c_1a_1+\cdots+c_ra_r=1$. So $g=g^1=g^{c_1a_1+\cdots+c_ra_r}=g^{c_1a_1}\cdots g^{c_ra_r}$. Consider $(g^{c_ia_i})$. Then $(g^{c_ia_i})^{p_i^{\beta_i}}=g^{c_ia_ip_i^{\beta_i}}=g^{c_i|g|}=e$. So $|g^{c_ia_i}|\mid | p_i^{\beta_i}$ and thus $g^{c_ia_i}\in G_i$. Thus $g=(g^{c_1a_1})\cdots(g^{c_ra_r})\in G_1\cdots G_r$.
+
+	The last condition is trivial since $G$ is abelian.
+\end{proof}
+
+\begin{lemma}
+	Let $G$ be a finite abelian $p$-group and let $a\in G$ with maximal order (i.e. $|a|=p^m$, and $|h|\leq p^n$ for all $h\in G$ with $h\neq a$). Then
+	$$G\cong\langle a\rangle\times K\cong\mathbb Z_{p^n}\times K,$$
+	where $K$ is another $p$-group.
+\end{lemma}
+
+\begin{proof}
+	Assume $|G|=p^\alpha$ and let $|a|=p^n$ be the element of maximum order. Let $K$ be the largest subgroup of $G$ such that
+	$$\langle a\rangle \cap K=\left\{0\right\}.$$
+	There is at least one possible $K$ (taking $K=\{0\}$), so $K$ is well-defined. Our goal is to prove $G=\langle a\rangle +K$. Suppose for a contradiction that there is an element $b\in G\setminus(\langle a\rangle +K)$. Let $k$ be the smallest integer such that
+	$$p^kb=\underbrace{b+\cdots+b}_{\text{$p^k$ times}}\in \langle a\rangle +K.$$
+	Since $p^\alpha b=0$ for some $\alpha$, $p^\alpha b=0\in \langle a\rangle +K$. So such an integer $k$ exists. Since $k$ is minimal, $c=p^{k-1}b\not\in \langle a\rangle +K$, but $pc=p^kb\in \langle a\rangle +K$. Thus, $pc=ta+k$ for some integer $t$. Since $|a|=p^n$, $p^nx=0$ for all $x\in G$ because $a$ has maximal order. From here, $0=p^nc=p^{-1}(pc)=p^{n-1}(ta+k)=p^{n-1}ta+p^{n-1}k$. Rearranging yields $\underbrace{p^{n-1}ta}_{\in\langle a\rangle}=\underbrace{p^{n-1}k}_{\in K}\in\langle a\rangle \cap K=\{0\}$ which gives $p^{n-1}ta=0$. Since $|a|=p^n$ and $(p^{n-1}t)a=0$, $p^n\mid p^{n-1}t$ which implies $p\mid t$ and so $t=mp$ for some $m$. Now,
+	\begin{align*}
+		pc&=ta+k\\
+		&=mpa+k\\
+		&\Leftrightarrow k=pc-mpa\\
+		&\phantom{\Leftrightarrow k}\,=p(c-ma)
+	\end{align*}
+
+	So $pd=k\in K$. On the other hand, $d\not\in K$ because that would give $c=ma+d\in\langle a\rangle +K$.
+
+	Consider the following fact: Let $H=\{x+zd\mid x\in K,\, z\in\mathbb Z\}$. Then $H$ is a subgroup of $G$ that properly contains $K$.
+
+	Since $K$ was the largest subgroup such that $\langle a\rangle \cap K=\{0\}$, we have $\langle a\rangle \cap H\neq\{0\}$.
+
+	Let $0\neq w\in \langle a\rangle \cap H$. Hence
+	\begin{equation*}
+		w=sa=k_1+rd\text{ with }k_1\in K,r\in\mathbb Z.
+	\end{equation*}
+
+	We claim $p\not\mid r$. If $p\mid r$, we have $r=py$ and since $pd\in K$, we have $0\neq w=sa=k_1+pyd\in\langle a\rangle \cap K=\{0\}$, which yields a contradiction.
+
+	Since $p\not\mid r$, $\gcd(p,r)=1$ which implies $pu+rv=1$ for some $u,v$. Now,
+	\begin{align*}
+		c&=c\cdot 1\\
+		&=c(pu+rv)\\
+		&=u(pc)+vrc\\
+		&=u(ta+k)+vr(d+ma)\\
+		&=u(ta+k)+v(rd+mra)\\
+		&=u(ta+k)+v(sa=k_1+rma)\\
+		&=\underbrace{(ut+vs+vrm)a}_{\in \langle a\rangle}+\underbrace{uk-vk_1}_{\in K}\in \langle a\rangle+K.
+	\end{align*}
+
+	This is a contradiction, so there is no such $b$.
+\end{proof}

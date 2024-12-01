@@ -1,0 +1,118 @@
+\section{Lecture 14 — Sylow Theorem III}
+
+Recall that if $|G|=p^rm$ with $p$ not dividing $m$, then any subgroup $P$ of $G$ with $|P|=p^r$ is a Sylow $p$-subgroup. The first Sylow theorem shows that a Sylow $p$-subgroup always exists.
+
+The third Sylow theorem counts the number of Sylow $p$-subgroups.
+
+\begin{theorem}[Sylow Theorem III]\label{thm:sylow_3}
+	Let $G$ be a group with $p$ prime dividing $|G|$. If $n_p$ is the number of distinct Sylow $p$-subgroups, then
+	\begin{enumerate}
+		\item $n_p\equiv 1\pmod{p}$, and
+		\item $n_p$ divides $|G|$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	Show that any group $G$ with $|G|=45=3^2\cdot 5$ has exactly one Sylow $5$-subgroup.
+	\begin{solution}
+	By the third Sylow theorem,
+	\begin{itemize}
+		\item $n_5\in\{1,6,11,16,21,26,31,36,41\}$, and
+		\item $n_5\in\{1,3,5,9,15,45\}$
+	\end{itemize}
+	So we must have that $n_5=1$.
+	\end{solution}
+	In the previous lecture, we saw that if $P$ is the only Sylow $p$-subgroup, then $P$ is normal. So in any group $G$ with $|G|=45$, the Sylow $5$-subgroup is normal. Recall also that $G$ is simple if it has no normal subgroups.
+\end{example}
+
+\begin{corollary}
+	There are no simple groups of order 45.
+\end{corollary}
+
+\begin{lemma}
+	Let $H$ and $K$ be subgroups of $G$. The number of distinct $H$-conjugates of $K$ is
+	$$[H:N(K)\cap H].$$
+\end{lemma}
+
+\begin{lemma}\label{lem:conjugate_P}
+	Suppose $|x|=p^a$ and $xPx^{-1}=P$ for some Sylow $p$-subgroup. Then $x\in P$.
+\end{lemma}
+
+These lemmas will help prove the third Sylow theorem.
+
+\begin{proof}
+	Let $S=\{P=P_1,P_2,\hdots,P_k\}$ be the set of all the distinct Sylow $p$-subgroups of $G$. We want $n_p=k$. We can make $S$ into a $P$-set via the action
+	\begin{align*}
+		P\times S&\to S,\\
+		(x,P_i)&\mapsto xP_ix^{-1}=x\cdot P_i
+	\end{align*}
+	Note that $xP_ix^{-1}\in S$ by the second Sylow theorem since any two Sylow $p$-subgroups are related by conjugation.
+
+	Since $\cdot$ is a group action, $S$ is partitioned by the orbits. If $P=P_1$, the orbit of $P$ is
+	$$\mathcal O_P=\{xPx^{-1}\mid x\in P\}=P.$$
+	If $P_i\neq P_1$, the orbit of $P_i$ is
+	$$\mathcal O_{P_i}=\{x{P_i}x^{-1}\mid x\in P\}.$$
+	Now,
+	\begin{align*}
+		|\mathcal O_{P_i}|&=\text{number of distinct $P$-conjugates of $P_i$}\\
+		&=[P:N(P_i)\cap P]\\
+		&=\frac{|P|}{|N(P_i)\cap P|}\\
+		&=p^{a_i},\quad\text{with $a_i\geq 0$}.
+	\end{align*}
+
+	In addition, if $P_i\neq P$, then $|\mathcal O_{P_i}|>1$ because if $\{xP_ix^{-1}\mid x\in P\}=\{P_i\}$, i.e. $xP_ix^{-1}=P_i$ for all $x\in P$. But Lemma \ref{lem:conjugate_P} forces $P=P_1=P_i$. So $|\mathcal O_{P_i}|=p^{a_i}$ with $a_i\geq 1$. To summarize, we have the partition
+	$$P=\mathcal O_P\cup\mathcal O_{P_2}\cup\cdots\cup\mathcal O_{P_t}$$
+	So
+	\begin{align*}
+		|S|&=|\mathcal O_P|+|\mathcal O_{P_2}|+\cdots +|\mathcal O_{P_t}|\\
+		&=1+p^{a_1}+p^{a_2}+\cdots +p^{a_t}.
+	\end{align*}
+	Thus, $n_p=|S|\equiv 1\pmod p$.
+
+	At the same time, $S$ is a $G$-set via the action
+	\begin{align*}
+		G\times S&\to S,\\
+		(g,P_i)&\mapsto gP_ig^{-1}=g*P_i.
+	\end{align*}
+	For any $P\in S$, the orbit under the action $*$ is
+	$$\mathcal O_P\{gPg^{-1}\mid g\in G\}=S$$
+	(by the second Sylow theorem). So
+	\begin{align*}
+		|\mathcal O_P|&=[G:N(P)\cap G]\\
+		&=[G:N(P)]\\
+		&=\frac{|G|}{|N(P)|}.
+	\end{align*}
+
+	So $|N(P)||\mathcal O_P|=|G|$. But $n_p=|\mathcal O_P|$, so $n_p$ divides $|G|$.
+\end{proof}
+
+We now look at some applications of this result.
+
+Recall that if $|G|=p$ with $p$ prime, then $G\cong\mathbb Z_p$.
+
+\begin{theorem}
+	Suppose $|G|=pq$ with $p,q$ primes and $p<q$. Then $G$ has a unique Sylow $q$-subgroup and $G$ is not simple. Additionally, if $q\not\equiv 1\pmod p$, then $G\cong\mathbb Z_{pq}$.
+\end{theorem}
+
+\begin{proof}
+	We need $n_q$ to be the number of distinct Sylow $q$-subgroups. So $n_q\in\{1,q,p,pq\}$. We note that $q\equiv 0\pmod q$, $pq\equiv \pmod q$ and $p\equiv p\pmod q$ since $p<q$. So $n_q=1$ and thus there is only one Sylow $q$-subgroup.
+
+	Now count $n_p=$ number of Sylow $p$-subgroups if $q\neq 1\pmod p$. So $n_p\in\{1,q,p,pq\}$. Note $p\equiv 0\pmod p$, $pq\equiv 0\pmod p$. We are given $q\not\equiv 1\pmod p$. So $n_p=1$. To summarize, we have a Sylow $q$-subgroup, say $Q$ and a Sylow $p$-subgroup, say $P$, with $|Q|=q$ and $|P|=p$. We claim $G$ is the internal direct product of $P$ and $Q$.
+
+	We need to check:
+	\begin{itemize}
+		\item $Q\cap P=\{e\}$
+		\item $QP=G$
+		\item $qp=pq$ for all $p\in P$ and $q\in Q$ (use the fact that $P$ and $Q$ are normal)
+	\end{itemize}
+
+	These hold (check!) so $G\cong Q\times P\cong\mathbb Z_q\times\mathbb Z_p\cong\mathbb Z_{pq}$.
+\end{proof}
+
+\begin{example}
+	Suppose $|G|=77=7\cdot 11$. Since $11\not\equiv 1\pmod p$, $G\cong\mathbb Z_{77}$.
+\end{example}
+
+\begin{example}
+	If $|G|=15=3\cdot 5$, we have that $3<5$ and $5\not\equiv 1\pmod 3$, so $G\cong\mathbb Z_{15}$.
+\end{example}

@@ -1,0 +1,78 @@
+\section{Lecture 22 — The Division Algorithm in \textit{F}[\textit{x}]}
+
+\begin{theorem}[Division Algorithm in {$\mathbb Z$}]
+	Let $a,b\in\mathbb Z$ with $b\neq 0$. Then there exist unique integers $q$ and $r$ such that
+	$$a=bq+r,$$
+	with $0\leq r<|b|$.
+\end{theorem}
+
+\begin{theorem}
+	Given any $a,b\in\mathbb Z$, there exist $s,t\in\mathbb Z$ such that
+	$$\gcd(a,b)=as+bt$$
+\end{theorem}
+
+We prove similar results for $F[x]$.
+
+\begin{theorem}[Division Algorithm in {\textit{F}[\textit{x}]}]
+	Suppose $F$ is a field and $a(x),b(x)\in F[x]$ with $b(x)\neq 0$. Then there exist unique polynomials $q(x),r(x)\in F[x]$ such that $$a(x)=b(x)q(x)+r(x),$$
+	with $r(x)=0$ or $\deg r(x)<\deg b(x)$.
+\end{theorem}
+
+\begin{proof}
+	We present two parts to the proof: existence (I) and uniqueness (II).
+	\begin{enumerate}[label=\textbf{(\Roman*)}]
+		\item If $a(x)=0$, we must have $q(x)=r(x)=0$ and so $0=a(x)=b(x)\cdot 0+0$. If $\deg a(x)<\deg b(x)$, let $q(x)=0$ and $r(x)=a(x)$. Then $a(x)=b(x)\cdot 0+a(x)$. If $\deg a(x)\geq \deg b(x)$, we proceed by strong induction on the degree of $a(x)$. That is, we assume the statement is true for all polynomials $a'(x)$ with $\deg a'(x)<\deg a(x)$. Suppose
+		$$a(x)=a_mx^m+\cdots+a_0\qquad\text{and}\qquad b(x)=b_nx^n+\cdots+b_0,$$
+		with $a_m,b_n\neq 0$ and $m\geq n$. Since $F$ is a field, $\frac{a_m}{b_n}\in F$. Thus, $\frac{a_m}{b_n}x^{m-n}\in F[x]$. Define
+		\begin{align*}
+			a'(x)&=a(x)-\frac{a_m}{b_n}x^{m-n}b(x)\\
+			&=a_mx^m+\cdots+a_0-\frac{a_m}{b_n}x^{m-n}(b_nx^n+\cdots+b_0)\\
+			&=a_mx^m+(\text{lower order terms})-a_mx^m-(\text{lower order terms}).
+		\end{align*}
+		So $\deg a'(x)<\deg a(x)$. By strong induction, there exist $q'(x),r'(x)\in F[x]$ such that
+		$$a'(x)=b(x)q'(x)+r'(x).$$
+		Thus, $a(x)-\frac{a_m}{b_n}x^{m-n}b(x)=b(x)q'(x)+r'(x)$. Re-arranging,
+		\begin{align*}
+			a(x)&=b(x)q'(x)+\frac{a_m}{b_n}x^{m-n}b(x)+r'(x)\\
+			&=b(x)\left(q'(x)+\frac{a_m}{b_n}x^{m-n}\right)+r'(x).
+		\end{align*}
+		So let $q(x)=q'(x)+\frac{a_m}{b_n}x^{m-n}$ and $r(x)=r'(x)$. Note $r(x)=r'(x)=0$ or $\deg r(x)=\deg r'(x)<\deg b(x)$.
+		\item Suppose $a(x)=b(x)q(x)+r(x)=b(x)q'(x)+r'(x)$. So $b(x)(q(x)-q'(x))=r'(x)-r(x)$. If $q(x)\neq q'(x)$, $b(x)(q(x)-q'(x))\neq 0$. So $\deg(b(x)(q(x)-q'(x)))\geq\deg b(x)$. But then
+		$$\deg(r'(x)-r(x))\leq\max\{\deg r(x),\deg r'(x)\}<\deg b(x),$$
+		which cannot happen. So we must have $q'(x)=q(x)$ and $r'(x)=r(x)$.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[greatest common divisor]
+	A monic polynomial $d(x)$ is a \textbf{greatest common divisor} (gcd) of $p(x)$ and $q(x)$ if $d(x)$ divides both $p(x)$ and $q(x)$ and if $d'(x)$ also divides $p(x)$ and $q(x)$, then $d'(x)$ divides $d(x)$. We write $d(x)=\gcd(p(x),q(x))$.
+\end{definition}
+
+\begin{theorem}
+	Let $p(x),q(x)\in F[x]$ be nonzero. Then there exist $a(x),b(x)\in F[x]$ such that
+	$$\gcd(p(x),q(x))=a(x)p(x)+b(x)q(x).$$
+\end{theorem}
+
+\begin{proof}
+	Let $S=\{a(x)p(x)+b(x)q(x)\mid a(x),b(x)\in F[x]\}$. Let $d(x)\in S$ be the element such that $\deg d(x)\leq\deg t(x)$ for all $t(x)\in S$. Also, by re-scaling, we may assume $d(x)$ is monic. We claim $\gcd(p(x),q(x))=d(x)$. We first show $d(x)$ divides $p(x)$. Applying the division algorithm,
+	$$p(x)=d(x)\tilde q(x)+r(x),$$
+	with $r(x)=0$ or $\deg r(x)<\deg d(x)$. In the case $\deg r(x)<\deg d(x)$,
+	\begin{align*}
+		r(x)&=p(x)-d(x)\tilde q(x)\\
+		&=p(x)-(a(x)p(x)+b(x)q(x))\tilde q(x)\\
+		&=(1-a(x)\tilde q(x))p(x)-q(x)(b(x)\tilde q(x))\in S.
+	\end{align*}
+	But then $S$ has an element of smaller degree than $d(x)$, yielding a contradiction. So we must have $r(x)=0$. A similar argument shows $d(x)$ divides $q(x)$.
+
+	Now suppose $d'(x)$ divides both $p(x)$ and $q(x)$. So $p(x)=d'(x)p'(x)$ and $q(x)=d'(x)q'(x)$. Thus $d(x)=p(x)a(x)+q(x)b(x)=d'(x)p'(x)a(x)+d'(x)q'(x)b(x)=d'(x)(p'(x)a(x)+q'(x)b(x))$. Thus, $d'(x)$ divides $d(x)$.
+\end{proof}
+
+Note that the Division algorithm gives a Euclidean algorithm to determine $\gcd(a(x),b(x))$:
+\begin{align*}
+	a(x)&=b(x)q_1(x)+r_1(x)\\
+	b(x)&=r_1(x)q_2(x)+r_2(x)\\
+	r_1(x)&=r_2(x)q_3(x)+r_3(x)\\
+	&\vdots\\
+	r_{n-2}&=r_{n-1}q_n(x)+\underbrace{r_n(x)}_{\neq 0}\\
+	r_{n-1}&=r_n(x)q_n(x)+0
+\end{align*}
+The monic version of $r_n(x)$ is the gcd of $a(x)$ and $b(x)$.

@@ -1,0 +1,151 @@
+\section{Lecture 11 — Counting and Burnside's Equation}
+
+We would like to apply group actions to solve counting problems.
+
+\underline{Problem:} We have a flag with six equal stripes. We can colour the bands with red, blue, or green. We want to count the number of possible flags. Below is an example of such a flag.
+
+\begin{center}
+\begin{tikzpicture}[yscale=1/12,scale=4]
+	\filldraw[MaterialGreen500,draw=black] (0,0) rectangle (1,1);
+	\filldraw[MaterialRed500,draw=black] (0,1) rectangle (1,2);
+	\filldraw[MaterialRed500,draw=black] (0,2) rectangle (1,3);
+	\filldraw[MaterialBlue500,draw=black] (0,3) rectangle (1,4);
+	\filldraw[MaterialRed500,draw=black] (0,4) rectangle (1,5);
+	\filldraw[MaterialBlue500,draw=black] (0,5) rectangle (1,6);
+\end{tikzpicture}
+\end{center}
+
+Note that a flag can be represented by a six tuple,
+$$(c_1,c_2,c_3,c_4,c_5)$$
+with $c_i\in\{\text{\color{MaterialRed500}red},\text{\color{MaterialGreen500}green},\text{\color{MaterialBlue500}blue}\}$.
+
+\begin{center}
+\begin{tikzpicture}[yscale=1/12,scale=4]
+	\filldraw[MaterialGreen500,draw=black] (0,0) rectangle (1,1);
+	\filldraw[MaterialRed500,draw=black] (0,1) rectangle (1,2);
+	\filldraw[MaterialRed500,draw=black] (0,2) rectangle (1,3);
+	\filldraw[MaterialBlue500,draw=black] (0,3) rectangle (1,4);
+	\filldraw[MaterialRed500,draw=black] (0,4) rectangle (1,5);
+	\filldraw[MaterialBlue500,draw=black] (0,5) rectangle (1,6);
+
+	\node[right,overlay] at (1,0.5) {$c_1=\text{\color{MaterialGreen500}green}$};
+	\node[right,overlay] at (1,1.5) {$c_2=\text{\color{MaterialRed500}red}$};
+	\node[right,overlay] at (1,2.5) {$c_3=\text{\color{MaterialRed500}red}$};
+	\node[right,overlay] at (1,3.5) {$c_4=\text{\color{MaterialBlue500}blue}$};
+	\node[right,overlay] at (1,4.5) {$c_5=\text{\color{MaterialRed500}red}$};
+	\node[right,overlay] at (1,5.5) {$c_6=\text{\color{MaterialBlue500}blue}$};
+\end{tikzpicture}
+\end{center}
+
+Let $X=\{\text{all such six tuples}\}$. We have $|X|=3^6$. Let $\tau$ be the permutation that corresponds to ``flipping'' the flag:
+$$\tau=\begin{pmatrix}
+	1 & 2 & 3 & 4 & 5 & 6\\
+	6 & 5 & 4 & 3 & 2 & 1
+\end{pmatrix}.$$
+Let $G=\{(1),\tau\}$. Make $X$ into a $G$-set
+ by
+\begin{align*}
+	G\times X &\to X\\
+	(\sigma,(c_1,\hdots,c_6)) &\mapsto\begin{cases}
+		(c_1,\hdots,c_6) & \text{if $\sigma=(1)$},\\
+		(c_6,\hdots,c_1) & \text{if $\sigma=\tau$}.
+	\end{cases}
+\end{align*}
+
+For any $x\in X$, $\mathcal O_x=\{\sigma\cdot x\mid\sigma\in G\}=\{(c_1,\hdots,c_6),(c_6,\hdots,c_1)\}$, where $x=(c_1,\hdots,c_6)$. So
+
+$$|\mathcal O_x|=\begin{cases}
+	1 & \text{if $x=\tau\cdot x$},\\
+	2 & \text{if $x\neq\tau\cdot x$}.
+\end{cases}$$
+
+Recall that orbits partition $X$:
+$$X=\mathcal O_{x_1}\cup\mathcal O_{x_2}\cup\cdots\cup\mathcal O_{x_k}.$$
+
+So the solution to our problem is to count the number of distinct orbits (each orbit consists of distinct flags).
+
+Recall that the stabilizer of $x$ is the set
+$$G_x=\{g\in G\mid g\cdot x=x\}.$$
+
+\begin{lemma}\label{lem:burn_lem}
+	Suppose $X$ is a $G$-set and $x\sim y$, i.e. $y=g\cdot x$ for some $g\in G$. Then if $G_x\cong G_y$, then $|G_x|=|G_y|$.
+\end{lemma}
+
+\begin{proof}
+	Let $g\in G$ be such that $y=g\cdot x$ and so $g^{-1}\cdot y=x$. Define a map
+	\begin{align*}
+		\Phi\colon G_x&\to G_y,\\
+		a&\mapsto gag^{-1}
+	\end{align*}
+
+	Note $gag^{-1}\in G_y$ since
+	\begin{align*}
+		gag^{-1}\cdot y&=ga\cdot (g^{-1}\cdot y)\\
+		&=ga\cdot x\\
+		&=g\cdot (a\cdot x)\\
+		&=g\cdot x\\
+		&=y
+	\end{align*}
+
+	This is a homomorphism since
+	\begin{align*}
+		\Phi(ab)&=gdbg^{-1}\\
+		&=(gag^{-1})(gbg^{-1})\\
+		&=\Phi(a)\Phi(b)
+	\end{align*}
+
+	It is injective since if
+	$$\Phi(a)=gag^{-1}=gbg^{-1}=\Phi(b),$$
+	we have $a=b$ by cancellation. It is surjective since if $h\in G_y$, then $g^{-1}hg\in G_x$ since
+	\begin{align*}
+		(g^{-1}hg)\cdot x&=g^{-1}h\cdot (g\cdot x)\\
+		&=g^{-1}h\cdot y\\
+		&=g^{-1}\cdot (h\cdot y)\\
+		&=g^{-1}\cdot y\\
+		&=x.
+	\end{align*}
+	Thus $\Phi(g^{-1}hg)=g(g^{-1}hg)g^{-1}=h$.
+\end{proof}
+
+\begin{theorem}[Burnside]
+	Let $G$ be a finite group acting on a set $X$. If $k$ is the number of distinct orbits of $X$, then
+	$$k=\frac{1}{|G|}\sum_{g\in G}|X_g|,\quad\text{where }X_g=\{x\mid g\cdot x=x\}.$$
+\end{theorem}
+
+\begin{proof}
+	We want to count all solutions to $g\cdot x=x$. We can count in two ways.
+
+	\underline{Method 1:} Fix $g$ and count all $x\in X$ such that
+	$g\cdot x=x$. So if we sum over all $g\in G$, then number of solutions is
+	$$\sum_{g\in G}|X_g|.$$
+
+	\underline{Method 2:} Fix an $x\in X$ and count all $g\in G$ such that $g\cdot x=x$. Summing over all $x$,
+	$$\sum_{x\in X}|G_x|.$$
+
+	We will equate these. So
+	$$\sum_{g\in G}|X_g|=\sum_{x\in X}|G_x|.$$
+
+	We will first refine the index of summation on the RHS. Recall $X=\mathcal O_{x_1}\cup\cdots\cup\mathcal O_{x_k}$.
+
+	$$\sum_{x\in X}|G_x|=\sum_{x\in\mathcal O_{x_1}}|G_x|+\cdots+\sum_{x\in\mathcal O_{x_k}}|G_x|.$$
+
+	By Lemma \ref{lem:burn_lem}, $|G_x|=|G_y|$ for all $x,y\in\mathcal O_{x_i}$. So
+	$$\sum_{x\in\mathcal O_{x_i}}|G_x|=|G_{x_i}||\mathcal O_{x_i}|.$$
+	Thus,
+	$$\sum_{x\in X}|G_x|=|G_{x_1}||\mathcal O_{x_1}|+\cdots +|G_{x_k}||\mathcal O_{x_k}|.$$
+
+	But $|\mathcal O_{x_i}|=|G|/|G_{x_i}|=[G:G_{x_i}]$. Thus
+	$$\sum_{x\in X}|G_x|=|G_{x_1}|\frac{|G|}{|G_{x_1}|}+\cdots +|G_{x_k}|\frac{|G|}{|G_{x_k}|}=k|G|.$$
+
+	So
+	$$\sum_{g\in G}|X_g|=k|G|\quad\Leftrightarrow\quad k=\frac{1}{|G|}\sum_{g\in G}|X_g|.$$
+\end{proof}
+
+Let's come back around to the flag problem. Our group is $G=\{(1),\tau\}$, so $|G|=2$. We compute:
+\begin{align*}
+	X_{(1)}&=\{x\mid (1)\cdot x=x\}=X\Rightarrow |X_{(1)}|=3^6\\
+	X_\tau&=\{x\mid \tau\cdot x=x\}=\{(c_1,c_2,c_3,c_4,c_5,c_6)\mid c_1=c_6,c_2=c_5,c_3=c_4\}\Rightarrow |X_{\tau}|=3^3
+\end{align*}
+
+So the number of flags = the number of orbits which, by Burnside's Theorem, is
+$$\frac 12(|X_{(1)}|+|X_\tau|)=378.$$

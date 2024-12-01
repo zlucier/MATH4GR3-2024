@@ -1,0 +1,118 @@
+\section{Lecture 7 — The Jordan-Hölder Theorem}
+
+\begin{theorem}[Jordan-Hölder]\label{thm:jordan_holder}
+	Suppose $\{H_i\}$ and $\{K_j\}$ are two composition series of $G$. Then $\{H_i\}$ and $\{K_j\}$ are isomorphic. That is, there is a one-to-one correspondence between the sets $\{H_{i+1}/H_i\}$ and $\{K_{j+1}/K_j\}$.
+\end{theorem}
+
+We use the Second Isomorphism Theorem and a couple of lemmas to prove this result.
+
+\begin{theorem}[Second Isomorphism Theorem]\label{thm:iso2}
+	Let $H$ be any subgroup of $G$ and let $N$ be a normal subgroup of $G$. Then
+	\begin{enumerate}
+		\item $HN=\{hn\mid h\in H,n\in N\}$ is a subgroup of $G$,
+		\item $H\cap N$ is normal in $H$, and
+		\item $H/(H\cap N)\cong HN/N$. 
+	\end{enumerate}
+\end{theorem}
+
+\begin{lemma}\label{lem:jh1}
+	Suppose $H$ is normal in a subgroup $K$ of $G$. For any subgroup $L$ of $G$, $H\cap L$ is normal in $K\cap L$.
+\end{lemma}
+
+\begin{proof}
+	Let $t\in H\cap L$ and $s\in K\cap L$. Since $t\in L$ and $s\in L$, $sts^{-1}\in L$. Since $t\in H$ and $s\in K$, $sts^{-1}\in sHs^{-1}\subseteq H$, as $H$ is normal in $K$. So $sts^{-1}\in s(H\cap L)s^{-1}\subseteq H\cap L$. In particular, $sts^{-1}\in L$.
+\end{proof}
+
+\begin{lemma}\label{lem:jh2}
+	If $A$ is normal in $B$ and $N$ is normal in both $A$ and $B$, then $A/N$ is normal in $B/N$.
+\end{lemma}
+
+\begin{proof}
+	We want to show that $bN(A/N)(bN)^{-1}\subseteq A/N$ for all $bN\in B/N$. Take $\ell\in bN(A/N)(bN)^{-1}$. Then $\ell=bNaNb^{-1}N$ for some $a\in A$. In particular, $\ell=bab^{-1}N$. But $A$ is normal in $B$. So $bab^{-1}\in bAb^{-1}\subseteq A$. So $bab^{-1}N=aN\in A/N$.
+\end{proof}
+
+We are now ready to prove the Jordan-Hölder Theorem (\ref{thm:jordan_holder}).
+
+\begin{proof}
+	The proof is by induction on the length of the smallest composition series of $G$. If $n=1$, then $G=\{e\}$. So $G/\{e\}\cong G$, and so $G$ is simple. So this is the only possible composition series for $G$ (note that in a composition series, $H_{n-1}$ is normal in $G=H_n$ so this forces $H_{n-1}=H_0=\{e\}$).
+
+	Suppose that for all $k$ with $1\leq k<n$, all composition series for $G$ of length $k$ are isomorphic. We now want to show any two composition series of length $n$ are isomorphic. Consider the following two composition series:
+	\begin{equation}\label{eq:jh_series1}
+		G=H_n\supset H_{n-1}\supset\hdots\supset H_1\supset H_0=\{e\}
+	\end{equation}
+	and
+	\begin{equation}\label{eq:jh_series2}
+		G=K_n\supset K_{n-1}\supset\hdots\supset K_1\supset K_0=\{e\}.
+	\end{equation}
+	By lemma \ref{lem:jh1},
+	\begin{center}
+		$H_i\cap K_{m-1}$ is normal in $H_{i+1}\cap K_{m-1}$ for $i=0,\hdots,n-2$\\
+		and\\
+		$H_{n-1}\cap K_j$ is normal in $H_{n-1}\cap K_{j+1}$ for $j=0,\hdots,m-2$.
+	\end{center}
+	So we have two new subnormal series
+	\begin{gather*}
+		G=H_n\supset H_{n-1}\supset H_{n-1}\cap K_{m-1} \supset H_{n-2}\cap K_{m-1}\supset\cdots\supset H_0\cap K_{m-1}=\{e\}\\
+		\text{and}\\
+		G=K_m\supset K_{m-1}\supset H_{n-1}\cap K_{m-1} \supset H_{n-1}\cap K_{m-2}\supset\cdots\supset H_{n-1}\cap K_0=\{e\}.
+	\end{gather*}
+	We want to show that the above are two new composition series, i.e. each quotient is simple. It should be clear that $H_n/H_{n-1}$ and $K_m/K_{m-1}$ are simple, by construction.
+
+	\textbf{Claim.} $H_{n-1}\cap K_{m-1}$ is normal in $H_{n-1}$ and $H_{n-1}/(H_{n-1}\cap K_{m-1})$ is simple. We'll come back to proving this claim. Assume it to be true.
+
+	By the Second Isomorphism Theorem (\ref{thm:iso2}),
+	$$\frac{H_{i+1}\cap K_{m-1}}{H_i\cap K_{m-1}}=\frac{H_{i+1}\cap K_{m-1}}{H_i\cap(H_{i+1}\cap K_{m-1})}\cong\frac{H_i(H_{i+1}\cap K_{m-1})}{H_i}$$
+	for $i=0,\hdots,n-2$.
+
+	We claim that $H_i(H_{i+1}\cap K_{m-1})$ is normal in $H_{i+1}$. Let $a\in H_i$ and $b\in H_{i+1}\cap K_{m-1}$ so that $ab\in H_i(H_{i+1}\cap K_{m-1})$. Let $\ell\in H_{i+1}$. Since $H_i$ is normal in $H_{i+1}$, $\ell a\ell^{-1}\in H_i$. Also $\ell b\ell^{-1}\in H_{i+1}$ since $b,\ell\in H_{i+1}$. Finally, since $K_{m-1}$ is normal in $G$, $\ell b\ell^{-1}\in K_{m-1}$. So
+	$$\ell ab\ell^{-1}=\ell aeb\ell^{-1}=(\ell a\ell^{-1})(\ell b\ell^{-1})\in H_i(H_{i+1}\cap K_{m-1}).$$
+
+	Because $H_i$ is normal in $H_i(H_{i+1}\cap K_{m-1})$, and $H_{i+1}$, and $H_i(H_{i+1}\cap K_{m-1})$ is normal in $H_{i+1}$, by \ref{lem:jh2},
+
+	{\centering $\frac{H_i(H_{i+1}\cap K_{m-1})}{H_i}$ is normal in $\frac{H_{i+1}}{H_i}$.\par}
+
+	But $H_{i+1}/H_i$ is simple. So
+
+	$$\frac{H_i(H_{i+1}\cap K_{m-1})}{H_i}=\frac{H_i}{H_i}\text{ or }=\frac{H_{i+1}}{H_i}\quad\Longleftrightarrow\quad H_i(H_{i+1}\cap K_{m-1})=H_i\text{ or }=H_{i+1}.$$
+
+	By removing non-proper inclusions,
+	\begin{equation}\label{eq:jh_series3}
+		H_{n-1}\supset H_{n-1}\cap K_{m-1}\supset H_{n-2}\cap K_{m-1}\supset\cdots\supset H_0\cap K_{m-1}
+	\end{equation}
+	is a composition series. By the same reasoning,
+	\begin{equation}\label{eq:jh_series4}
+		K_{m-1}\supset H_{n-1}\cap K_{m-1}\supset H_{n-1}\cap K_{m-2}\supset\cdots\supset H_{n-1}\cap K_0
+	\end{equation}
+	is also a composition series. By the induction hypothesis, the composition series (\ref{eq:jh_series3}) is equivalent to
+	$$H_{n-1}\supset H_{n-2}\supset\cdots\supset H_0.$$
+	Considering composition series (\ref{eq:jh_series1}) and (\ref{eq:jh_series2}), if $H_{n-1}=K_{m-1}$ then the first quotients are equivalent, i.e. $H_n/H_{n-1}\cong K_m/K_{m-1}$ and the rest are equivalent by induction.
+
+	If $H_{n-1}\neq K_{m-1}$, consider
+	\begin{gather}
+		G=H_n\supset H_{n-1}\supset H_{n-1}\cap K_{m-1}\supset H_{n-2}\cap K_{m-1}\supset\cdots\supset H_0\cap K_{m-1}\\
+		\text{and}
+		H=K_m\supset K_{m-1}\supset H_{n-1}\cap K_{m-1}\supset H_{n-1}\cap K_{m-2}\supset\cdots\supset H_{n-1}\cap K_0.
+	\end{gather}
+
+	Note $K_{m-1}/(H_{n-1}\cap K_{m-1})\cong H_{n-1}K_{m-1}/H_{n-1}=G/H_{n-1}$ by the Second Isomorphism Theorem \ref{thm:iso2}. Similarly, $H_{n-1}/(H_{n-1}\cap K_{m-1})\cong G/K_{n-1}$.
+\end{proof}
+
+Bonus content! We now prove those claims we put off.
+
+We claimed that
+\begin{enumerate}
+	\item $H_{n-1}\cap K_{m-1}$ is normal in $H_{n-1}$, and
+	\item $H_{n-1}/(H_{n-1}\cap K_{m-1})$ is simple.
+\end{enumerate}
+
+\begin{proof}
+	To prove the first claim, take $h\in H_{n-1}\cap K_{m-1}$ and $g\in H_{n-1}$. We want to show $ghg^{-1}\in H_{n-1}\cap K_{m-1}$. Since $h,g,g^{-1}\in H_{n-1}$, we have $ghg^{-1}\in H_{n-1}$. Because $K_{m-1}$ is normal in $G$ and $g\in H_{n-1}\subseteq G$, we have $ghg^{-1}\in K_{m-1}$. Thus, $ghg^{-1}\in H_{n-1}\cap K_{m-1}$, as desired.
+
+	Now to prove the second claim, first observe that by the Second Isomorphism Theorem (\ref{thm:iso2}),
+	$$H_{n-1}/(H_{n-1}\cap K_{m-1})\cong H_{n-1}K_{m-1}/K_{m-1}.$$
+	We first want to show $H_{n-1}K_{m-1}/K_{m-1}$ is normal in $G/K_{m-1}$. So let $hkK_{m-1}\in H_{n-1}K_{m-1}/K_{m-1}$ and $gK_{m-1}\in G/K_{m-1}$. Since $h\in H_{n-1}$ and $H_{n-1}$ is normal in $G$, $ghg^{-1}\in H_{n-1}$. Since $k\in K_{m-1}$ and $K_{m-1}$ is normal in $G$, $gkg^{-1}\in K_{m-1}$. So 
+	$$(gK_{m-1})(hkK_{m-1})(g^{-1}K_{m-1})=g(hk)g^{-1}K_{m-1}.$$
+	But $(ghg^{-1})(gkg^{-1})=ghkg^{-1}\in H_{n-1}K_{m-1}$, and so $g(hk)g^{-1}K_{m-1}\in H_{n-1}K_{m-1}/K_{m-1}$. Thus, $H_{n-1}K_{m-1}/K_{m-1}$is normal in $G/K_{m-1}=K_m/K_{m-1}$. But $K_m/K_{m-1}$ is simple, so either
+	$$H_nK_{m-1}/K_{m-1}=\underbrace{K_{m-1}/K_{m-1}}_\text{the trivial group}\quad\text{or}\quad H_nK_{m-1}/K_{m-1}=K_m/K_{m-1}.$$
+	In both cases, the group is simple.
+\end{proof}

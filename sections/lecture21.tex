@@ -1,0 +1,116 @@
+\section{Lecture 21 — Polynomial Rings}
+
+We will assume in this section that $R$ is a commutative ring with identity.
+
+\begin{definition}[polynomial]
+	An expression $p(x)$ of the form
+	$$p(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0$$
+	with $a_n\neq 0$ and $a_0,\hdots,a_n\in R$ is called a \textbf{polynomial} over $R$ with indeterminate $x$.
+	\begin{itemize}
+		\item $a_0,\hdots,a_n$ are the \textbf{coefficients} of $p(x)$.
+		\item We call $a_n$ the \textbf{leading coefficient}.
+		\item $p(x)$ is said to be a \textbf{monic polynomial} if $a_n=1$.
+		\item The \textbf{degree} of $p(x)\neq 0$ is $\deg p(x)=n$. If $p(x)=0$, we define $\deg p(x)=-\infty$.
+	\end{itemize}
+
+	The set of all such polynomials over $R$, denoted $R[x]$, is called the \textbf{polynomial ring} over $R$.
+\end{definition}
+
+As preemptively indicated, it is in fact the case that $R[x]$ is a ring.
+
+\begin{theorem}
+	$R[x]$ is a commutative ring with identity under the usual operations.
+\end{theorem}
+
+\begin{example}
+	Take $R=\mathbb Z_3$. Count the number of polynomials of degree 2.
+	\begin{solution}
+		A polynomial of degree 2 has the form $a_2x^2+a_1x+a_0$. We must have $a_2\in\{1,2\}$ and $a_1,a_0\in\{0,1,2\}$. This gives us $2\cdot 3\cdot 3=18$ possibilities.
+	\end{solution}
+\end{example}
+
+You may ask yourself: ``If $R$ has property $P$, does $R[x]$ \textit{also} have property $P$?''. The short answer to this question is it depends.
+
+\begin{theorem}
+	If $R$ is an integral domain, then $R[x]$ is also an integral domain.
+\end{theorem}
+
+\begin{proof}
+	Suppose $p(x)=a_mx^m+\cdots+a_1x+a_0$ and $q(x)=b_nx^n+\cdots+b_1x+b_0$. Then $p(x)q(x)=a_mb_nx^{m+n}+\cdots$. Since $a_m\neq 0$ and $b_n\neq 0$, and since $R$ is an integral domain (in particular has no zero divisors), $a_mb_n\neq 0$. So $p(x)q(x)\neq 0$. Thus $R[x]$ is an integral domain.
+\end{proof}
+
+\begin{corollary}
+	If $R$ is an integral domain and $p(x),q(x)\in R[x]$, then
+	$$\deg(p(x)q(x))=\deg p(x)+\deg q(x).$$
+\end{corollary}
+
+\begin{example}
+	If $R=\mathbb Z_4$ (not an integral domain) and if $p(x)=2x^{100}+1$ and $q(x)=2x^{2024}+1$, then $p(x)q(x)=4x^{2124}+2x^{100}+2x^{2024}=2x^{2024}+2x^{100}+1$.
+\end{example}
+
+\begin{example}
+	If $F$ is a field, is $F[x]$ a field?
+	\begin{solution}
+		No. The element $x$ has no inverse. Suppose $q(x)x=1$. Then $\deg q(x)+\deg x=0$. This implies $\deg q(x)<0$, which can't happen.
+	\end{solution}
+\end{example}
+
+\begin{theorem}
+	Let $\alpha\in R$ then the map $\varphi_\alpha\colon R[x]\to R$ given by
+	$$p(x)=a_nx^n+\cdots+a_0\mapsto p(\alpha)=a_n\alpha^n+\cdots+a_0$$
+	is a homomorphism. We call $\varphi_\alpha$ the \textbf{evaluation homomorphism} at $\alpha$.
+\end{theorem}
+
+Note that $S=R[x]$ s a commutative ring with identity. We can use this ring of coefficients $S$ to make a new polynomial ring $S[y]$, elements of which have the form
+$$g(x)=f_n(x)y^n+f_{n-1}(x)y^{n-1}+f_0(x).$$
+We write $S[y]=(R[x])[y]=R[x,y]$. We can continue to form coefficient rings in this manner and more generally form $R[x_1,x_2,\hdots,x_n]$.
+
+Consider $F[x]$ with $F$ a field. Then we can carry out polynomial division.
+
+\begin{example}
+	Compute $(6x^3+25x^2+16x+17)\div(3x^2+2x+1)$.
+	\begin{solution}
+		We long-divide.
+		\begin{center}\setlength{\tabcolsep}{1pt}\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{c c c c c c c c c c c c c c}
+		&&&&&&&&&&&$2x$ & $+$ & $7$\\ \cline{7-14}
+			$3x^2$ & $+$ & $2x$ & $+$ & $1$ &\multicolumn{1}{c|}{} & & $6x^3$ & $+$ & $25x^2$ & $+$ & $16x$ & + & $17$\\
+			&&&&&& $-$ & $6x^3$ & $-$ & $4x^2$ & $-$ & $2x$\\ \cline{7-12}
+			&&&&&&&&& $21x^2$ & $+$ & $14x$ & $+$ & $17$\\
+			&&&&&&&& $-$ & $21x^2$ & $-$ & $14x$ & $-$ & $7$\\ \cline{9-14}
+			&&&&&&&&&&&&& $10$
+		\end{tabular}
+		\end{center}
+
+		So $(6x^3+25x^2+16x+17)\div(3x^2+2x+1)=2x+7$.
+	\end{solution}
+\end{example}
+
+We can always long-divide if the ring of coefficients is a field.
+
+\begin{theorem}[Division Algorithm in {\textit{F}[\textit{x}]}]
+	Suppose $F$ is a field and $a(x),b(x)\in F[x]$ with $b(x)\neq 0$. Then there exist unique polynomials $q(x),r(x)\in F[x]$ such that $$a(x)=b(x)q(x)+r(x),$$
+	with $r(x)=0$ or $\deg r(x)<\deg b(x)$.
+\end{theorem}
+
+The proof is delayed to next lecture.
+
+\begin{example}
+	Let $R=\mathbb Z$, $a(x)=2x^2+1$ and $b(x)=3x+1$. When we carry out long division, we will have
+	$$2x^2+1=(3x+1)(ax+b)+c.$$
+	But then we will require $a=2/3$. So we need the field property.
+\end{example}
+
+\begin{definition}[root]
+	Let $p(x)\in R[x]$. If $\alpha\in R$ is such that $p(\alpha)=0$, we call $\alpha$ a \textbf{root} of $p(x)$ in $R$.
+\end{definition}
+
+\begin{corollary}
+	Let $F$ be a field. Then $\alpha$ is a root of $p(x)\in F[x]$ if and only if $p(x)=(x-\alpha)q(x)$ for some $q(x)\in F[x]$.
+\end{corollary}
+
+\begin{proof}
+	If $p(x)=(x-\alpha)q(x)$, then $p(\alpha)=(\alpha-\alpha)q(\alpha)=0$ and so $\alpha$ is a root.
+
+	If $\alpha$ is a root, we can apply the division algorithm to $p(x)$ and $(x-\alpha)$. Thus $p(x)=(x-\alpha)q(x)+r(x)$. Now since $\alpha$ is a root $0=p(\alpha)=(\alpha-\alpha)q(\alpha)+r(\alpha)=r(\alpha)$. Thus $r(\alpha)=0$. But $r(x)$ is a constant so we must have $r(x)=0$.
+\end{proof}

@@ -1,0 +1,203 @@
+\phantomsection
+\chapter*{Homework Assignments}
+\addcontentsline{toc}{chapter}{Homework Assignments}
+\markboth{Homework Assignments}{Homework Assignments}
+
+\phantomsection
+\section*{Assignment 1}
+\addcontentsline{toc}{section}{Assignment 1}
+
+\begin{enumerate}[label={\sffamily\bfseries\color{main}\arabic*.}]
+	\item Let $G$ be a group and $H$ be a subgroup of $G$. For any $g\in G$, prove that
+	$$gHg^{-1}=\left\{ghg^{-1}\mid h\in H\right\}$$
+	is also a subgroup of $G$.
+
+	\item Determine all the non-isomorphic abelian groups of order 2024. Justify your answer.
+
+	{\footnotesize\textit{\color{main}Hint.} $2024=2^3\cdot 11\cdot 23$.\par}
+
+	\item Let $p$ and $q$ be distinct primes. Prove that the number of distinct finite abelian groups of order $p^4$ is the same as the number of distinct finite abelian groups of order $q^4$. How many distinct finite abelian groups of order $p_1^4p_2^4\cdots p_r^4$ are there if $p_1,\hdots,p_r$ are all distinct primes?
+
+	\item You are given a finite abelian group with $|G|=16$. As well, you are told that $G$ has an element of order 8 and two elements of order 2. What group is $G$ isomorphic to? Justify your answer.
+
+	\item Let $G$ be an abelian group where the operation is addition. Let $K$ be a proper subgroup of $G$, and suppose that $d\in G\setminus K$, that is $d$ is an element of $G$ not in $K$. Show that the set
+	$$H=\{k+zd\mid k\in K,z\in\mathbb Z\}$$
+	is also a subgroup of $G$ with $K\subsetneq H$.
+
+	{\footnotesize\textit{\color{main}Remark.} This exercise justifies a step we used in the proof of the Fundamental Theorem of Finite Abelian Groups given in Lecture 5.\par}
+
+	\item Suppose $G$ is an abelian group of order 25. You are able to ask an ``oracle'' about the order of a particular element in the group. What is the maximum number of times you have to ask the ``oracle'' for an answer to figure out the structure of $G$? Justify your answer.
+
+	\item Find all composition series of $S_3\times\mathbb Z_3$.
+
+	\item Let $G$ and $H$ be solvable groups. Show that $G\times H$ is also solvable.
+\end{enumerate}
+
+\vfill\pagebreak
+
+\phantomsection
+\section*{Assignment 2}
+\addcontentsline{toc}{section}{Assignment 2}
+
+\begin{enumerate}[label={\sffamily\bfseries\color{main}\arabic*.}]
+	\item Show that $D_{2024}$ is a solvable group (for clarity, this is the dihedral group on the 2024-gon, so this group has 4048 elements).
+
+	\item Let $N$ be a normal subgroup of $G$. If $N$ and $G/N$ are solvable groups, show that $G$ is a solvable group.
+
+	\item Let $X=\{1,2,3,4,5,6\}$ and consider the group $H=\{(1),(1\, 4)(2\, 5)(3\, 6)\}$. The elements of $H$ act on $X$ as functions. Determine all the unique orbits of this action and write $X$ as a partition of these orbits.
+
+	\item Find the class equation for $D_5$. Show all your work.
+
+	\item A flag with seven horizontal stripes can be coloured with three different colours. How many distinct flags can you make?
+
+	\item What does the First Sylow Theorem tell you about all the groups of order 2024? What does the Third Sylow Theorem tell you about the Sylow 23-subgroups of a group of order 2024?
+
+	\item Prove that a noncyclic group of order 21 must have 14 elements of order 3.
+
+	{\footnotesize\textit{\color{main}Hint.} The theorem given below will be helpful.\par}
+
+	\begin{theorem*}
+		Let $G$ be a finite group and suppose that $M$ and $N$ are normal subgroups of $G$ such that $M\cap N=\{e\}$ and $|M||N|=|G|$. Then $G\cong M\times N$.
+	\end{theorem*}
+
+	\item Prove that if $G$ is a group with $|G|=99$, then $G\cong\mathbb Z_{99}$ or $G\cong\mathbb Z_3\times\mathbb Z_{33}$.
+
+	{\footnotesize\textit{\color{main}Hint.} The theorem given previously will be helpful.\par}
+
+	\item Go to \url{http://abstract.ups.edu/aata/aata.html} and review the tutorial in Chapter 14. Also, review the Sage documentation found here:
+
+	{\centering\footnotesize\url{https://doc.sagemath.org/html/en/thematic_tutorials/group_theory.html#conjugacy}\par}
+
+	Now find the class equations for $D_3, D_4, \hdots , D_{10}$. (Note, you will be able to check your answer for Exercise 4).
+\end{enumerate}
+
+\vfill\pagebreak
+
+\phantomsection
+\section*{Assignment 3}
+\addcontentsline{toc}{section}{Assignment 3}
+
+\begin{enumerate}[label={\sffamily\bfseries\color{main}\arabic*.}]
+	\item Let $\vec x=\begin{bmatrix}
+	x_1 & x_2 & x_3
+	\end{bmatrix}^\mathsf{T}$ be a point on the unit sphere in $\mathbb R^3$. That is, ${x_1}^2+{x_2}^2+{x_3}^2=1$. Prove that if $A\in\mathrm{O}_3(\mathbb R)$, where $\mathrm{O}_3(\mathbb R)$ is the group of $3\times 3$ orthogonal matrices, then $A\vec x$ is also on the unit sphere.
+
+	\item Let $\varphi\colon R\to S$ be a homomorphism of rings. If $J$ is an ideal of $S$ and $I=\{r\in R\mid \varphi(r)\in J\}$, then prove that $I$ is an ideal of $R$ and $\ker(\varphi)\subseteq I$.
+
+	\item Let $T$ be the set of rational numbers whose denominators (in lowest terms) are not divisible by 101 (which is a prime number). Prove that $T$ is a subring of $\mathbb Q$.
+
+	\item \textit{This question extends from the previous question.}
+
+	Let $I$ be the elements of $T$ such that $101$ divides the numerator of an element of $T$. Prove that $I$ is an ideal of $T$ and that $T/I\cong\mathbb Z_{101}$.
+
+	{\footnotesize\textit{\color{main}Hint.} Recall that if $101\!\nmid\! s$, then $s\not\equiv 0\pmod{101}$. Furthermore, since $\mathbb Z_{101}$ is a field, there is a $u\in\mathbb Z_{101}$ such that $su=1$ in $\mathbb Z_{101}$.\par}
+
+	\item Prove or disprove the following statements:
+	\begin{enumerate}
+		\item If $R$ is a commutative ring, then $R[x]$ is a commutative ring.
+		\item If $R$ has an identity, then $R[x]$ has an identity.
+		\item If $R$ is a field, then $R[x]$ is a field. 
+	\end{enumerate}
+
+	\item Consider the \textbf{derivative map} $\D\colon\mathbb R[x]\to\mathbb R[x]$ given by
+	$$\D(a_0+a_1x+a_2x^2+\cdots +a_nx^n)=a_1+2a_2x+\cdots +na_nx^{n-1}.$$
+	Is $\D$ a ring homomorphism? Either prove this statement or give a counterexample.
+
+	\item Recall that a nonzero element $a\in R$ is \textbf{nilpotent} if there is a positive integer $k\geq 2$ such that $a^k=0$. Suppose that $a_0$ is a unit and $a_1$ is a nilpotent element of $R$. Prove that $a_0+a_1x$ is a unit in $R[x]$.
+
+	\item Suppose $R$ is an integral domain. Assume that the division algorithm holds in $R[x]$. Prove that $R$ is a field.
+
+	\item Go to \url{http://abstract.ups.edu/aata/aata.html} and review the tutorial in Chapter 17. Also look for documentation on the SAGE command \verb|quo_rem|. Use SAGE to answer all of the problems of Exercise 3 of Section 17.5.
+\end{enumerate}
+
+\vfill\pagebreak
+
+\phantomsection
+\section*{Assignment 4}
+\addcontentsline{toc}{section}{Assignment 4}
+
+\begin{enumerate}[label={\sffamily\bfseries\color{main}\arabic*.}]
+	\item Prove the Rational Root Theorem.
+
+	\begin{theorem*}[Rational Root Theorem]
+		Let
+		$$p(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0\in\mathbb Z[x]$$
+		with $a_n\neq 0$. If $\frac rs$ is a rational number with $\gcd(r,s)=1$ such that $p\left(\frac rs\right)=0$, then $r$ divides $a_0$ and $s$ divides $a_n$.
+	\end{theorem*}
+
+	\item If $f(x)=a_nx^n+\cdots +a_0$ is a polynomial in $\mathbb Z[x]$ and if $p$ is a prime that does not divide $a_n$, we can consider the polynomial $\bar f(x)=[a_n]x^n+\cdots+[a_0]\in\mathbb Z_p[x]$, where $[a_i]$ denotes the equivalence class of $a_i$ in $\mathbb Z_p$. It can be shown that if $\bar f(x)$ is irreducible in $\mathbb Z_p$, then $f(x)$ is irreducible in $\mathbb Q[x]$. Use this fact to show the following polynomials are irreducible in $\mathbb Q[x]$:
+	\begin{enumerate}
+		\item $7x^3+6x^2+4x+6$
+		\item $9x^4+4x^3-3x+7$
+	\end{enumerate}
+
+	{\footnotesize\textit{\color{main}Remark.} The proof of this fact can be found in most abstract algebra textbooks. It gives you another tool to check if a polynomial is irreducible.\par}
+
+	\item Consider the following subring of $\mathbb Q$ that is also a domain:
+	$$R=\left.\left\{\frac{n}{2^i}~\right|~ n\in\mathbb Z,i\geq 0\right\}.$$
+	Prove that the field of fractions $F_R$ is isomorphic to $\mathbb Q$.
+
+	{\footnotesize\textit{\color{main}Remark.} In the above result, we can replace 2 with any prime $p$ and get a similar result. Consequently, there are an infinite number of domains $R$ with $\mathbb Z\subseteq R\subseteq\mathbb Q$ whose field of fractions is isomorphic to $\mathbb Q$.\par}
+
+	\item Let $D$ be a PID. Prove that every ideal of $D$ is contained in a maximal ideal.
+
+	\item Let $D$ be a Euclidean Domain with corresponding Euclidean valuation $v$. Prove that $u\in D$ is a unit if and only if $v(u)=v(1)$.
+
+	\item The ring $\mathbb Z[i]=\{a+bi\mid a,b\in\mathbb Z\}$ with $i^2=-1$ is a Euclidean Domain via the Euclidean valuation $v(a+bi)=a^2+b^2$.
+	\begin{enumerate}
+		\item Find all the units of $\mathbb Z[i]$.
+		\item Show that if $v(a+bi)$ is a prime number, then the element $a+bi$ is an irreducible element of $\mathbb Z[i]$.
+
+		{\footnotesize\textit{\color{main}Hint.} The previous question may be helpful.\par}
+	\end{enumerate}
+
+	\item The ring $\mathbb Z[i]=\{a+bi\mid a,b\in\mathbb Z\}$ with $i^2=-1$ is a Euclidean Domain via the Euclidean valuation $v(a+bi)=a^2+b^2$. Find $q$ and $r$ such that $2024+i=(1+2024i)q+r$ with $r=0$ or $v(r)<v(1+2024i)$. In other words, apply the division algorithm to $z=2024+i$ and $w=1+2024i$.
+
+	\item A ring $R$ has the \textbf{descending chain condition} if for every descending chain of ideals of $R$
+	$$I_1\supseteq I_2\supseteq I_3\supseteq \cdots,$$
+	there exists an integer $N$ such that $I_N=I_{N+1}=I_{N+2}=\cdots$.
+	\begin{enumerate}
+		\item Show that $\mathbb Q[x]$ does not have the descending chain condition.
+		\item Prove that an integral domain $R$ is a field if and only if $R$ satisfies the descending chain condition.
+	\end{enumerate}
+
+	{\footnotesize\textit{\color{main}Hint.} If $a\in R$ is such that $a\neq 0$ and $a$ is not a unit, what can be said about the chain of ideals $(a)\supseteq(a^2)\supseteq(a^3)\supseteq\cdots$?\par}
+\end{enumerate}
+
+\vfill\pagebreak
+
+\phantomsection
+\section*{Assignment 5}
+\addcontentsline{toc}{section}{Assignment 5}
+
+\begin{enumerate}[label={\sffamily\bfseries\color{main}\arabic*.}]
+	\item Suppose that $p(x)$ is an irreducible polynomial of degree 2024 in $\mathbb Z_2[x]$. How many elements are in the field $\mathbb Z_2[x]/(p(x))$? How does your answer change if $p(x)$ is an irreducible polynomial in $\mathbb Z_p[x]$ with $p$ a prime?
+
+	\item Show that $\sqrt{1+\sqrt{1+\sqrt{2022}}}$ is algebraic over $\mathbb Q$. What is the minimal polynomial of this element?
+
+	\item If $r$ and $s$ are nonzero integers, prove that $\mathbb Q(\sqrt{r})=\mathbb Q(\sqrt s)$ if and only if $r=t^2s$ for some $t\in\mathbb Q$.
+
+	\item Show that $\mathbb C$ is algebraic over $\mathbb R$.
+
+	\item Let $\alpha$ be an algebraic element of $E$ over $F$ whose minimal polynomial in $F[x]$ has odd degree. Prove that $F(\alpha)=F(\alpha^2)$.
+
+	{\footnotesize\textit{\color{main}Hint.} Verify that $F(\alpha,\alpha^2)=[F(\alpha^2)](\alpha)=F(\alpha)$.\par}
+
+	\item Let $n_1,\hdots,n_t$ be $t$ distinct positive integers. Prove that
+	$$[\mathbb Q(\sqrt{n_1},\hdots,\sqrt{n_t}):\mathbb Q]\leq 2^t.$$
+
+	\item Compute a basis for the extension $\mathbb Q(\sqrt{2024},i)$ over $\mathbb Q$. What is $[\mathbb Q(\sqrt{2024},i):\mathbb Q]$?
+
+	\item Prove or disprove: $\mathbb Q(\sqrt 5)\cong\mathbb Q(\sqrt 2)$.
+
+	\item Prove that the following three statements are equivalent:
+	\begin{enumerate}
+		\item $F$ is an algebraically closed field.
+		\item Every irreducible polynomial in $F[x]$ has degree 1.
+		\item Every non-constant polynomial in $F[x]$ splits in $F$.
+	\end{enumerate}
+
+	\item Is it possible to construct with a straightedge and compass an isosceles triangle of perimeter 8 and area 1?
+
+	{\footnotesize\textit{\color{main}Hint.} No. You may want to use Exercise 2 of Assignment 4 (I used it in my solution).\par}
+\end{enumerate}
